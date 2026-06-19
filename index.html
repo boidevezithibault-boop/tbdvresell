@@ -14,33 +14,27 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;min-height:100vh;}
-
-/* LOGIN */
 #login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;}
 .login-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:40px;width:100%;max-width:380px;}
 .login-logo{font-size:24px;font-weight:700;margin-bottom:4px;}
 .login-logo span{color:var(--accent);}
 .login-sub{color:var(--text2);font-size:13px;margin-bottom:28px;}
-
-/* FORMS */
 .form-group{margin-bottom:14px;}
 .form-label{display:block;font-size:12px;color:var(--text2);margin-bottom:5px;}
 input,select{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:9px 12px;font-size:14px;outline:none;transition:border-color .15s;}
 input:focus,select:focus{border-color:var(--accent);}
 select option{background:var(--bg3);}
-
-/* BUTTONS */
 .btn{width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s;}
 .btn:hover{opacity:.85;}
 .btn:disabled{opacity:.5;cursor:not-allowed;}
 .btn-green{background:var(--green);}
+.btn-red{background:var(--red);}
 .btn-secondary{background:var(--bg3);border:1px solid var(--border);color:var(--text);}
 .btn-sm{width:auto;padding:5px 14px;font-size:12px;font-weight:600;border-radius:6px;}
 .btn-sell{background:var(--green);color:#fff;border:none;}
-.btn-outline{background:transparent;border:1px solid var(--border);color:var(--text2);}
+.btn-delete{background:transparent;color:var(--red);border:1px solid rgba(248,81,73,.3);transition:all .15s;}
+.btn-delete:hover{background:rgba(248,81,73,.1);border-color:var(--red);}
 .error-msg{color:var(--red);font-size:12px;margin-top:8px;}
-
-/* APP */
 #app-screen{display:none;}
 .header{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;}
 .header-title{font-size:16px;font-weight:700;}
@@ -48,38 +42,26 @@ select option{background:var(--bg3);}
 .header-right{display:flex;align-items:center;gap:12px;}
 .logout-btn{background:transparent;border:1px solid var(--border);color:var(--text2);padding:5px 14px;border-radius:6px;cursor:pointer;font-size:12px;width:auto;transition:all .15s;}
 .logout-btn:hover{border-color:var(--red);color:var(--red);}
-
-/* NAV */
 .nav-tabs{display:flex;gap:2px;background:var(--bg2);border-bottom:1px solid var(--border);padding:0 32px;}
-.nav-tab{padding:13px 22px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;display:flex;align-items:center;gap:8px;}
+.nav-tab{padding:13px 22px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;}
 .nav-tab:hover{color:var(--text);}
 .nav-tab.active{color:var(--accent);border-bottom-color:var(--accent);}
-
-/* SCREENS */
 .tab-screen{display:none;padding:24px 32px;max-width:1300px;margin:0 auto;}
 .tab-screen.active{display:block;}
-
-/* KPI */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:12px;margin-bottom:22px;}
 .kpi-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:16px;}
 .kpi-label{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
 .kpi-value{font-size:24px;font-weight:700;line-height:1;}
 .kpi-sub{font-size:11px;color:var(--text2);margin-top:5px;}
 .green{color:var(--green);} .blue{color:var(--accent);} .gold{color:var(--gold);} .purple{color:var(--purple);}
-
-/* CHARTS */
 .charts-row{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:20px;}
 .charts-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
 .chart-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px;}
 .chart-title{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:14px;}
-
-/* YEAR FILTER */
 .year-filter{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;align-items:center;}
 .year-filter label{font-size:12px;color:var(--text2);}
 .yr-btn{background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:5px 14px;border-radius:6px;cursor:pointer;font-size:13px;transition:all .15s;}
 .yr-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600;}
-
-/* STOCK */
 .stock-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
 .stock-filters{display:flex;gap:6px;}
 .filter-btn{background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:500;transition:all .15s;}
@@ -98,25 +80,17 @@ tbody tr:hover{background:rgba(255,255,255,.02);}
 .badge-en_stock{background:rgba(63,185,80,.15);color:var(--green);}
 .badge-vendu{background:rgba(139,148,158,.12);color:var(--text2);}
 .empty-state{text-align:center;padding:48px 20px;color:var(--text2);}
-.empty-icon{font-size:38px;margin-bottom:12px;}
-
-/* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;}
 .modal-overlay.show{display:flex;}
 .modal{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:28px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;}
 .modal-title{font-size:16px;font-weight:700;margin-bottom:20px;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
 .form-row.full{grid-template-columns:1fr;}
-
-/* BENEF PREVIEW */
 .benef-preview{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;margin:14px 0;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .benef-item .bl{font-size:11px;color:var(--text2);margin-bottom:3px;}
 .benef-item .bv{font-size:20px;font-weight:700;}
-
 .modal-actions{display:flex;gap:10px;margin-top:20px;}
 .modal-actions .btn{flex:1;}
-
-/* CAT SECTION */
 .cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px;}
 .cat-card{background:var(--bg2);border:1px solid var(--border);border-left:3px solid;border-radius:10px;padding:16px;}
 .cat-card.sneakers{border-left-color:var(--accent);}
@@ -126,9 +100,10 @@ tbody tr:hover{background:rgba(255,255,255,.02);}
 .cat-name{font-size:13px;font-weight:600;margin-bottom:8px;}
 .cat-benef{font-size:22px;font-weight:700;margin-bottom:4px;}
 .cat-sub{font-size:11px;color:var(--text2);}
-
 .section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text2);margin-bottom:14px;}
-
+.confirm-modal{max-width:380px;}
+.confirm-text{color:var(--text2);font-size:14px;line-height:1.5;margin-bottom:6px;}
+.confirm-item{font-weight:700;color:var(--text);font-size:15px;margin-bottom:16px;}
 @media(max-width:800px){
   .tab-screen{padding:16px;}
   .charts-row,.charts-row2{grid-template-columns:1fr;}
@@ -140,7 +115,6 @@ tbody tr:hover{background:rgba(255,255,255,.02);}
 </head>
 <body>
 
-<!-- ── LOGIN ──────────────────────────────────────────────────────────────── -->
 <div id="login-screen">
   <div class="login-card">
     <div class="login-logo">Resell <span>Thib</span></div>
@@ -151,19 +125,14 @@ tbody tr:hover{background:rgba(255,255,255,.02);}
     </div>
     <div class="form-group">
       <label class="form-label">Mot de passe</label>
-      <input type="password" id="login-password" placeholder="••••••••"
-        onkeydown="if(event.key==='Enter')handleLogin()" />
+      <input type="password" id="login-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')handleLogin()" />
     </div>
     <div id="login-error" class="error-msg"></div>
-    <button class="btn btn-green" style="margin-top:16px" onclick="handleLogin()" id="login-btn">
-      Se connecter
-    </button>
+    <button class="btn btn-green" style="margin-top:16px" onclick="handleLogin()" id="login-btn">Se connecter</button>
   </div>
 </div>
 
-<!-- ── APP ────────────────────────────────────────────────────────────────── -->
 <div id="app-screen">
-
   <div class="header">
     <div class="header-title">Resell <span>Thib</span></div>
     <div class="header-right">
@@ -171,44 +140,24 @@ tbody tr:hover{background:rgba(255,255,255,.02);}
       <button class="logout-btn" onclick="handleLogout()">Déconnexion</button>
     </div>
   </div>
-
   <div class="nav-tabs">
     <div class="nav-tab active" onclick="switchTab('dashboard',this)">📊 Dashboard</div>
     <div class="nav-tab" onclick="switchTab('stock',this)">📦 Stock</div>
   </div>
-
-  <!-- DASHBOARD -->
   <div id="tab-dashboard" class="tab-screen active">
     <div class="year-filter" id="year-filter"></div>
     <div class="kpi-grid" id="kpi-grid"></div>
-
     <div class="charts-row">
-      <div class="chart-card">
-        <div class="chart-title">Bénéfice mensuel</div>
-        <canvas id="chartBar" height="90"></canvas>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Comparaison annuelle</div>
-        <canvas id="chartAnnuel" height="90"></canvas>
-      </div>
+      <div class="chart-card"><div class="chart-title">Bénéfice mensuel</div><canvas id="chartBar" height="90"></canvas></div>
+      <div class="chart-card"><div class="chart-title">Comparaison annuelle</div><canvas id="chartAnnuel" height="90"></canvas></div>
     </div>
-
     <div class="charts-row2">
-      <div class="chart-card">
-        <div class="chart-title">Cumul bénéfice par année</div>
-        <canvas id="chartCumul" height="110"></canvas>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Répartition par catégorie</div>
-        <canvas id="chartCat" height="110"></canvas>
-      </div>
+      <div class="chart-card"><div class="chart-title">Cumul bénéfice par année</div><canvas id="chartCumul" height="110"></canvas></div>
+      <div class="chart-card"><div class="chart-title">Répartition par catégorie</div><canvas id="chartCat" height="110"></canvas></div>
     </div>
-
     <div class="section-title">Performance par catégorie</div>
     <div class="cat-grid" id="cat-grid"></div>
   </div>
-
-  <!-- STOCK -->
   <div id="tab-stock" class="tab-screen">
     <div class="stock-header">
       <div class="stock-filters">
@@ -216,71 +165,49 @@ tbody tr:hover{background:rgba(255,255,255,.02);}
         <button class="filter-btn" onclick="setFilter('vendu',this)">Vendus</button>
         <button class="filter-btn" onclick="setFilter('all',this)">Tous</button>
       </div>
-      <button class="btn btn-green btn-sm" style="font-size:13px;padding:8px 18px;" onclick="openAddModal()">
-        + Ajouter un article
-      </button>
+      <button class="btn btn-green btn-sm" style="font-size:13px;padding:8px 18px;" onclick="openAddModal()">+ Ajouter un article</button>
     </div>
     <div class="table-card">
       <table>
-        <thead>
-          <tr>
-            <th>Article</th>
-            <th>SKU</th>
-            <th>Prix achat</th>
-            <th>Catégorie</th>
-            <th>Statut</th>
-            <th>Bénéfice</th>
-            <th></th>
-          </tr>
-        </thead>
+        <thead><tr><th>Article</th><th>SKU</th><th>Prix achat</th><th>Catégorie</th><th>Statut</th><th>Bénéfice</th><th></th></tr></thead>
         <tbody id="stock-tbody"></tbody>
       </table>
     </div>
   </div>
-
 </div>
 
-<!-- ── MODAL : AJOUTER ARTICLE ────────────────────────────────────────────── -->
 <div class="modal-overlay" id="modal-add">
   <div class="modal">
     <div class="modal-title">Nouvel article</div>
-    <div class="form-row full">
-      <div class="form-group">
-        <label class="form-label">Nom de l'article *</label>
-        <input type="text" id="add-nom" placeholder="ex: Veste CT Perforated" />
-      </div>
-    </div>
+    <div class="form-row full"><div class="form-group">
+      <label class="form-label">Nom de l'article *</label>
+      <input type="text" id="add-nom" placeholder="ex: Veste CT Perforated" />
+    </div></div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Catégorie</label>
+      <div class="form-group"><label class="form-label">Catégorie</label>
         <select id="add-categorie">
           <option value="equitation">Équitation</option>
           <option value="vetements">Vêtements</option>
           <option value="sneakers">Sneakers</option>
         </select>
       </div>
-      <div class="form-group">
-        <label class="form-label">Taille</label>
+      <div class="form-group"><label class="form-label">Taille</label>
         <input type="text" id="add-taille" placeholder="ex: 42, T38, 57..." />
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">SKU / Référence</label>
+      <div class="form-group"><label class="form-label">SKU / Référence</label>
         <input type="text" id="add-sku" placeholder="ex: CT2246-123" />
       </div>
-      <div class="form-group">
-        <label class="form-label">Marque</label>
+      <div class="form-group"><label class="form-label">Marque</label>
         <input type="text" id="add-marque" placeholder="ex: Cavalleria Toscana" />
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Prix d'achat (€) *</label>
+      <div class="form-group"><label class="form-label">Prix d'achat (€) *</label>
         <input type="number" id="add-prix" placeholder="280" min="0" step="0.01" />
       </div>
-      <div class="form-group">
-        <label class="form-label">Date d'achat</label>
+      <div class="form-group"><label class="form-label">Date d'achat</label>
         <input type="date" id="add-date" />
       </div>
     </div>
@@ -292,47 +219,28 @@ tbody tr:hover{background:rgba(255,255,255,.02);}
   </div>
 </div>
 
-<!-- ── MODAL : VENDRE ─────────────────────────────────────────────────────── -->
 <div class="modal-overlay" id="modal-sell">
   <div class="modal">
     <div class="modal-title">Marquer comme vendu</div>
     <div id="sell-info" style="background:var(--bg3);border-radius:8px;padding:12px;margin-bottom:18px;font-size:13px;"></div>
     <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">Prix de vente (€) *</label>
+      <div class="form-group"><label class="form-label">Prix de vente (€) *</label>
         <input type="number" id="sell-prix" placeholder="390" min="0" step="0.01" oninput="updatePreview()" />
       </div>
-      <div class="form-group">
-        <label class="form-label">Date de vente</label>
+      <div class="form-group"><label class="form-label">Date de vente</label>
         <input type="date" id="sell-date" />
       </div>
     </div>
-    <div class="form-row full">
-      <div class="form-group">
-        <label class="form-label">Part maman (%)</label>
-        <input type="number" id="sell-pct" placeholder="0" min="0" max="100" value="0" oninput="updatePreview()" />
-      </div>
-    </div>
-
+    <div class="form-row full"><div class="form-group">
+      <label class="form-label">Part maman (%)</label>
+      <input type="number" id="sell-pct" placeholder="0" min="0" max="100" value="0" oninput="updatePreview()" />
+    </div></div>
     <div class="benef-preview" id="benef-preview" style="display:none">
-      <div class="benef-item">
-        <div class="bl">Bénéfice total</div>
-        <div class="bv green" id="prev-total">—</div>
-      </div>
-      <div class="benef-item">
-        <div class="bl">Part maman</div>
-        <div class="bv" style="color:var(--text2)" id="prev-maman">—</div>
-      </div>
-      <div class="benef-item">
-        <div class="bl">Ton bénéfice net</div>
-        <div class="bv green" id="prev-thib">—</div>
-      </div>
-      <div class="benef-item">
-        <div class="bl">Marge</div>
-        <div class="bv gold" id="prev-marge">—</div>
-      </div>
+      <div class="benef-item"><div class="bl">Bénéfice total</div><div class="bv green" id="prev-total">—</div></div>
+      <div class="benef-item"><div class="bl">Part maman</div><div class="bv" style="color:var(--text2)" id="prev-maman">—</div></div>
+      <div class="benef-item"><div class="bl">Ton bénéfice net</div><div class="bv green" id="prev-thib">—</div></div>
+      <div class="benef-item"><div class="bl">Marge</div><div class="bv gold" id="prev-marge">—</div></div>
     </div>
-
     <div id="sell-error" class="error-msg"></div>
     <div class="modal-actions">
       <button class="btn btn-secondary" onclick="closeModal('modal-sell')">Annuler</button>
@@ -341,14 +249,26 @@ tbody tr:hover{background:rgba(255,255,255,.02);}
   </div>
 </div>
 
+<div class="modal-overlay" id="modal-delete">
+  <div class="modal confirm-modal">
+    <div class="modal-title">Supprimer l'article ?</div>
+    <div class="confirm-text">Tu es sur le point de supprimer :</div>
+    <div class="confirm-item" id="delete-article-name"></div>
+    <div class="confirm-text" style="color:var(--red);font-size:12px;">Cette action est irréversible. La vente associée sera également supprimée.</div>
+    <div id="delete-error" class="error-msg"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('modal-delete')">Annuler</button>
+      <button class="btn btn-red" id="btn-delete" onclick="handleDeleteArticle()">Supprimer définitivement</button>
+    </div>
+  </div>
+</div>
+
 <script>
-// ── CONFIG ────────────────────────────────────────────────────────────────────
 const SUPABASE_URL = 'https://anfalfxtvdijqoxllsdh.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_uA-kauvNHvgTPsuxsNDLyw_exOqyEAI';
 const { createClient } = supabase;
 const db = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// ── DONNÉES HISTORIQUES 2021–2024 ─────────────────────────────────────────────
 const DATA_FIXED = [
   {y:2021,m:'Septembre',ca:170,benef:72,thib:72,maman:0,cat:'sneakers'},
   {y:2021,m:'Octobre',ca:0,benef:0,thib:0,maman:0,cat:'sneakers'},
@@ -390,433 +310,263 @@ const DATA_FIXED = [
   {y:2024,m:'Octobre',ca:0,benef:0,thib:0,maman:0,cat:'mixed'},
   {y:2024,m:'Novembre',ca:2168,benef:740,thib:740,maman:0,cat:'vetements'},
   {y:2024,m:'Décembre',ca:2660,benef:1296,thib:1296,maman:0,cat:'vetements'},
+  {y:2025,m:'Janvier',ca:1123,benef:430,thib:430,maman:0,cat:'vetements'},
+  {y:2025,m:'Février',ca:1124,benef:500,thib:500,maman:0,cat:'vetements'},
+  {y:2025,m:'Mars',ca:1774,benef:650,thib:650,maman:0,cat:'vetements'},
+  {y:2025,m:'Avril',ca:1877,benef:869,thib:869,maman:0,cat:'vetements'},
+  {y:2025,m:'Mai',ca:3590,benef:2007,thib:2007,maman:0,cat:'vetements'},
+  {y:2025,m:'Juin',ca:3160,benef:1832,thib:1624,maman:208,cat:'equitation'},
+  {y:2025,m:'Juillet',ca:1161,benef:690,thib:241,maman:449,cat:'equitation'},
+  {y:2025,m:'Août',ca:1557,benef:856,thib:389,maman:467,cat:'equitation'},
+  {y:2025,m:'Septembre',ca:3010,benef:1670,thib:913,maman:757,cat:'equitation'},
+  {y:2025,m:'Octobre',ca:1850,benef:1110,thib:307,maman:803,cat:'equitation'},
+  {y:2025,m:'Novembre',ca:1707,benef:813,thib:281,maman:532,cat:'equitation'},
+  {y:2025,m:'Décembre',ca:1096,benef:593,thib:83,maman:510,cat:'equitation'},
+  {y:2026,m:'Janvier',ca:1062,benef:593,thib:620,maman:239,cat:'equitation'},
+  {y:2026,m:'Février',ca:781,benef:414,thib:372,maman:139,cat:'equitation'},
+  {y:2026,m:'Mars',ca:1369,benef:900,thib:919,maman:450,cat:'equitation'},
+  {y:2026,m:'Avril',ca:645,benef:448,thib:421,maman:224,cat:'equitation'},
+  {y:2026,m:'Mai',ca:549,benef:292,thib:403,maman:146,cat:'equitation'},
 ];
 
-const MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-const CAT_LABELS = {sneakers:'Sneakers',vetements:'Vêtements',equitation:'Équitation',mixed:'Mix'};
-const CAT_COLORS = {
-  sneakers:'rgba(88,166,255,0.75)',vetements:'rgba(63,185,80,0.75)',
-  equitation:'rgba(188,140,255,0.75)',mixed:'rgba(240,136,62,0.75)'
-};
+const MONTHS_FR=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+const CAT_LABELS={sneakers:'Sneakers',vetements:'Vêtements',equitation:'Équitation',mixed:'Mix'};
+const CAT_COLORS={sneakers:'rgba(88,166,255,0.75)',vetements:'rgba(63,185,80,0.75)',equitation:'rgba(188,140,255,0.75)',mixed:'rgba(240,136,62,0.75)'};
 
-// ── STATE ─────────────────────────────────────────────────────────────────────
-let currentUser = null;
-let articles = [];
-let ventes = [];
-let liveData = [];
-let currentYear = 'all';
-let stockFilter = 'en_stock';
-let currentSellId = null;
-let charts = {};
+let currentUser=null,articles=[],ventes=[],liveData=[],currentYear='all',stockFilter='en_stock',currentSellId=null,currentDeleteId=null,charts={};
 
-// ── AUTH ──────────────────────────────────────────────────────────────────────
-async function checkAuth() {
-  const { data: { session } } = await db.auth.getSession();
-  if (session) { currentUser = session.user; await initApp(); }
-  else { document.getElementById('login-screen').style.display = 'flex'; }
+async function checkAuth(){
+  const{data:{session}}=await db.auth.getSession();
+  if(session){currentUser=session.user;await initApp();}
+  else document.getElementById('login-screen').style.display='flex';
 }
-
-async function handleLogin() {
-  const email = document.getElementById('login-email').value.trim();
-  const pwd   = document.getElementById('login-password').value;
-  const errEl = document.getElementById('login-error');
-  const btn   = document.getElementById('login-btn');
-  errEl.textContent = '';
-  btn.disabled = true; btn.textContent = 'Connexion…';
-  const { data, error } = await db.auth.signInWithPassword({ email, password: pwd });
-  if (error) {
-    errEl.textContent = 'Email ou mot de passe incorrect.';
-    btn.disabled = false; btn.textContent = 'Se connecter';
-    return;
-  }
-  currentUser = data.user;
-  await initApp();
+async function handleLogin(){
+  const email=document.getElementById('login-email').value.trim();
+  const pwd=document.getElementById('login-password').value;
+  const errEl=document.getElementById('login-error');
+  const btn=document.getElementById('login-btn');
+  errEl.textContent='';btn.disabled=true;btn.textContent='Connexion…';
+  const{data,error}=await db.auth.signInWithPassword({email,password:pwd});
+  if(error){errEl.textContent='Email ou mot de passe incorrect.';btn.disabled=false;btn.textContent='Se connecter';return;}
+  currentUser=data.user;await initApp();
 }
-
-async function handleLogout() {
-  await db.auth.signOut();
-  currentUser = null;
-  document.getElementById('app-screen').style.display = 'none';
-  document.getElementById('login-screen').style.display = 'flex';
+async function handleLogout(){
+  await db.auth.signOut();currentUser=null;
+  document.getElementById('app-screen').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
 }
-
-async function initApp() {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('app-screen').style.display = 'block';
-  document.getElementById('user-badge').textContent = currentUser.email;
-  document.getElementById('add-date').value = today();
-  document.getElementById('sell-date').value = today();
-  await loadData();
-  buildYearFilter();
-  render();
+async function initApp(){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app-screen').style.display='block';
+  document.getElementById('user-badge').textContent=currentUser.email;
+  document.getElementById('add-date').value=today();
+  document.getElementById('sell-date').value=today();
+  await loadData();buildYearFilter();render();
 }
-
-// ── DATA ──────────────────────────────────────────────────────────────────────
-async function loadData() {
-  const [{ data: arts }, { data: vts }] = await Promise.all([
-    db.from('articles').select('*').order('date_achat', { ascending: false }),
-    db.from('ventes').select('*, articles(*)').order('date_vente', { ascending: false })
+async function loadData(){
+  const[{data:arts},{data:vts}]=await Promise.all([
+    db.from('articles').select('*').order('date_achat',{ascending:false}),
+    db.from('ventes').select('*, articles(*)').order('date_vente',{ascending:false})
   ]);
-  articles = arts || [];
-  ventes   = vts  || [];
-  liveData = buildLiveData(ventes);
+  articles=arts||[];ventes=vts||[];liveData=buildLiveData(ventes);
 }
-
-function buildLiveData(ventes) {
-  const map = {};
-  ventes.forEach(v => {
-    if (!v.date_vente || !v.articles) return;
-    const d   = new Date(v.date_vente);
-    const y   = d.getFullYear();
-    const m   = MONTHS_FR[d.getMonth()];
-    const key = `${y}-${m}`;
-    const ca  = v.prix_vente || 0;
-    const bn  = ca - (v.articles.prix_achat || 0);
-    if (!map[key]) map[key] = { y, m, ca:0, benef:0, thib:0, maman:0, cat: v.articles.categorie || 'equitation' };
-    map[key].ca    += ca;
-    map[key].benef += bn;
-    map[key].thib  += v.part_thib  || bn;
-    map[key].maman += v.part_maman || 0;
+function buildLiveData(ventes){
+  const map={};
+  ventes.forEach(v=>{
+    if(!v.date_vente||!v.articles)return;
+    const d=new Date(v.date_vente),y=d.getFullYear(),m=MONTHS_FR[d.getMonth()],key=`${y}-${m}`;
+    const ca=v.prix_vente||0,bn=ca-(v.articles.prix_achat||0);
+    if(!map[key])map[key]={y,m,ca:0,benef:0,thib:0,maman:0,cat:v.articles.categorie||'equitation'};
+    map[key].ca+=ca;map[key].benef+=bn;map[key].thib+=v.part_thib||bn;map[key].maman+=v.part_maman||0;
   });
-  return Object.values(map).sort((a,b) => a.y!==b.y ? a.y-b.y : MONTHS_FR.indexOf(a.m)-MONTHS_FR.indexOf(b.m));
+  return Object.values(map).sort((a,b)=>a.y!==b.y?a.y-b.y:MONTHS_FR.indexOf(a.m)-MONTHS_FR.indexOf(b.m));
 }
-
-function allData() {
-  return [...DATA_FIXED, ...liveData.filter(d => d.y >= 2025)];
+function allData(){
+  const live=liveData.filter(d=>d.y>2026||(d.y===2026&&MONTHS_FR.indexOf(d.m)>=5));
+  return[...DATA_FIXED,...live];
 }
+function filtered(){const d=allData();return currentYear==='all'?d:d.filter(r=>r.y===currentYear);}
+const fmt=n=>(Math.round(n*100)/100).toLocaleString('fr-FR')+' €';
+const today=()=>new Date().toISOString().split('T')[0];
+const r2=n=>Math.round(n*100)/100;
 
-function filtered() {
-  const d = allData();
-  return currentYear === 'all' ? d : d.filter(r => r.y === currentYear);
+function switchTab(name,el){
+  document.querySelectorAll('.tab-screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');el.classList.add('active');
 }
-
-// ── HELPERS ───────────────────────────────────────────────────────────────────
-const fmt  = n => (Math.round(n*100)/100).toLocaleString('fr-FR') + ' €';
-const pct  = (b,ca) => ca>0 ? Math.round(b/ca*100)+'%' : '—';
-const today = () => new Date().toISOString().split('T')[0];
-const r2   = n => Math.round(n*100)/100;
-
-// ── NAVIGATION ────────────────────────────────────────────────────────────────
-function switchTab(name, el) {
-  document.querySelectorAll('.tab-screen').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  el.classList.add('active');
+function setFilter(f,el){stockFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');renderStock();}
+function setYear(y,el){currentYear=y;document.querySelectorAll('.yr-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');renderDashboard();}
+function buildYearFilter(){
+  const years=[...new Set(allData().map(d=>d.y))].sort();
+  let h='<label>Filtrer :</label><button class="yr-btn active" onclick="setYear(\'all\',this)">Toutes</button>';
+  years.forEach(y=>{h+=`<button class="yr-btn" onclick="setYear(${y},this)">${y}</button>`;});
+  document.getElementById('year-filter').innerHTML=h;
 }
-
-function setFilter(f, el) {
-  stockFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  renderStock();
-}
-
-function setYear(y, el) {
-  currentYear = y;
-  document.querySelectorAll('.yr-btn').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  renderDashboard();
-}
-
-function buildYearFilter() {
-  const years = [...new Set(allData().map(d=>d.y))].sort();
-  let h = '<label>Filtrer :</label>';
-  h += '<button class="yr-btn active" onclick="setYear(\'all\',this)">Toutes</button>';
-  years.forEach(y => { h += `<button class="yr-btn" onclick="setYear(${y},this)">${y}</button>`; });
-  document.getElementById('year-filter').innerHTML = h;
-}
-
-// ── MODALS ────────────────────────────────────────────────────────────────────
-function openAddModal() {
-  ['add-nom','add-taille','add-sku','add-marque','add-prix'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('add-date').value = today();
-  document.getElementById('add-error').textContent = '';
+function openAddModal(){
+  ['add-nom','add-taille','add-sku','add-marque','add-prix'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('add-date').value=today();document.getElementById('add-error').textContent='';
   document.getElementById('modal-add').classList.add('show');
-  setTimeout(() => document.getElementById('add-nom').focus(), 100);
+  setTimeout(()=>document.getElementById('add-nom').focus(),100);
 }
-
-function openSellModal(id) {
-  const a = articles.find(x => x.id === id);
-  if (!a) return;
-  currentSellId = id;
-  document.getElementById('sell-info').innerHTML =
-    `<strong>${a.nom}</strong>${a.taille?' · '+a.taille:''}${a.sku?' <span style="color:var(--text2);font-size:11px">SKU: '+a.sku+'</span>':''}<br>
-     <span style="color:var(--text2)">Acheté ${fmt(a.prix_achat)}${a.date_achat?' le '+new Date(a.date_achat).toLocaleDateString('fr-FR'):''}</span>`;
-  document.getElementById('sell-prix').value = '';
-  document.getElementById('sell-date').value = today();
-  document.getElementById('sell-pct').value  = '0';
-  document.getElementById('sell-error').textContent = '';
-  document.getElementById('benef-preview').style.display = 'none';
+function openSellModal(id){
+  const a=articles.find(x=>x.id===id);if(!a)return;currentSellId=id;
+  document.getElementById('sell-info').innerHTML=`<strong>${a.nom}</strong>${a.taille?' · '+a.taille:''}${a.sku?` <span style="color:var(--text2);font-size:11px">SKU: ${a.sku}</span>`:''}<br><span style="color:var(--text2)">Acheté ${fmt(a.prix_achat)}${a.date_achat?' le '+new Date(a.date_achat).toLocaleDateString('fr-FR'):''}</span>`;
+  document.getElementById('sell-prix').value='';document.getElementById('sell-date').value=today();
+  document.getElementById('sell-pct').value='0';document.getElementById('sell-error').textContent='';
+  document.getElementById('benef-preview').style.display='none';
   document.getElementById('modal-sell').classList.add('show');
-  setTimeout(() => document.getElementById('sell-prix').focus(), 100);
+  setTimeout(()=>document.getElementById('sell-prix').focus(),100);
 }
-
-function closeModal(id) { document.getElementById(id).classList.remove('show'); }
-
-// Fermer modal en cliquant le fond
-document.querySelectorAll('.modal-overlay').forEach(o => {
-  o.addEventListener('click', e => { if (e.target === o) o.classList.remove('show'); });
-});
-
-function updatePreview() {
-  const a = articles.find(x => x.id === currentSellId);
-  if (!a) return;
-  const pv  = parseFloat(document.getElementById('sell-prix').value);
-  const pct = parseFloat(document.getElementById('sell-pct').value) || 0;
-  if (isNaN(pv) || pv <= 0) { document.getElementById('benef-preview').style.display='none'; return; }
-  const bn    = pv - a.prix_achat;
-  const mama  = r2(bn * pct / 100);
-  const thib  = r2(bn - mama);
-  const marge = Math.round(bn / pv * 100);
-  document.getElementById('prev-total').textContent = fmt(bn);
-  document.getElementById('prev-maman').textContent = pct > 0 ? fmt(mama) : '—';
-  document.getElementById('prev-thib').textContent  = fmt(thib);
-  document.getElementById('prev-marge').textContent = marge + '%';
-  document.getElementById('benef-preview').style.display = 'grid';
+function openDeleteModal(id){
+  const a=articles.find(x=>x.id===id);if(!a)return;currentDeleteId=id;
+  document.getElementById('delete-article-name').textContent=a.nom+(a.taille?' · '+a.taille:'');
+  document.getElementById('delete-error').textContent='';
+  document.getElementById('modal-delete').classList.add('show');
 }
-
-// ── ACTIONS ───────────────────────────────────────────────────────────────────
-async function handleAddArticle() {
-  const nom  = document.getElementById('add-nom').value.trim();
-  const prix = parseFloat(document.getElementById('add-prix').value);
-  const errEl = document.getElementById('add-error');
-  if (!nom)              { errEl.textContent = 'Le nom est requis.'; return; }
-  if (!prix || prix <= 0){ errEl.textContent = 'Le prix d\'achat est requis.'; return; }
-
-  const btn = document.getElementById('btn-add');
-  btn.disabled = true; btn.textContent = 'Ajout…';
-
-  const { error } = await db.from('articles').insert({
-    nom,
-    categorie: document.getElementById('add-categorie').value,
-    taille:    document.getElementById('add-taille').value  || null,
-    sku:       document.getElementById('add-sku').value     || null,
-    marque:    document.getElementById('add-marque').value  || null,
-    prix_achat: prix,
-    date_achat: document.getElementById('add-date').value   || null,
-    user_id:   currentUser.id
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+document.querySelectorAll('.modal-overlay').forEach(o=>{o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('show');});});
+function updatePreview(){
+  const a=articles.find(x=>x.id===currentSellId);if(!a)return;
+  const pv=parseFloat(document.getElementById('sell-prix').value);
+  const pct=parseFloat(document.getElementById('sell-pct').value)||0;
+  if(isNaN(pv)||pv<=0){document.getElementById('benef-preview').style.display='none';return;}
+  const bn=pv-a.prix_achat,mama=r2(bn*pct/100),thib=r2(bn-mama),marge=Math.round(bn/pv*100);
+  document.getElementById('prev-total').textContent=fmt(bn);
+  document.getElementById('prev-maman').textContent=pct>0?fmt(mama):'—';
+  document.getElementById('prev-thib').textContent=fmt(thib);
+  document.getElementById('prev-marge').textContent=marge+'%';
+  document.getElementById('benef-preview').style.display='grid';
+}
+async function handleAddArticle(){
+  const nom=document.getElementById('add-nom').value.trim();
+  const prix=parseFloat(document.getElementById('add-prix').value);
+  const errEl=document.getElementById('add-error');
+  if(!nom){errEl.textContent='Le nom est requis.';return;}
+  if(!prix||prix<=0){errEl.textContent="Le prix d'achat est requis.";return;}
+  const btn=document.getElementById('btn-add');btn.disabled=true;btn.textContent='Ajout…';
+  const{error}=await db.from('articles').insert({
+    nom,categorie:document.getElementById('add-categorie').value,
+    taille:document.getElementById('add-taille').value||null,
+    sku:document.getElementById('add-sku').value||null,
+    marque:document.getElementById('add-marque').value||null,
+    prix_achat:prix,date_achat:document.getElementById('add-date').value||null,
+    user_id:currentUser.id
   });
-
-  btn.disabled = false; btn.textContent = 'Ajouter au stock';
-  if (error) { errEl.textContent = 'Erreur : ' + error.message; return; }
-  closeModal('modal-add');
-  await loadData();
-  renderStock();
+  btn.disabled=false;btn.textContent='Ajouter au stock';
+  if(error){errEl.textContent='Erreur : '+error.message;return;}
+  closeModal('modal-add');await loadData();renderStock();
 }
-
-async function handleSellArticle() {
-  const a     = articles.find(x => x.id === currentSellId);
-  const pv    = parseFloat(document.getElementById('sell-prix').value);
-  const pctM  = parseFloat(document.getElementById('sell-pct').value) || 0;
-  const dv    = document.getElementById('sell-date').value;
-  const errEl = document.getElementById('sell-error');
-  if (!pv || pv <= 0) { errEl.textContent = 'Le prix de vente est requis.'; return; }
-
-  const bn    = r2(pv - a.prix_achat);
-  const mama  = r2(bn * pctM / 100);
-  const thib  = r2(bn - mama);
-
-  const btn = document.getElementById('btn-sell');
-  btn.disabled = true; btn.textContent = 'Enregistrement…';
-
-  const [{ error: e1 }, { error: e2 }] = await Promise.all([
-    db.from('ventes').insert({
-      article_id: currentSellId,
-      prix_vente: pv,
-      date_vente: dv || null,
-      pct_maman:  pctM,
-      part_maman: mama,
-      part_thib:  thib,
-      user_id:    currentUser.id
-    }),
-    db.from('articles').update({ statut: 'vendu' }).eq('id', currentSellId)
+async function handleSellArticle(){
+  const a=articles.find(x=>x.id===currentSellId);
+  const pv=parseFloat(document.getElementById('sell-prix').value);
+  const pctM=parseFloat(document.getElementById('sell-pct').value)||0;
+  const dv=document.getElementById('sell-date').value;
+  const errEl=document.getElementById('sell-error');
+  if(!pv||pv<=0){errEl.textContent='Le prix de vente est requis.';return;}
+  const bn=r2(pv-a.prix_achat),mama=r2(bn*pctM/100),thib=r2(bn-mama);
+  const btn=document.getElementById('btn-sell');btn.disabled=true;btn.textContent='Enregistrement…';
+  const[{error:e1},{error:e2}]=await Promise.all([
+    db.from('ventes').insert({article_id:currentSellId,prix_vente:pv,date_vente:dv||null,pct_maman:pctM,part_maman:mama,part_thib:thib,user_id:currentUser.id}),
+    db.from('articles').update({statut:'vendu'}).eq('id',currentSellId)
   ]);
-
-  btn.disabled = false; btn.textContent = 'Confirmer la vente';
-  if (e1 || e2) { errEl.textContent = 'Erreur lors de l\'enregistrement.'; return; }
-  closeModal('modal-sell');
-  await loadData();
-  buildYearFilter();
-  render();
+  btn.disabled=false;btn.textContent='Confirmer la vente';
+  if(e1||e2){errEl.textContent="Erreur lors de l'enregistrement.";return;}
+  closeModal('modal-sell');await loadData();buildYearFilter();render();
 }
-
-// ── DASHBOARD ─────────────────────────────────────────────────────────────────
-function renderDashboard() {
-  const d = filtered();
-  renderKPIs(d);
-  renderBarChart(d);
-  renderAnnualChart();
-  renderCumulChart();
-  renderCatChart(d);
-  renderCatCards(d);
+async function handleDeleteArticle(){
+  const btn=document.getElementById('btn-delete');const errEl=document.getElementById('delete-error');
+  btn.disabled=true;btn.textContent='Suppression…';
+  const{error}=await db.from('articles').delete().eq('id',currentDeleteId);
+  btn.disabled=false;btn.textContent='Supprimer définitivement';
+  if(error){errEl.textContent='Erreur : '+error.message;return;}
+  closeModal('modal-delete');await loadData();buildYearFilter();render();
 }
-
-function renderKPIs(d) {
-  const tB  = d.reduce((s,r)=>s+r.benef,0);
-  const tCA = d.reduce((s,r)=>s+r.ca,0);
-  const tT  = d.reduce((s,r)=>s+r.thib,0);
-  const avgM = tCA>0 ? Math.round(tB/tCA*100) : 0;
-  const best = [...d].filter(r=>r.benef>0).sort((a,b)=>b.benef-a.benef)[0];
-  const enStock = articles.filter(a=>a.statut==='en_stock');
-  const valStock = enStock.reduce((s,a)=>s+a.prix_achat,0);
-
-  document.getElementById('kpi-grid').innerHTML = `
-    <div class="kpi-card"><div class="kpi-label">Bénéfice total</div>
-      <div class="kpi-value green">${fmt(tB)}</div>
-      <div class="kpi-sub">${currentYear==='all'?'depuis sept. 2021':currentYear}</div></div>
-    <div class="kpi-card"><div class="kpi-label">Chiffre d'affaires</div>
-      <div class="kpi-value blue">${fmt(tCA)}</div></div>
-    <div class="kpi-card"><div class="kpi-label">Marge moyenne</div>
-      <div class="kpi-value gold">${avgM}%</div>
-      <div class="kpi-sub">bénéfice / CA</div></div>
-    <div class="kpi-card"><div class="kpi-label">Part Thibault</div>
-      <div class="kpi-value purple">${fmt(tT)}</div></div>
-    <div class="kpi-card"><div class="kpi-label">Stock actuel</div>
-      <div class="kpi-value gold">${enStock.length} articles</div>
-      <div class="kpi-sub">${fmt(valStock)} investis</div></div>
-    ${best?`<div class="kpi-card"><div class="kpi-label">Meilleur mois</div>
-      <div class="kpi-value green">${fmt(best.benef)}</div>
-      <div class="kpi-sub">${best.m} ${best.y}</div></div>`:''}
-  `;
+function renderDashboard(){const d=filtered();renderKPIs(d);renderBarChart(d);renderAnnualChart();renderCumulChart();renderCatChart(d);renderCatCards(d);}
+function renderKPIs(d){
+  const tB=d.reduce((s,r)=>s+r.benef,0),tCA=d.reduce((s,r)=>s+r.ca,0),tT=d.reduce((s,r)=>s+r.thib,0);
+  const avgM=tCA>0?Math.round(tB/tCA*100):0;
+  const best=[...d].filter(r=>r.benef>0).sort((a,b)=>b.benef-a.benef)[0];
+  const enStock=articles.filter(a=>a.statut==='en_stock');
+  const valStock=enStock.reduce((s,a)=>s+a.prix_achat,0);
+  document.getElementById('kpi-grid').innerHTML=`
+    <div class="kpi-card"><div class="kpi-label">Bénéfice total</div><div class="kpi-value green">${fmt(tB)}</div><div class="kpi-sub">${currentYear==='all'?'depuis sept. 2021':currentYear}</div></div>
+    <div class="kpi-card"><div class="kpi-label">Chiffre d'affaires</div><div class="kpi-value blue">${fmt(tCA)}</div></div>
+    <div class="kpi-card"><div class="kpi-label">Marge moyenne</div><div class="kpi-value gold">${avgM}%</div><div class="kpi-sub">bénéfice / CA</div></div>
+    <div class="kpi-card"><div class="kpi-label">Part Thibault</div><div class="kpi-value purple">${fmt(tT)}</div></div>
+    <div class="kpi-card"><div class="kpi-label">Stock actuel</div><div class="kpi-value gold">${enStock.length} articles</div><div class="kpi-sub">${fmt(valStock)} investis</div></div>
+    ${best?`<div class="kpi-card"><div class="kpi-label">Meilleur mois</div><div class="kpi-value green">${fmt(best.benef)}</div><div class="kpi-sub">${best.m} ${best.y}</div></div>`:''}`;
 }
-
-function renderBarChart(d) {
-  if (charts.bar) charts.bar.destroy();
-  charts.bar = new Chart(document.getElementById('chartBar'), {
-    type:'bar',
-    data:{ labels:d.map(r=>r.m.substring(0,3)+' '+r.y),
-      datasets:[{ data:d.map(r=>r.benef), backgroundColor:d.map(r=>CAT_COLORS[r.cat]||CAT_COLORS.equitation), borderRadius:4 }]},
+function renderBarChart(d){
+  if(charts.bar)charts.bar.destroy();
+  charts.bar=new Chart(document.getElementById('chartBar'),{type:'bar',
+    data:{labels:d.map(r=>r.m.substring(0,3)+' '+r.y),datasets:[{data:d.map(r=>r.benef),backgroundColor:d.map(r=>CAT_COLORS[r.cat]||CAT_COLORS.equitation),borderRadius:4}]},
     options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.raw)}}},
-      scales:{x:{ticks:{color:'#8b949e',font:{size:10},maxRotation:60},grid:{color:'#21262d'}},
-        y:{ticks:{color:'#8b949e',callback:v=>v+'€'},grid:{color:'#21262d'}}}}
-  });
+      scales:{x:{ticks:{color:'#8b949e',font:{size:10},maxRotation:60},grid:{color:'#21262d'}},y:{ticks:{color:'#8b949e',callback:v=>v+'€'},grid:{color:'#21262d'}}}}});
 }
-
-function renderAnnualChart() {
-  const all = allData();
-  const yrs = [...new Set(all.map(d=>d.y))].sort();
-  if (charts.annual) charts.annual.destroy();
-  charts.annual = new Chart(document.getElementById('chartAnnuel'), {
-    type:'bar',
-    data:{ labels:yrs,
-      datasets:[
-        {label:'CA',data:yrs.map(y=>all.filter(d=>d.y===y).reduce((s,r)=>s+r.ca,0)),
-          backgroundColor:'rgba(88,166,255,0.22)',borderColor:'rgba(88,166,255,0.8)',borderWidth:1,borderRadius:4},
-        {label:'Bénéfice',data:yrs.map(y=>all.filter(d=>d.y===y).reduce((s,r)=>s+r.benef,0)),
-          backgroundColor:'rgba(63,185,80,0.6)',borderRadius:4}
-      ]},
-    options:{responsive:true,
-      plugins:{legend:{labels:{color:'#8b949e',font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.raw)}}},
-      scales:{x:{ticks:{color:'#8b949e'},grid:{color:'#21262d'}},y:{ticks:{color:'#8b949e',callback:v=>v+'€'},grid:{color:'#21262d'}}}}
-  });
+function renderAnnualChart(){
+  const all=allData(),yrs=[...new Set(all.map(d=>d.y))].sort();
+  if(charts.annual)charts.annual.destroy();
+  charts.annual=new Chart(document.getElementById('chartAnnuel'),{type:'bar',
+    data:{labels:yrs,datasets:[
+      {label:'CA',data:yrs.map(y=>all.filter(d=>d.y===y).reduce((s,r)=>s+r.ca,0)),backgroundColor:'rgba(88,166,255,0.22)',borderColor:'rgba(88,166,255,0.8)',borderWidth:1,borderRadius:4},
+      {label:'Bénéfice',data:yrs.map(y=>all.filter(d=>d.y===y).reduce((s,r)=>s+r.benef,0)),backgroundColor:'rgba(63,185,80,0.6)',borderRadius:4}]},
+    options:{responsive:true,plugins:{legend:{labels:{color:'#8b949e',font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.raw)}}},
+      scales:{x:{ticks:{color:'#8b949e'},grid:{color:'#21262d'}},y:{ticks:{color:'#8b949e',callback:v=>v+'€'},grid:{color:'#21262d'}}}}});
 }
-
-function renderCumulChart() {
-  const all = allData();
-  const yrs = [...new Set(all.map(d=>d.y))].sort();
-  const palette = [210,30,120,60,160,270];
-  const datasets = yrs.map((y,i) => {
-    let cum=0;
-    const vals = all.filter(d=>d.y===y).map(r=>{cum+=r.benef;return cum;});
-    const hue  = palette[i%palette.length];
-    return {label:String(y),data:vals,borderColor:`hsl(${hue},75%,60%)`,fill:false,tension:.35,borderWidth:2,pointRadius:3};
-  });
-  const maxLen = Math.max(...yrs.map(y=>all.filter(d=>d.y===y).length));
-  if (charts.cumul) charts.cumul.destroy();
-  charts.cumul = new Chart(document.getElementById('chartCumul'), {
-    type:'line',
+function renderCumulChart(){
+  const all=allData(),yrs=[...new Set(all.map(d=>d.y))].sort(),palette=[210,30,120,60,160,270];
+  const datasets=yrs.map((y,i)=>{let cum=0;const vals=all.filter(d=>d.y===y).map(r=>{cum+=r.benef;return cum;});return{label:String(y),data:vals,borderColor:`hsl(${palette[i%palette.length]},75%,60%)`,fill:false,tension:.35,borderWidth:2,pointRadius:3};});
+  const maxLen=Math.max(...yrs.map(y=>all.filter(d=>d.y===y).length));
+  if(charts.cumul)charts.cumul.destroy();
+  charts.cumul=new Chart(document.getElementById('chartCumul'),{type:'line',
     data:{labels:MONTHS_FR.slice(0,maxLen).map(m=>m.substring(0,3)),datasets},
-    options:{responsive:true,
-      plugins:{legend:{labels:{color:'#8b949e',font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.raw)}}},
-      scales:{x:{ticks:{color:'#8b949e',font:{size:10}},grid:{color:'#21262d'}},y:{ticks:{color:'#8b949e',callback:v=>v+'€'},grid:{color:'#21262d'}}}}
-  });
+    options:{responsive:true,plugins:{legend:{labels:{color:'#8b949e',font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.raw)}}},
+      scales:{x:{ticks:{color:'#8b949e',font:{size:10}},grid:{color:'#21262d'}},y:{ticks:{color:'#8b949e',callback:v=>v+'€'},grid:{color:'#21262d'}}}}});
 }
-
-function renderCatChart(d) {
-  const cats = ['sneakers','vetements','equitation','mixed'];
-  const stats = cats.map(c=>({c,b:d.filter(r=>r.cat===c).reduce((s,r)=>s+r.benef,0)})).filter(s=>s.b>0);
-  if (!stats.length) return;
-  const total = stats.reduce((s,x)=>s+x.b,0);
-  if (charts.cat) charts.cat.destroy();
-  charts.cat = new Chart(document.getElementById('chartCat'), {
-    type:'doughnut',
-    data:{labels:stats.map(s=>CAT_LABELS[s.c]),
-      datasets:[{data:stats.map(s=>s.b),backgroundColor:stats.map(s=>CAT_COLORS[s.c]),borderColor:'#161b22',borderWidth:3}]},
-    options:{responsive:true,plugins:{
-      legend:{position:'right',labels:{color:'#8b949e',font:{size:11}}},
-      tooltip:{callbacks:{label:c=>c.label+': '+fmt(c.raw)+' ('+Math.round(c.raw/total*100)+'%)'}}
-    }}
-  });
+function renderCatChart(d){
+  const cats=['sneakers','vetements','equitation','mixed'];
+  const stats=cats.map(c=>({c,b:d.filter(r=>r.cat===c).reduce((s,r)=>s+r.benef,0)})).filter(s=>s.b>0);
+  if(!stats.length)return;const total=stats.reduce((s,x)=>s+x.b,0);
+  if(charts.cat)charts.cat.destroy();
+  charts.cat=new Chart(document.getElementById('chartCat'),{type:'doughnut',
+    data:{labels:stats.map(s=>CAT_LABELS[s.c]),datasets:[{data:stats.map(s=>s.b),backgroundColor:stats.map(s=>CAT_COLORS[s.c]),borderColor:'#161b22',borderWidth:3}]},
+    options:{responsive:true,plugins:{legend:{position:'right',labels:{color:'#8b949e',font:{size:11}}},tooltip:{callbacks:{label:c=>c.label+': '+fmt(c.raw)+' ('+Math.round(c.raw/total*100)+'%)'}}}}});
 }
-
-function renderCatCards(d) {
-  const cats = ['sneakers','vetements','equitation','mixed'];
-  const total = d.reduce((s,r)=>s+r.benef,0);
-  let h = '';
-  cats.forEach(c => {
-    const rows  = d.filter(r=>r.cat===c);
-    const benef = rows.reduce((s,r)=>s+r.benef,0);
-    const ca    = rows.reduce((s,r)=>s+r.ca,0);
-    const mois  = rows.filter(r=>r.benef>0).length;
-    if (!mois && !benef) return;
-    const share = total>0 ? Math.round(benef/total*100) : 0;
-    const marge = ca>0 ? Math.round(benef/ca*100) : 0;
-    h += `<div class="cat-card ${c}">
-      <div class="cat-name">${CAT_LABELS[c]}</div>
-      <div class="cat-benef ${benef>=0?'green':'red'}">${fmt(benef)}</div>
-      <div class="cat-sub">${share}% du total · CA ${fmt(ca)} · Marge ${marge}% · ${mois} mois</div>
-    </div>`;
+function renderCatCards(d){
+  const cats=['sneakers','vetements','equitation','mixed'],total=d.reduce((s,r)=>s+r.benef,0);
+  let h='';
+  cats.forEach(c=>{
+    const rows=d.filter(r=>r.cat===c),benef=rows.reduce((s,r)=>s+r.benef,0),ca=rows.reduce((s,r)=>s+r.ca,0),mois=rows.filter(r=>r.benef>0).length;
+    if(!mois&&!benef)return;
+    const share=total>0?Math.round(benef/total*100):0,marge=ca>0?Math.round(benef/ca*100):0;
+    h+=`<div class="cat-card ${c}"><div class="cat-name">${CAT_LABELS[c]}</div><div class="cat-benef ${benef>=0?'green':'red'}">${fmt(benef)}</div><div class="cat-sub">${share}% du total · CA ${fmt(ca)} · Marge ${marge}% · ${mois} mois</div></div>`;
   });
-  document.getElementById('cat-grid').innerHTML = h || '<div style="color:var(--text2);font-size:13px;">Aucune donnée</div>';
+  document.getElementById('cat-grid').innerHTML=h||'<div style="color:var(--text2);font-size:13px;">Aucune donnée</div>';
 }
-
-// ── STOCK ─────────────────────────────────────────────────────────────────────
-function renderStock() {
-  let list = articles;
-  if (stockFilter !== 'all') list = articles.filter(a => a.statut === stockFilter);
-
-  if (!list.length) {
-    document.getElementById('stock-tbody').innerHTML = `
-      <tr><td colspan="7"><div class="empty-state">
-        <div class="empty-icon">📦</div>
-        <div>${stockFilter==='en_stock'?'Aucun article en stock — clique "+ Ajouter un article"':'Aucune vente enregistrée'}</div>
-      </div></td></tr>`;
-    return;
-  }
-
-  let h = '';
-  list.forEach(a => {
-    const v   = ventes.find(x => x.article_id === a.id);
-    const bn  = v ? fmt(r2(v.prix_vente - a.prix_achat)) : '—';
-    const bnC = v ? (v.prix_vente - a.prix_achat >= 0 ? 'green' : 'red') : '';
-    h += `<tr>
-      <td>
-        <div style="font-weight:600">${a.nom}</div>
-        ${a.marque?`<div style="font-size:11px;color:var(--text2)">${a.marque}${a.taille?' · '+a.taille:''}</div>`:''}
-      </td>
+function renderStock(){
+  let list=articles;
+  if(stockFilter!=='all')list=articles.filter(a=>a.statut===stockFilter);
+  if(!list.length){document.getElementById('stock-tbody').innerHTML=`<tr><td colspan="7"><div class="empty-state"><div style="font-size:36px;margin-bottom:12px">📦</div><div>${stockFilter==='en_stock'?'Aucun article en stock — clique "+ Ajouter un article"':'Aucune vente enregistrée'}</div></div></td></tr>`;return;}
+  let h='';
+  list.forEach(a=>{
+    const v=ventes.find(x=>x.article_id===a.id),bn=v?r2(v.prix_vente-a.prix_achat):null;
+    h+=`<tr>
+      <td><div style="font-weight:600">${a.nom}</div>${a.marque||a.taille?`<div style="font-size:11px;color:var(--text2)">${[a.marque,a.taille].filter(Boolean).join(' · ')}</div>`:''}</td>
       <td style="color:var(--text2);font-size:12px">${a.sku||'—'}</td>
       <td style="font-weight:600">${fmt(a.prix_achat)}</td>
       <td><span class="badge badge-${a.categorie||'equitation'}">${CAT_LABELS[a.categorie]||'—'}</span></td>
       <td><span class="badge badge-${a.statut}">${a.statut==='en_stock'?'En stock':'Vendu'}</span></td>
-      <td class="${bnC}" style="font-weight:600">${bn}</td>
-      <td style="text-align:right">
-        ${a.statut==='en_stock'
-          ? `<button class="btn btn-sm btn-sell" onclick="openSellModal('${a.id}')">Vendre</button>`
-          : `<span style="font-size:11px;color:var(--text2)">${v&&v.date_vente?new Date(v.date_vente).toLocaleDateString('fr-FR'):''}</span>`
-        }
+      <td class="${bn!==null?(bn>=0?'green':'red'):''}" style="font-weight:600">${bn!==null?fmt(bn):'—'}</td>
+      <td style="text-align:right;display:flex;gap:8px;justify-content:flex-end;align-items:center;">
+        ${a.statut==='en_stock'?`<button class="btn btn-sm btn-sell" onclick="openSellModal('${a.id}')">Vendre</button>`:`<span style="font-size:11px;color:var(--text2)">${v&&v.date_vente?new Date(v.date_vente).toLocaleDateString('fr-FR'):''}</span>`}
+        <button class="btn btn-sm btn-delete" onclick="openDeleteModal('${a.id}')">✕</button>
       </td>
     </tr>`;
   });
-  document.getElementById('stock-tbody').innerHTML = h;
+  document.getElementById('stock-tbody').innerHTML=h;
 }
-
-// ── RENDER ────────────────────────────────────────────────────────────────────
-function render() {
-  renderDashboard();
-  renderStock();
-}
-
-// ── START ─────────────────────────────────────────────────────────────────────
+function render(){renderDashboard();renderStock();}
 checkAuth();
 </script>
 </body>
