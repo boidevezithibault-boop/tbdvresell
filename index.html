@@ -285,6 +285,18 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
 /* ─── DORMANT ALERT ─── */
 .dormant-alert{display:flex;align-items:center;gap:10px;background:var(--gold-dim);border:1px solid rgba(246,195,66,.25);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12.5px;color:var(--gold);}
 
+/* ─── ACCUEIL ─── */
+.obj-bar-wrap{margin-top:10px;}
+.obj-bar-track{height:10px;background:var(--bg4);border-radius:6px;overflow:hidden;}
+.obj-bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--gold),var(--green));transition:width .6s cubic-bezier(.25,.8,.25,1);}
+.obj-pct{font-size:22px;font-weight:700;color:var(--gold);}
+.last-sales-list{display:flex;flex-direction:column;gap:8px;margin-top:4px;}
+.last-sale-row{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:var(--bg3);border-radius:8px;border:1px solid var(--border);}
+.last-sale-name{font-size:12.5px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px;}
+.last-sale-date{font-size:11px;color:var(--text3);margin-top:2px;}
+.last-sale-benef{font-size:14px;font-weight:700;color:var(--green);white-space:nowrap;}
+.proj-chip{display:inline-flex;align-items:center;gap:6px;background:var(--accent-dim);border:1px solid rgba(108,143,255,.2);border-radius:8px;padding:8px 14px;font-size:13px;color:var(--accent);font-weight:600;margin-bottom:16px;}
+
 /* ─── MONTH NOTE ─── */
 .note-area{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;}
 .note-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
@@ -334,7 +346,11 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
     </div>
     <nav class="sidebar-nav">
       <div class="nav-section">Navigation</div>
-      <div class="nav-item active" onclick="gotoPage('dashboard',this)">
+      <div class="nav-item active" onclick="gotoPage('accueil',this)">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Accueil
+      </div>
+      <div class="nav-item" onclick="gotoPage('dashboard',this)">
         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         Dashboard
       </div>
@@ -358,8 +374,41 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
 
   <main class="main">
 
+    <!-- ACCUEIL -->
+    <div class="page active" id="page-accueil">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Accueil</div>
+          <div class="page-sub" id="acc-period">—</div>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="acc-obj-btn" onclick="">🎯 Définir objectif</button>
+      </div>
+      <div class="kpi-grid" id="acc-kpis"></div>
+      <div id="acc-proj"></div>
+      <div id="acc-obj-bar" style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:16px;display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+          <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.06em">🎯 Objectif du mois</div>
+          <div class="obj-pct" id="acc-obj-pct">0%</div>
+        </div>
+        <div class="obj-bar-track"><div class="obj-bar-fill" id="acc-obj-fill" style="width:0%"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11.5px;color:var(--text3)">
+          <span id="acc-obj-curr">0 €</span><span id="acc-obj-total">/ 0 €</span>
+        </div>
+      </div>
+      <div class="charts-row">
+        <div class="chart-card">
+          <div class="chart-title">Évolution cumulée — ce mois vs mois précédent</div>
+          <canvas id="chartAccueil" height="130"></canvas>
+        </div>
+        <div class="chart-card" id="acc-last-sales-wrap">
+          <div class="chart-title">Dernières ventes</div>
+          <div class="last-sales-list" id="acc-last-sales"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- DASHBOARD -->
-    <div class="page active" id="page-dashboard">
+    <div class="page" id="page-dashboard">
       <div class="page-header">
         <div>
           <div class="page-title">Dashboard</div>
@@ -770,6 +819,7 @@ async function initApp(){
   document.getElementById('sell-date').value=today();
   await loadData();
   buildFilters();
+  renderAccueil();
   renderDashboard();
   renderStock();
 }
@@ -909,6 +959,109 @@ function saveObjective(){
   closeModal('modal-obj');
   renderDashboard();
   showToast('Objectif enregistré ✓');
+}
+
+/* ─── ACCUEIL ─── */
+function renderAccueil(){
+  const now=new Date();
+  const year=now.getFullYear(),monthIdx=now.getMonth(),month=MONTHS_FR[monthIdx];
+  const dayToday=now.getDate();
+  const daysInMonth=new Date(year,monthIdx+1,0).getDate();
+
+  // Ventes du mois courant (Supabase)
+  const curVentes=ventes.filter(v=>{
+    if(!v.date_vente)return false;
+    const d=new Date(v.date_vente);
+    return d.getFullYear()===year&&d.getMonth()===monthIdx;
+  });
+  // Ventes du mois précédent
+  const prevMonthIdx=monthIdx===0?11:monthIdx-1;
+  const prevYear=monthIdx===0?year-1:year;
+  const prevVentes=ventes.filter(v=>{
+    if(!v.date_vente)return false;
+    const d=new Date(v.date_vente);
+    return d.getFullYear()===prevYear&&d.getMonth()===prevMonthIdx;
+  });
+
+  // KPIs mois courant
+  let tCA=0,tBenef=0,tThib=0,tMaman=0,tPayThib=0;
+  curVentes.forEach(v=>{
+    const ca=v.prix_vente||0,pa=v.articles?v.articles.prix_achat||0:0,bn=ca-pa;
+    tCA+=ca;tBenef+=bn;
+    tThib+=(v.part_thib||bn);tMaman+=(v.part_maman||0);
+    if((v.pct_maman||0)>0)tPayThib+=r2(ca-(v.part_maman||0));
+  });
+  // Compléter avec DATA_FIXED si le mois courant est dedans (cas limites anciens)
+  const fixedRow=DATA_FIXED.find(r=>r.y===year&&r.m===month);
+  if(fixedRow&&curVentes.length===0){
+    const aug=augmentFixed(fixedRow);
+    tCA=aug.ca;tBenef=aug.benef;tThib=aug.thib;tMaman=aug.maman;tPayThib=aug.payThib;
+  }
+
+  document.getElementById('acc-period').textContent=month+' '+year;
+  document.getElementById('acc-obj-btn').onclick=()=>openObjectiveModal(year,month);
+
+  // KPI grid
+  document.getElementById('acc-kpis').innerHTML=`
+    <div class="kpi green"><div class="kpi-label">📈 Bénéfice</div><div class="kpi-value green">${fmt(tBenef)}</div><div class="kpi-sub" style="margin-top:5px">Marge ${tCA>0?Math.round(tBenef/tCA*100):0}%</div></div>
+    <div class="kpi blue"><div class="kpi-label">💰 CA total</div><div class="kpi-value blue">${fmt(tCA)}</div><div class="kpi-sub" style="margin-top:5px">${curVentes.length} vente${curVentes.length>1?'s':''}</div></div>
+    <div class="kpi green"><div class="kpi-label">🧍 Bénéf. Thibault</div><div class="kpi-value green">${fmt(tThib)}</div></div>
+    <div class="kpi purple"><div class="kpi-label">👩 Bénéf. Maman</div><div class="kpi-value purple">${fmt(tMaman)}</div></div>
+    ${tPayThib>0?`<div class="kpi blue"><div class="kpi-label">💸 PayThib</div><div class="kpi-value blue">${fmt(tPayThib)}</div><div class="kpi-sub" style="margin-top:5px">À récupérer</div></div>`:''}
+  `;
+
+  // Projection fin de mois
+  const dailyAvg=dayToday>0?tBenef/dayToday:0;
+  const proj=Math.round(tBenef+dailyAvg*(daysInMonth-dayToday));
+  document.getElementById('acc-proj').innerHTML=tBenef>0?
+    `<div class="proj-chip">🔮 À ce rythme : <strong style="margin-left:4px">${fmt(proj)}</strong>&nbsp;en fin de mois</div>`:'';
+
+  // Objectif
+  const obj=getObjective(year,month);
+  const objEl=document.getElementById('acc-obj-bar');
+  if(obj>0){
+    const pct=Math.min(100,Math.round(tBenef/obj*100));
+    objEl.style.display='block';
+    document.getElementById('acc-obj-pct').textContent=pct+'%';
+    document.getElementById('acc-obj-fill').style.width=pct+'%';
+    document.getElementById('acc-obj-curr').textContent=fmt(tBenef);
+    document.getElementById('acc-obj-total').textContent='/ '+fmt(obj);
+  }else{objEl.style.display='none';}
+
+  // Chart courbe cumulative jour par jour
+  const buildCumul=(ventesArr,mIdx)=>{
+    const daysN=new Date(year,mIdx+1,0).getDate();
+    const dayMap={};
+    ventesArr.forEach(v=>{const day=new Date(v.date_vente).getDate();const bn=(v.prix_vente||0)-(v.articles?v.articles.prix_achat||0:0);dayMap[day]=(dayMap[day]||0)+bn;});
+    let cum=0;return Array.from({length:daysN},(_,i)=>{cum+=dayMap[i+1]||0;return r2(cum);});
+  };
+  const curCumul=buildCumul(curVentes,monthIdx);
+  const prevCumul=buildCumul(prevVentes,prevMonthIdx);
+  const labels=Array.from({length:Math.max(curCumul.length,prevCumul.length)},(_,i)=>i+1);
+
+  if(charts.accueil)charts.accueil.destroy();
+  charts.accueil=new Chart(document.getElementById('chartAccueil'),{type:'line',
+    data:{labels,datasets:[
+      {label:month,data:curCumul,borderColor:'rgba(62,207,142,.9)',backgroundColor:'rgba(62,207,142,.08)',fill:true,tension:.4,borderWidth:2.5,pointRadius:2},
+      {label:MONTHS_FR[prevMonthIdx],data:prevCumul,borderColor:'rgba(108,143,255,.5)',backgroundColor:'transparent',fill:false,tension:.4,borderWidth:1.5,borderDash:[4,4],pointRadius:0}
+    ]},
+    options:{responsive:true,plugins:{legend:{labels:{color:'#8890a4',font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+' : '+fmt(c.raw)}}},
+      scales:{x:{ticks:{color:'#555e72',font:{size:10}},grid:{color:'rgba(30,33,40,.8)'}},y:{ticks:{color:'#555e72',callback:v=>v+'€'},grid:{color:'rgba(30,33,40,.8)'}}}}
+  });
+
+  // Dernières ventes
+  const last5=[...curVentes].sort((a,b)=>new Date(b.date_vente)-new Date(a.date_vente)).slice(0,5);
+  const lsEl=document.getElementById('acc-last-sales');
+  if(!last5.length){lsEl.innerHTML='<div style="color:var(--text3);font-size:12.5px;padding:12px 0">Aucune vente ce mois-ci</div>';return;}
+  lsEl.innerHTML=last5.map(v=>{
+    const bn=r2((v.prix_vente||0)-(v.articles?v.articles.prix_achat||0:0));
+    const nom=v.articles?(v.articles.nom+(v.articles.taille?' · '+v.articles.taille:'')):'—';
+    const date=new Date(v.date_vente).toLocaleDateString('fr-FR',{day:'numeric',month:'short'});
+    return`<div class="last-sale-row">
+      <div><div class="last-sale-name" title="${nom}">${nom}</div><div class="last-sale-date">${date}</div></div>
+      <div class="last-sale-benef">+${fmt(bn)}</div>
+    </div>`;
+  }).join('');
 }
 
 /* ─── DASHBOARD ─── */
