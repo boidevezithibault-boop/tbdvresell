@@ -644,15 +644,23 @@ function buildLiveData(ventes){
     if(!v.date_vente||!v.articles)return;
     const d=new Date(v.date_vente),y=d.getFullYear(),m=MONTHS_FR[d.getMonth()],key=`${y}-${m}`;
     const ca=v.prix_vente||0,bn=ca-(v.articles.prix_achat||0);
-    if(!map[key])map[key]={y,m,ca:0,benef:0,thib:0,maman:0,cat:v.articles.categorie||'equitation'};
+    if(!map[key])map[key]={y,m,ca:0,benef:0,thib:0,maman:0,ca_maman:0,ca_thib:0,payThib:0,cat:v.articles.categorie||'equitation'};
     map[key].ca+=ca;map[key].benef+=bn;
     map[key].thib+=(v.part_thib||bn);map[key].maman+=(v.part_maman||0);
+    if((v.pct_maman||0)>0){map[key].ca_maman+=ca;map[key].payThib+=r2(ca-(v.part_maman||0));}
+    else{map[key].ca_thib+=ca;}
   });
   return Object.values(map).sort((a,b)=>a.y!==b.y?a.y-b.y:MONTHS_FR.indexOf(a.m)-MONTHS_FR.indexOf(b.m));
 }
+function augmentFixed(row){
+  const ca_maman=row.maman>0?row.ca:0;
+  const ca_thib=row.maman===0?row.ca:0;
+  const payThib=row.maman>0?r2(row.ca-row.maman):0;
+  return{...row,ca_maman,ca_thib,payThib};
+}
 function allData(){
   const live=liveData.filter(d=>d.y>2026||(d.y===2026&&MONTHS_FR.indexOf(d.m)>=5));
-  return[...DATA_FIXED,...live];
+  return[...DATA_FIXED.map(augmentFixed),...live];
 }
 function filtered(){
   let d=allData();
@@ -766,6 +774,9 @@ function renderDashboard(){
   const tCA=d.reduce((s,r)=>s+r.ca,0),prevCA=prev.reduce((s,r)=>s+r.ca,0);
   const tThib=d.reduce((s,r)=>s+r.thib,0),prevThib=prev.reduce((s,r)=>s+r.thib,0);
   const tMaman=d.reduce((s,r)=>s+r.maman,0);
+  const tCaMaman=d.reduce((s,r)=>s+(r.ca_maman||0),0);
+  const tCaThib=d.reduce((s,r)=>s+(r.ca_thib||0),0);
+  const tPayThib=d.reduce((s,r)=>s+(r.payThib||0),0);
   const marge=tCA>0?Math.round(tB/tCA*100):0;
   const best=[...d].filter(r=>r.benef>0).sort((a,b)=>b.benef-a.benef)[0];
   const enStock=articles.filter(a=>a.statut==='en_stock');
@@ -807,24 +818,34 @@ function renderDashboard(){
       <div class="kpi-label">📈 Bénéfice total</div>
       <div class="kpi-value green">${fmt(tB)}</div>
       ${delta(tB,prevB)}
-      <div class="kpi-sub" style="margin-top:4px">${periodLabel}</div>
-    </div>
-    <div class="kpi blue">
-      <div class="kpi-label">💰 Chiffre d'affaires</div>
-      <div class="kpi-value blue">${fmt(tCA)}</div>
-      ${delta(tCA,prevCA)}
       <div class="kpi-sub" style="margin-top:4px">Marge ${marge}%</div>
     </div>
+    <div class="kpi blue">
+      <div class="kpi-label">💰 CA Thibault</div>
+      <div class="kpi-value blue">${fmt(tCaThib)}</div>
+      <div class="kpi-sub" style="margin-top:5px">Ventes directes</div>
+    </div>
+    <div class="kpi purple">
+      <div class="kpi-label">💜 CA Maman</div>
+      <div class="kpi-value purple">${fmt(tCaMaman)}</div>
+      <div class="kpi-sub" style="margin-top:5px">Ventes via maman</div>
+    </div>
     <div class="kpi green">
-      <div class="kpi-label">🧍 Part Thibault</div>
+      <div class="kpi-label">🧍 Bénéf. Thibault</div>
       <div class="kpi-value green">${fmt(tThib)}</div>
       ${delta(tThib,prevThib)}
     </div>
     <div class="kpi purple">
-      <div class="kpi-label">👩 Part Maman</div>
+      <div class="kpi-label">👩 Bénéf. Maman</div>
       <div class="kpi-value purple">${fmt(tMaman)}</div>
       <div class="kpi-sub" style="margin-top:5px">${tB>0?Math.round(tMaman/tB*100):0}% du bénéfice</div>
     </div>
+    ${tPayThib>0?`<div class="kpi blue">
+      <div class="kpi-label">💸 PayThib</div>
+      <div class="kpi-value blue">${fmt(tPayThib)}</div>
+      <div class="kpi-sub" style="margin-top:5px">Maman → Thibault</div>
+    </div>`:''}
+
     <div class="kpi orange">
       <div class="kpi-label">📦 Stock actuel</div>
       <div class="kpi-value orange">${enStock.length} art.</div>
