@@ -8,62 +8,38 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-/* ─── Reset & Base ─── */
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --bg:#0a0c10;
-  --bg2:#111318;
-  --bg3:#191c23;
-  --bg4:#1e2128;
-  --border:#252830;
-  --border2:#2e3240;
-  --text:#eef0f6;
-  --text2:#8890a4;
-  --text3:#555e72;
-  --accent:#6c8fff;
-  --accent-dim:rgba(108,143,255,.12);
-  --green:#3ecf8e;
-  --green-dim:rgba(62,207,142,.12);
-  --red:#f56565;
-  --red-dim:rgba(245,101,101,.1);
-  --gold:#f6c342;
-  --gold-dim:rgba(246,195,66,.1);
-  --purple:#a78bfa;
-  --purple-dim:rgba(167,139,250,.12);
-  --orange:#fb923c;
-  --orange-dim:rgba(251,146,60,.1);
-  --sidebar:220px;
-  --radius:10px;
-  --radius-sm:7px;
-  --shadow:0 1px 3px rgba(0,0,0,.4);
+  --bg:#0a0c10;--bg2:#111318;--bg3:#191c23;--bg4:#1e2128;
+  --border:#252830;--border2:#2e3240;
+  --text:#eef0f6;--text2:#8890a4;--text3:#555e72;
+  --accent:#6c8fff;--accent-dim:rgba(108,143,255,.12);
+  --green:#3ecf8e;--green-dim:rgba(62,207,142,.12);
+  --red:#f56565;--red-dim:rgba(245,101,101,.1);
+  --gold:#f6c342;--gold-dim:rgba(246,195,66,.1);
+  --purple:#a78bfa;--purple-dim:rgba(167,139,250,.12);
+  --orange:#fb923c;--orange-dim:rgba(251,146,60,.1);
+  --sidebar:220px;--radius:10px;--radius-sm:7px;
 }
 body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',sans-serif;font-size:13.5px;min-height:100vh;-webkit-font-smoothing:antialiased;}
 
-/* ─── Login ─── */
-#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--bg);}
+/* LOGIN */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;}
 .login-wrap{width:100%;max-width:400px;padding:20px;}
 .login-logo{font-size:26px;font-weight:700;letter-spacing:-.5px;margin-bottom:6px;}
 .login-logo em{color:var(--accent);font-style:normal;}
 .login-sub{color:var(--text2);font-size:13px;margin-bottom:36px;}
 .login-card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:32px;}
 .f-label{display:block;font-size:11.5px;font-weight:500;color:var(--text2);margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase;}
-input,select,textarea{
-  width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);
-  border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;outline:none;
-  transition:border-color .15s,box-shadow .15s;font-family:inherit;
-}
-input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(108,143,255,.12);}
+input,select,textarea{width:100%;background:var(--bg3);border:1px solid var(--border2);color:var(--text);border-radius:var(--radius-sm);padding:10px 13px;font-size:13.5px;outline:none;transition:border-color .15s,box-shadow .15s;font-family:inherit;}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(108,143,255,.12);}
 select option{background:var(--bg3);}
 input::placeholder{color:var(--text3);}
 .f-group{margin-bottom:16px;}
 .error-msg{color:var(--red);font-size:12px;margin-top:8px;min-height:16px;}
 
-/* ─── Buttons ─── */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:7px;
-  padding:9px 18px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;
-  cursor:pointer;border:none;transition:all .15s;font-family:inherit;white-space:nowrap;
-}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 18px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:inherit;white-space:nowrap;}
 .btn:disabled{opacity:.45;cursor:not-allowed;}
 .btn-primary{background:var(--accent);color:#fff;}
 .btn-primary:hover:not(:disabled){background:#7d9fff;}
@@ -72,61 +48,58 @@ input::placeholder{color:var(--text3);}
 .btn-red{background:var(--red);color:#fff;}
 .btn-red:hover:not(:disabled){background:#f87171;}
 .btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--text2);}
-.btn-ghost:hover:not(:disabled){border-color:var(--border2);background:var(--bg3);color:var(--text);}
+.btn-ghost:hover:not(:disabled){background:var(--bg3);color:var(--text);}
 .btn-full{width:100%;}
 .btn-sm{padding:5px 12px;font-size:12px;border-radius:6px;}
-.btn-icon{
-  width:30px;height:30px;padding:0;border-radius:6px;border:1px solid var(--border);
-  background:transparent;color:var(--text2);cursor:pointer;display:inline-flex;
-  align-items:center;justify-content:center;font-size:13px;transition:all .15s;
-}
+.btn-icon{width:30px;height:30px;padding:0;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:13px;transition:all .15s;}
 .btn-icon:hover{background:var(--bg4);color:var(--text);}
 .btn-icon.danger:hover{background:var(--red-dim);color:var(--red);border-color:rgba(245,101,101,.3);}
 .btn-icon.edit:hover{background:var(--accent-dim);color:var(--accent);border-color:rgba(108,143,255,.3);}
-.btn-icon.sell:hover{background:var(--green-dim);color:var(--green);border-color:rgba(62,207,142,.3);}
+.btn-icon.sell-icon:hover{background:var(--green-dim);color:var(--green);border-color:rgba(62,207,142,.3);}
 
-/* ─── App Layout ─── */
+/* APP LAYOUT */
 #app-screen{display:none;}
 .app-layout{display:flex;min-height:100vh;}
 
-/* ─── Sidebar ─── */
-.sidebar{
-  width:var(--sidebar);min-width:var(--sidebar);
-  background:var(--bg2);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;
-}
+/* SIDEBAR */
+.sidebar{width:var(--sidebar);min-width:var(--sidebar);background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:200;}
 .sidebar-logo{padding:22px 20px 18px;border-bottom:1px solid var(--border);}
-.sidebar-logo .mark{font-size:17px;font-weight:700;letter-spacing:-.4px;color:var(--text);}
+.sidebar-logo .mark{font-size:17px;font-weight:700;letter-spacing:-.4px;}
 .sidebar-logo .mark em{color:var(--accent);font-style:normal;}
 .sidebar-logo .sub{font-size:11px;color:var(--text3);margin-top:3px;}
 .sidebar-nav{flex:1;padding:14px 10px;display:flex;flex-direction:column;gap:2px;}
-.nav-item{
-  display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius-sm);
-  color:var(--text2);cursor:pointer;transition:all .15s;font-size:13px;font-weight:500;
-  border:1px solid transparent;
-}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius-sm);color:var(--text2);cursor:pointer;transition:all .15s;font-size:13px;font-weight:500;border:1px solid transparent;}
 .nav-item:hover{background:var(--bg3);color:var(--text);}
 .nav-item.active{background:var(--accent-dim);color:var(--accent);border-color:rgba(108,143,255,.2);}
-.nav-item svg,.nav-item .nav-icon{width:16px;height:16px;flex-shrink:0;opacity:.8;}
+.nav-icon{width:16px;height:16px;flex-shrink:0;}
 .nav-section{font-size:10.5px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;padding:14px 12px 6px;}
 .sidebar-footer{padding:14px 10px;border-top:1px solid var(--border);}
 .user-chip{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--radius-sm);}
 .user-avatar{width:28px;height:28px;border-radius:50%;background:var(--accent-dim);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
-.user-info .name{font-size:12px;font-weight:600;color:var(--text);}
+.user-info .name{font-size:12px;font-weight:600;}
 .user-info .email{font-size:11px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px;}
 .logout-btn{margin-top:6px;width:100%;text-align:left;background:transparent;border:none;color:var(--text3);font-size:12px;cursor:pointer;padding:4px 10px;border-radius:5px;font-family:inherit;transition:color .15s;}
 .logout-btn:hover{color:var(--red);}
 
-/* ─── Main Content ─── */
-.main{margin-left:var(--sidebar);flex:1;min-height:100vh;}
+/* MAIN */
+.main{margin-left:var(--sidebar);flex:1;}
 .page{display:none;padding:28px 32px;max-width:1280px;}
 .page.active{display:block;}
 .page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap;}
 .page-title{font-size:20px;font-weight:700;letter-spacing:-.3px;}
-.page-title .sub{font-size:13px;font-weight:400;color:var(--text2);margin-top:3px;}
+.page-sub{font-size:13px;font-weight:400;color:var(--text2);margin-top:3px;}
 
-/* ─── KPI Cards ─── */
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin-bottom:24px;}
+/* FILTERS */
+.dash-filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:22px;}
+.yr-btn{background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:5px 14px;border-radius:6px;cursor:pointer;font-size:12.5px;font-weight:500;transition:all .15s;font-family:inherit;}
+.yr-btn:hover{border-color:var(--border2);color:var(--text);}
+.yr-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.filter-sep{width:1px;height:20px;background:var(--border2);}
+.month-select{background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:5px 12px;border-radius:6px;font-size:12.5px;font-family:inherit;cursor:pointer;outline:none;}
+.month-select:focus{border-color:var(--accent);}
+
+/* KPI CARDS */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:22px;}
 .kpi{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px 18px 14px;position:relative;overflow:hidden;}
 .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
 .kpi.green::before{background:linear-gradient(90deg,var(--green),transparent);}
@@ -134,37 +107,31 @@ input::placeholder{color:var(--text3);}
 .kpi.gold::before{background:linear-gradient(90deg,var(--gold),transparent);}
 .kpi.purple::before{background:linear-gradient(90deg,var(--purple),transparent);}
 .kpi.orange::before{background:linear-gradient(90deg,var(--orange),transparent);}
-.kpi-label{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
-.kpi-value{font-size:26px;font-weight:700;letter-spacing:-.5px;line-height:1;margin-bottom:6px;}
+.kpi-label{font-size:11px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;}
+.kpi-value{font-size:24px;font-weight:700;letter-spacing:-.5px;line-height:1;margin-bottom:5px;}
 .kpi-value.green{color:var(--green);}
 .kpi-value.blue{color:var(--accent);}
 .kpi-value.gold{color:var(--gold);}
 .kpi-value.purple{color:var(--purple);}
 .kpi-value.orange{color:var(--orange);}
 .kpi-sub{font-size:11.5px;color:var(--text3);}
-.kpi-badge{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:2px 7px;border-radius:4px;gap:3px;}
-.kpi-badge.up{background:var(--green-dim);color:var(--green);}
-.kpi-badge.down{background:var(--red-dim);color:var(--red);}
+.kpi-delta{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:2px 6px;border-radius:4px;margin-top:5px;gap:2px;}
+.kpi-delta.up{background:var(--green-dim);color:var(--green);}
+.kpi-delta.down{background:var(--red-dim);color:var(--red);}
+.kpi-delta.neutral{background:var(--bg4);color:var(--text3);}
 .kpi-progress{margin-top:10px;}
 .kpi-progress-bar{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;margin-top:5px;}
 .kpi-progress-fill{height:100%;border-radius:2px;background:var(--gold);transition:width .4s;}
 
-/* ─── Charts ─── */
+/* CHARTS */
 .charts-row{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:16px;}
-.charts-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;}
+.charts-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
 .chart-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;}
-.chart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
-.chart-title{font-size:12.5px;font-weight:600;color:var(--text2);letter-spacing:.02em;}
+.chart-title{font-size:12.5px;font-weight:600;color:var(--text2);letter-spacing:.02em;margin-bottom:16px;}
 
-/* ─── Year filter ─── */
-.year-filter{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
-.yr-btn{background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:5px 14px;border-radius:6px;cursor:pointer;font-size:12.5px;font-weight:500;transition:all .15s;font-family:inherit;}
-.yr-btn:hover{border-color:var(--border2);color:var(--text);}
-.yr-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
-
-/* ─── Category cards ─── */
-.cat-section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:12px;}
-.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin-bottom:0;}
+/* CAT CARDS */
+.cat-section-title{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);margin-bottom:12px;margin-top:16px;}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;}
 .cat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;border-left:3px solid;}
 .cat-card.sneakers{border-left-color:var(--accent);}
 .cat-card.vetements{border-left-color:var(--green);}
@@ -173,44 +140,43 @@ input::placeholder{color:var(--text3);}
 .cat-name{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:8px;}
 .cat-benef{font-size:21px;font-weight:700;margin-bottom:3px;}
 .cat-benef.pos{color:var(--green);}
-.cat-benef.neg{color:var(--red);}
 .cat-sub{font-size:11px;color:var(--text3);}
 
-/* ─── Objective modal trigger ─── */
-.obj-set-btn{font-size:11px;color:var(--text3);cursor:pointer;text-decoration:underline;text-underline-offset:2px;}
-.obj-set-btn:hover{color:var(--text2);}
-
-/* ─── Stock page ─── */
-.stock-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+/* STOCK PAGE */
+.stock-header-bar{display:flex;gap:10px;align-items:center;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;margin-bottom:16px;flex-wrap:wrap;}
+.stock-stat{display:flex;flex-direction:column;gap:2px;}
+.stock-stat-val{font-size:17px;font-weight:700;}
+.stock-stat-label{font-size:11px;color:var(--text3);}
+.stock-stat-sep{width:1px;background:var(--border);align-self:stretch;margin:0 6px;}
+.stock-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
 .stock-filters-left{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
-.filter-pill{
-  background:var(--bg3);border:1px solid var(--border);color:var(--text2);
-  padding:5px 13px;border-radius:20px;cursor:pointer;font-size:12.5px;font-weight:500;
-  transition:all .15s;font-family:inherit;
-}
+.filter-pill{background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:5px 13px;border-radius:20px;cursor:pointer;font-size:12.5px;font-weight:500;transition:all .15s;font-family:inherit;}
 .filter-pill:hover{border-color:var(--border2);color:var(--text);}
 .filter-pill.active{background:var(--accent-dim);border-color:rgba(108,143,255,.4);color:var(--accent);}
-.filter-sep{width:1px;height:20px;background:var(--border);margin:0 4px;}
+.pill-sep{width:1px;height:18px;background:var(--border);margin:0 2px;}
 .sort-select{background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:5px 10px;border-radius:6px;font-size:12.5px;cursor:pointer;font-family:inherit;outline:none;}
+.search-input{background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:6px 12px;border-radius:6px;font-size:12.5px;width:180px;font-family:inherit;outline:none;transition:border-color .15s;}
+.search-input:focus{border-color:var(--accent);}
+.search-input::placeholder{color:var(--text3);}
 
-/* ─── Table ─── */
+/* TABLE */
 .table-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
 table{width:100%;border-collapse:collapse;}
-thead th{
-  font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;
-  color:var(--text3);padding:12px 16px;text-align:left;
-  background:var(--bg3);border-bottom:1px solid var(--border);white-space:nowrap;
-}
-tbody td{padding:13px 16px;border-bottom:1px solid var(--border);vertical-align:middle;}
+thead th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);padding:12px 16px;text-align:left;background:var(--bg3);border-bottom:1px solid var(--border);white-space:nowrap;}
+tbody td{padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:middle;}
 tbody tr:last-child td{border-bottom:none;}
 tbody tr:hover{background:rgba(255,255,255,.018);}
-.td-main{font-weight:600;font-size:13.5px;color:var(--text);line-height:1.2;}
+.td-main{font-weight:600;font-size:13.5px;color:var(--text);line-height:1.2;display:flex;align-items:center;gap:7px;}
 .td-sub{font-size:11.5px;color:var(--text3);margin-top:2px;}
 .td-amount{font-size:14px;font-weight:700;letter-spacing:-.3px;}
 .td-muted{font-size:12.5px;color:var(--text2);}
-.actions-cell{display:flex;gap:6px;justify-content:flex-end;align-items:center;}
+.actions-cell{display:flex;gap:5px;justify-content:flex-end;align-items:center;}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;display:inline-block;}
+.dot-green{background:var(--green);}
+.dot-orange{background:var(--gold);}
+.dot-red{background:var(--red);}
 
-/* ─── Badges ─── */
+/* BADGES */
 .badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:5px;font-size:11.5px;font-weight:600;}
 .badge-sneakers{background:var(--accent-dim);color:var(--accent);}
 .badge-vetements{background:var(--green-dim);color:var(--green);}
@@ -218,29 +184,18 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
 .badge-mixed{background:var(--orange-dim);color:var(--orange);}
 .badge-en_stock{background:var(--green-dim);color:var(--green);}
 .badge-vendu{background:rgba(139,148,158,.1);color:var(--text3);}
-.days-badge{font-size:11px;font-weight:600;padding:2px 7px;border-radius:4px;}
-.days-ok{background:var(--green-dim);color:var(--green);}
-.days-warn{background:var(--gold-dim);color:var(--gold);}
-.days-late{background:var(--red-dim);color:var(--red);}
+.badge-reserve{background:var(--gold-dim);color:var(--gold);}
 
-/* ─── Empty state ─── */
+/* EMPTY */
 .empty-state{text-align:center;padding:56px 24px;color:var(--text3);}
 .empty-icon{font-size:40px;margin-bottom:14px;opacity:.5;}
 .empty-title{font-size:15px;font-weight:600;color:var(--text2);margin-bottom:6px;}
-.empty-sub{font-size:13px;color:var(--text3);}
+.empty-sub{font-size:13px;}
 
-/* ─── Modals ─── */
-.modal-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:500;
-  display:none;align-items:center;justify-content:center;padding:20px;
-  backdrop-filter:blur(3px);
-}
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px);}
 .modal-overlay.show{display:flex;}
-.modal{
-  background:var(--bg2);border:1px solid var(--border2);border-radius:16px;
-  padding:0;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;
-  box-shadow:0 24px 60px rgba(0,0,0,.6);
-}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:16px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.6);}
 .modal-header{padding:22px 24px 18px;border-bottom:1px solid var(--border);}
 .modal-title{font-size:16px;font-weight:700;letter-spacing:-.3px;}
 .modal-sub{font-size:13px;color:var(--text2);margin-top:3px;}
@@ -250,43 +205,47 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .form-row.full{grid-template-columns:1fr;}
 
-/* ─── Sell preview ─── */
-.sell-preview{
-  background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);
-  padding:16px;margin:14px 0;display:none;
-}
+/* CHECKBOX VENTE MAMAN */
+.checkbox-row{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);cursor:pointer;margin-bottom:14px;transition:border-color .15s;}
+.checkbox-row:hover{border-color:var(--purple);}
+.checkbox-row input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--purple);}
+.checkbox-row label{cursor:pointer;font-size:13.5px;font-weight:600;color:var(--text);}
+.checkbox-row .cb-sub{font-size:11.5px;color:var(--text3);margin-top:2px;}
+
+/* SELL PREVIEW */
+.sell-preview{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);padding:16px;margin:14px 0;display:none;}
 .sell-preview.show{display:block;}
 .preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
 .preview-item .pl{font-size:11px;color:var(--text3);margin-bottom:3px;}
 .preview-item .pv{font-size:19px;font-weight:700;letter-spacing:-.3px;}
-.preview-item .pv.green{color:var(--green);}
-.preview-item .pv.muted{color:var(--text2);}
-.preview-item .pv.blue{color:var(--accent);}
-.preview-item .pv.gold{color:var(--gold);}
+.pv.green{color:var(--green);}
+.pv.muted{color:var(--text2);}
+.pv.gold{color:var(--gold);}
 .preview-divider{border:none;border-top:1px solid var(--border);margin:10px 0 0;}
 .paythib-row{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:10px 12px;background:var(--accent-dim);border-radius:var(--radius-sm);border:1px solid rgba(108,143,255,.2);}
 .paythib-label{font-size:12px;font-weight:600;color:var(--accent);}
+.paythib-sub{font-size:11px;color:var(--text3);margin-top:2px;}
 .paythib-value{font-size:18px;font-weight:700;color:var(--accent);}
 
-/* ─── Confirm modal ─── */
+/* CONFIRM MODAL */
 .confirm-modal{max-width:400px;}
 .confirm-body{padding:20px 24px;}
 .confirm-text{color:var(--text2);font-size:13.5px;line-height:1.6;margin-bottom:6px;}
 .confirm-item{font-weight:700;font-size:15px;color:var(--text);margin-bottom:16px;}
 .confirm-warning{color:var(--red);font-size:12px;padding:10px 12px;background:var(--red-dim);border-radius:var(--radius-sm);border:1px solid rgba(245,101,101,.2);}
 
-/* ─── Objective modal ─── */
-.obj-modal{max-width:380px;}
+/* TOAST */
+#toast{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none;}
+.toast-item{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:11px 16px;font-size:13px;font-weight:500;color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,.4);display:flex;align-items:center;gap:8px;transform:translateX(110%);transition:transform .3s cubic-bezier(.34,1.56,.64,1);}
+.toast-item.show{transform:translateX(0);}
+.toast-item.green{border-left:3px solid var(--green);}
+.toast-item.red{border-left:3px solid var(--red);}
 
-/* ─── Scrollbar ─── */
+/* SCROLLBAR */
 ::-webkit-scrollbar{width:6px;height:6px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
 
-/* ─── Divider ─── */
-.divider{border:none;border-top:1px solid var(--border);margin:20px 0;}
-
-/* ─── Responsive ─── */
 @media(max-width:900px){
   :root{--sidebar:0px;}
   .sidebar{transform:translateX(-220px);width:220px;}
@@ -299,9 +258,7 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
 </head>
 <body>
 
-<!-- ════════════════════════════════════════════
-     LOGIN
-════════════════════════════════════════════ -->
+<!-- LOGIN -->
 <div id="login-screen">
   <div class="login-wrap">
     <div class="login-logo">Resell<em>Thib</em></div>
@@ -321,13 +278,10 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
   </div>
 </div>
 
-<!-- ════════════════════════════════════════════
-     APP
-════════════════════════════════════════════ -->
+<!-- APP -->
 <div id="app-screen">
 <div class="app-layout">
 
-  <!-- Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-logo">
       <div class="mark">Resell<em>Thib</em></div>
@@ -336,11 +290,11 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
     <nav class="sidebar-nav">
       <div class="nav-section">Navigation</div>
       <div class="nav-item active" onclick="gotoPage('dashboard',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         Dashboard
       </div>
       <div class="nav-item" onclick="gotoPage('stock',this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
         Stock
       </div>
     </nav>
@@ -356,66 +310,45 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
     </div>
   </aside>
 
-  <!-- Main -->
   <main class="main">
 
-    <!-- ── Dashboard ── -->
+    <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
       <div class="page-header">
         <div>
           <div class="page-title">Dashboard</div>
-          <div class="page-title sub" id="dash-period">—</div>
+          <div class="page-sub" id="dash-period">—</div>
         </div>
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <div class="year-filter" id="year-filter"></div>
-          <button class="btn btn-ghost btn-sm" onclick="exportPDF()" id="pdf-btn">
+        <div style="display:flex;gap:8px;align-items:center;">
+          <button class="btn btn-ghost btn-sm" onclick="exportPDF()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
             Export PDF
           </button>
         </div>
       </div>
 
+      <div class="dash-filters" id="dash-filters"></div>
       <div class="kpi-grid" id="kpi-grid"></div>
 
       <div class="charts-row">
-        <div class="chart-card">
-          <div class="chart-header">
-            <div class="chart-title">Bénéfice mensuel</div>
-          </div>
-          <canvas id="chartBar" height="95"></canvas>
-        </div>
-        <div class="chart-card">
-          <div class="chart-header">
-            <div class="chart-title">Comparaison annuelle</div>
-          </div>
-          <canvas id="chartAnnuel" height="95"></canvas>
-        </div>
+        <div class="chart-card"><div class="chart-title">Bénéfice mensuel</div><canvas id="chartBar" height="95"></canvas></div>
+        <div class="chart-card"><div class="chart-title">Comparaison annuelle</div><canvas id="chartAnnuel" height="95"></canvas></div>
       </div>
       <div class="charts-row2">
-        <div class="chart-card">
-          <div class="chart-header">
-            <div class="chart-title">Cumul bénéfice par année</div>
-          </div>
-          <canvas id="chartCumul" height="110"></canvas>
-        </div>
-        <div class="chart-card">
-          <div class="chart-header">
-            <div class="chart-title">Répartition par catégorie</div>
-          </div>
-          <canvas id="chartCat" height="110"></canvas>
-        </div>
+        <div class="chart-card"><div class="chart-title">Cumul bénéfice par année</div><canvas id="chartCumul" height="110"></canvas></div>
+        <div class="chart-card"><div class="chart-title">Thibault vs Maman</div><canvas id="chartSplit" height="110"></canvas></div>
       </div>
 
       <div class="cat-section-title">Performance par catégorie</div>
       <div class="cat-grid" id="cat-grid"></div>
     </div>
 
-    <!-- ── Stock ── -->
+    <!-- STOCK -->
     <div class="page" id="page-stock">
       <div class="page-header">
         <div>
           <div class="page-title">Stock</div>
-          <div class="page-title sub" id="stock-count-label">—</div>
+          <div class="page-sub" id="stock-count-label">—</div>
         </div>
         <button class="btn btn-green btn-sm" onclick="openAddModal()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -423,9 +356,12 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
         </button>
       </div>
 
+      <div class="stock-header-bar" id="stock-header-bar"></div>
+
       <div class="stock-toolbar">
         <div class="stock-filters-left" id="stock-filters"></div>
         <div style="display:flex;gap:8px;align-items:center;">
+          <input class="search-input" id="search-input" type="text" placeholder="🔍 Rechercher…" oninput="renderStock()" />
           <select class="sort-select" id="sort-select" onchange="renderStock()">
             <option value="date_desc">Date ↓</option>
             <option value="date_asc">Date ↑</option>
@@ -438,9 +374,7 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
 
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr id="stock-thead"></tr>
-          </thead>
+          <thead><tr id="stock-thead"></tr></thead>
           <tbody id="stock-tbody"></tbody>
         </table>
       </div>
@@ -450,59 +384,28 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
 </div>
 </div>
 
-<!-- ════════════════════════════════════════════
-     MODALS
-════════════════════════════════════════════ -->
+<!-- TOAST CONTAINER -->
+<div id="toast"></div>
 
-<!-- Add article -->
+<!-- MODAL ADD -->
 <div class="modal-overlay" id="modal-add" onclick="if(event.target===this)closeModal('modal-add')">
   <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">Nouvel article</div>
-      <div class="modal-sub">Ajouter un article au stock</div>
-    </div>
+    <div class="modal-header"><div class="modal-title">Nouvel article</div><div class="modal-sub">Ajouter au stock</div></div>
     <div class="modal-body">
-      <div class="f-group form-row full">
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Nom *</label>
-          <input type="text" id="add-nom" placeholder="ex: Veste CT Perforated" />
-        </div>
+      <div class="f-group"><label class="f-label">Nom *</label><input type="text" id="add-nom" placeholder="ex: Veste CT Perforated" /></div>
+      <div class="form-row">
+        <div class="f-group" style="margin:0"><label class="f-label">Catégorie</label><select id="add-categorie"><option value="equitation">Équitation</option><option value="vetements">Vêtements</option><option value="sneakers">Sneakers</option></select></div>
+        <div class="f-group" style="margin:0"><label class="f-label">Taille</label><input type="text" id="add-taille" placeholder="T38, 42…" /></div>
       </div>
       <div class="form-row" style="margin-top:12px">
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Catégorie</label>
-          <select id="add-categorie">
-            <option value="equitation">Équitation</option>
-            <option value="vetements">Vêtements</option>
-            <option value="sneakers">Sneakers</option>
-          </select>
-        </div>
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Taille</label>
-          <input type="text" id="add-taille" placeholder="ex: T38, 42, 57…" />
-        </div>
+        <div class="f-group" style="margin:0"><label class="f-label">Marque</label><input type="text" id="add-marque" placeholder="Cavalleria Toscana…" /></div>
+        <div class="f-group" style="margin:0"><label class="f-label">SKU</label><input type="text" id="add-sku" placeholder="CT2246-123" /></div>
       </div>
       <div class="form-row" style="margin-top:12px">
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Marque</label>
-          <input type="text" id="add-marque" placeholder="ex: Cavalleria Toscana" />
-        </div>
-        <div class="f-group" style="margin:0">
-          <label class="f-label">SKU / Référence</label>
-          <input type="text" id="add-sku" placeholder="ex: CT2246-123" />
-        </div>
+        <div class="f-group" style="margin:0"><label class="f-label">Prix d'achat (€) *</label><input type="number" id="add-prix" placeholder="280" min="0" step="0.01" /></div>
+        <div class="f-group" style="margin:0"><label class="f-label">Date d'achat</label><input type="date" id="add-date" /></div>
       </div>
-      <div class="form-row" style="margin-top:12px">
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Prix d'achat (€) *</label>
-          <input type="number" id="add-prix" placeholder="280" min="0" step="0.01" />
-        </div>
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Date d'achat</label>
-          <input type="date" id="add-date" />
-        </div>
-      </div>
-      <div id="add-error" class="error-msg" style="margin-top:8px"></div>
+      <div id="add-error" class="error-msg"></div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeModal('modal-add')">Annuler</button>
@@ -511,59 +414,26 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
   </div>
 </div>
 
-<!-- Edit article -->
+<!-- MODAL EDIT -->
 <div class="modal-overlay" id="modal-edit" onclick="if(event.target===this)closeModal('modal-edit')">
   <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">Modifier l'article</div>
-      <div class="modal-sub">Corriger les informations</div>
-    </div>
+    <div class="modal-header"><div class="modal-title">Modifier l'article</div><div class="modal-sub">Corriger les informations</div></div>
     <div class="modal-body">
-      <div class="f-group form-row full">
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Nom *</label>
-          <input type="text" id="edit-nom" placeholder="Nom de l'article" />
-        </div>
+      <div class="f-group"><label class="f-label">Nom *</label><input type="text" id="edit-nom" /></div>
+      <div class="form-row">
+        <div class="f-group" style="margin:0"><label class="f-label">Catégorie</label><select id="edit-categorie"><option value="equitation">Équitation</option><option value="vetements">Vêtements</option><option value="sneakers">Sneakers</option></select></div>
+        <div class="f-group" style="margin:0"><label class="f-label">Taille</label><input type="text" id="edit-taille" /></div>
       </div>
       <div class="form-row" style="margin-top:12px">
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Catégorie</label>
-          <select id="edit-categorie">
-            <option value="equitation">Équitation</option>
-            <option value="vetements">Vêtements</option>
-            <option value="sneakers">Sneakers</option>
-          </select>
-        </div>
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Taille</label>
-          <input type="text" id="edit-taille" />
-        </div>
+        <div class="f-group" style="margin:0"><label class="f-label">Marque</label><input type="text" id="edit-marque" /></div>
+        <div class="f-group" style="margin:0"><label class="f-label">SKU</label><input type="text" id="edit-sku" /></div>
       </div>
       <div class="form-row" style="margin-top:12px">
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Marque</label>
-          <input type="text" id="edit-marque" />
-        </div>
-        <div class="f-group" style="margin:0">
-          <label class="f-label">SKU / Référence</label>
-          <input type="text" id="edit-sku" />
-        </div>
+        <div class="f-group" style="margin:0"><label class="f-label">Prix d'achat (€) *</label><input type="number" id="edit-prix" min="0" step="0.01" /></div>
+        <div class="f-group" style="margin:0"><label class="f-label">Date d'achat</label><input type="date" id="edit-date" /></div>
       </div>
-      <div class="form-row" style="margin-top:12px">
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Prix d'achat (€) *</label>
-          <input type="number" id="edit-prix" min="0" step="0.01" />
-        </div>
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Date d'achat</label>
-          <input type="date" id="edit-date" />
-        </div>
-      </div>
-      <div class="f-group" style="margin-top:12px">
-        <label class="f-label">Notes</label>
-        <input type="text" id="edit-notes" placeholder="Notes optionnelles" />
-      </div>
-      <div id="edit-error" class="error-msg" style="margin-top:8px"></div>
+      <div class="f-group" style="margin-top:12px"><label class="f-label">Notes</label><input type="text" id="edit-notes" placeholder="Notes optionnelles" /></div>
+      <div id="edit-error" class="error-msg"></div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeModal('modal-edit')">Annuler</button>
@@ -572,61 +442,43 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
   </div>
 </div>
 
-<!-- Sell article -->
+<!-- MODAL SELL -->
 <div class="modal-overlay" id="modal-sell" onclick="if(event.target===this)closeModal('modal-sell')">
   <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">Enregistrer une vente</div>
-      <div class="modal-sub" id="sell-article-name">—</div>
-    </div>
+    <div class="modal-header"><div class="modal-title">Enregistrer une vente</div><div class="modal-sub" id="sell-article-name">—</div></div>
     <div class="modal-body">
       <div id="sell-achat-info" style="font-size:12.5px;color:var(--text3);margin-bottom:14px;"></div>
-      <div class="form-row">
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Prix de vente (€) *</label>
-          <input type="number" id="sell-prix" placeholder="390" min="0" step="0.01" oninput="updateSellPreview()" />
-        </div>
-        <div class="f-group" style="margin:0">
-          <label class="f-label">Date de vente</label>
-          <input type="date" id="sell-date" />
+
+      <div class="checkbox-row" onclick="toggleVenteMaman()">
+        <input type="checkbox" id="cb-vente-maman" onchange="updateSellPreview()" onclick="event.stopPropagation()" />
+        <div>
+          <label for="cb-vente-maman">Vente Maman</label>
+          <div class="cb-sub">50% du bénéfice pour maman · PayThib = CA − part maman</div>
         </div>
       </div>
-      <div class="f-group" style="margin-top:12px">
-        <label class="f-label">Part maman (%)</label>
-        <input type="number" id="sell-pct" placeholder="0" min="0" max="100" value="0" oninput="updateSellPreview()" />
+
+      <div class="form-row">
+        <div class="f-group" style="margin:0"><label class="f-label">Prix de vente (€) *</label><input type="number" id="sell-prix" placeholder="390" min="0" step="0.01" oninput="updateSellPreview()" /></div>
+        <div class="f-group" style="margin:0"><label class="f-label">Date de vente</label><input type="date" id="sell-date" /></div>
       </div>
 
       <div class="sell-preview" id="sell-preview">
-        <div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;">Aperçu de la vente</div>
+        <div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;">Aperçu</div>
         <div class="preview-grid">
-          <div class="preview-item">
-            <div class="pl">Bénéfice total</div>
-            <div class="pv green" id="prev-benef">—</div>
-          </div>
-          <div class="preview-item">
-            <div class="pl">Marge</div>
-            <div class="pv gold" id="prev-marge">—</div>
-          </div>
-          <div class="preview-item">
-            <div class="pl">Part maman</div>
-            <div class="pv muted" id="prev-maman">—</div>
-          </div>
-          <div class="preview-item">
-            <div class="pl">Bénéf. Thibault</div>
-            <div class="pv green" id="prev-thib">—</div>
-          </div>
+          <div class="preview-item"><div class="pl">Bénéfice total</div><div class="pv green" id="prev-benef">—</div></div>
+          <div class="preview-item"><div class="pl">Marge</div><div class="pv gold" id="prev-marge">—</div></div>
+          <div class="preview-item"><div class="pl">Part maman</div><div class="pv muted" id="prev-maman-wrap" style="display:none"><span id="prev-maman">—</span></div><div class="pv muted" id="prev-maman-na" style="color:var(--text3)">—</div></div>
+          <div class="preview-item"><div class="pl">Bénéf. Thibault</div><div class="pv green" id="prev-thib">—</div></div>
         </div>
-        <hr class="preview-divider">
-        <div class="paythib-row">
-          <div>
-            <div class="paythib-label">PayThib</div>
-            <div style="font-size:11px;color:var(--text3);margin-top:2px;">Ce que maman reverse à Thibault</div>
+        <div id="paythib-section" style="display:none">
+          <hr class="preview-divider">
+          <div class="paythib-row">
+            <div><div class="paythib-label">PayThib</div><div class="paythib-sub">Maman reverse à Thibault</div></div>
+            <div class="paythib-value" id="prev-paythib">—</div>
           </div>
-          <div class="paythib-value" id="prev-paythib">—</div>
         </div>
       </div>
-
-      <div id="sell-error" class="error-msg" style="margin-top:8px"></div>
+      <div id="sell-error" class="error-msg"></div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeModal('modal-sell')">Annuler</button>
@@ -635,16 +487,14 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
   </div>
 </div>
 
-<!-- Delete article -->
+<!-- MODAL DELETE -->
 <div class="modal-overlay" id="modal-delete" onclick="if(event.target===this)closeModal('modal-delete')">
   <div class="modal confirm-modal">
-    <div class="modal-header">
-      <div class="modal-title">Supprimer l'article ?</div>
-    </div>
+    <div class="modal-header"><div class="modal-title">Supprimer l'article ?</div></div>
     <div class="confirm-body">
       <div class="confirm-text">Tu es sur le point de supprimer :</div>
       <div class="confirm-item" id="del-name">—</div>
-      <div class="confirm-warning">Cette action est irréversible. La vente associée sera également supprimée.</div>
+      <div class="confirm-warning">Action irréversible. La vente associée sera également supprimée.</div>
       <div id="del-error" class="error-msg" style="margin-top:8px"></div>
     </div>
     <div class="modal-footer">
@@ -654,18 +504,12 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
   </div>
 </div>
 
-<!-- Objective -->
+<!-- MODAL OBJECTIVE -->
 <div class="modal-overlay" id="modal-obj" onclick="if(event.target===this)closeModal('modal-obj')">
-  <div class="modal obj-modal">
-    <div class="modal-header">
-      <div class="modal-title">Objectif du mois</div>
-      <div class="modal-sub" id="obj-modal-period">—</div>
-    </div>
+  <div class="modal" style="max-width:360px">
+    <div class="modal-header"><div class="modal-title">Objectif du mois</div><div class="modal-sub" id="obj-modal-period">—</div></div>
     <div class="modal-body">
-      <div class="f-group">
-        <label class="f-label">Objectif de bénéfice (€)</label>
-        <input type="number" id="obj-input" placeholder="ex: 800" min="0" step="10" onkeydown="if(event.key==='Enter')saveObjective()" />
-      </div>
+      <div class="f-group"><label class="f-label">Objectif de bénéfice (€)</label><input type="number" id="obj-input" placeholder="ex: 800" min="0" step="10" onkeydown="if(event.key==='Enter')saveObjective()" /></div>
     </div>
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeModal('modal-obj')">Annuler</button>
@@ -675,9 +519,7 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
 </div>
 
 <script>
-/* ════════════════════════════════════════════
-   CONFIG & DATA
-════════════════════════════════════════════ */
+/* ─── CONFIG ─── */
 const SUPABASE_URL = 'https://anfalfxtvdijqoxllsdh.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_uA-kauvNHvgTPsuxsNDLyw_exOqyEAI';
 const { createClient } = supabase;
@@ -745,748 +587,626 @@ const DATA_FIXED = [
 
 const MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
 const CAT_LABELS = {sneakers:'Sneakers',vetements:'Vêtements',equitation:'Équitation',mixed:'Mix'};
-const CAT_COLORS = {
-  sneakers:'rgba(108,143,255,.7)',
-  vetements:'rgba(62,207,142,.7)',
-  equitation:'rgba(167,139,250,.7)',
-  mixed:'rgba(251,146,60,.7)'
-};
+const CAT_COLORS = {sneakers:'rgba(108,143,255,.7)',vetements:'rgba(62,207,142,.7)',equitation:'rgba(167,139,250,.7)',mixed:'rgba(251,146,60,.7)'};
 
-let currentUser = null;
-let articles = [], ventes = [], liveData = [];
-let currentYear = 'all';
-let stockStatus = 'en_stock', stockCat = 'all';
-let currentSellId = null, currentEditId = null, currentDelId = null;
-let charts = {};
+let currentUser=null, articles=[], ventes=[], liveData=[];
+let currentYear='all', currentMonth='all';
+let stockStatus='en_stock', stockCat='all';
+let currentSellId=null, currentEditId=null, currentDelId=null;
+let objModalYear=null, objModalMonth=null;
+let charts={};
 
-/* ════════════════════════════════════════════
-   AUTH
-════════════════════════════════════════════ */
-async function checkAuth() {
-  const { data: { session } } = await db.auth.getSession();
-  if (session) { currentUser = session.user; await initApp(); }
-  else document.getElementById('login-screen').style.display = 'flex';
+/* ─── AUTH ─── */
+async function checkAuth(){
+  const{data:{session}}=await db.auth.getSession();
+  if(session){currentUser=session.user;await initApp();}
+  else document.getElementById('login-screen').style.display='flex';
 }
-
-async function doLogin() {
-  const email = document.getElementById('login-email').value.trim();
-  const pwd = document.getElementById('login-pwd').value;
-  const errEl = document.getElementById('login-err');
-  const btn = document.getElementById('login-btn');
-  errEl.textContent = ''; btn.disabled = true; btn.textContent = 'Connexion…';
-  const { data, error } = await db.auth.signInWithPassword({ email, password: pwd });
-  if (error) { errEl.textContent = 'Email ou mot de passe incorrect.'; btn.disabled = false; btn.textContent = 'Se connecter'; return; }
-  currentUser = data.user; await initApp();
+async function doLogin(){
+  const email=document.getElementById('login-email').value.trim();
+  const pwd=document.getElementById('login-pwd').value;
+  const errEl=document.getElementById('login-err');
+  const btn=document.getElementById('login-btn');
+  errEl.textContent='';btn.disabled=true;btn.textContent='Connexion…';
+  const{data,error}=await db.auth.signInWithPassword({email,password:pwd});
+  if(error){errEl.textContent='Email ou mot de passe incorrect.';btn.disabled=false;btn.textContent='Se connecter';return;}
+  currentUser=data.user;await initApp();
 }
-
-async function doLogout() {
-  await db.auth.signOut(); currentUser = null;
-  document.getElementById('app-screen').style.display = 'none';
-  document.getElementById('login-screen').style.display = 'flex';
+async function doLogout(){
+  await db.auth.signOut();currentUser=null;
+  document.getElementById('app-screen').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
 }
-
-async function initApp() {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('app-screen').style.display = 'block';
-  document.getElementById('user-email-display').textContent = currentUser.email;
-  document.getElementById('user-avatar').textContent = currentUser.email[0].toUpperCase();
-  document.getElementById('add-date').value = today();
-  document.getElementById('sell-date').value = today();
+async function initApp(){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app-screen').style.display='block';
+  document.getElementById('user-email-display').textContent=currentUser.email;
+  document.getElementById('user-avatar').textContent=currentUser.email[0].toUpperCase();
+  document.getElementById('add-date').value=today();
+  document.getElementById('sell-date').value=today();
   await loadData();
-  buildYearFilter();
+  buildFilters();
   renderDashboard();
   renderStock();
 }
 
-/* ════════════════════════════════════════════
-   DATA
-════════════════════════════════════════════ */
-async function loadData() {
-  const [{ data: arts }, { data: vts }] = await Promise.all([
-    db.from('articles').select('*').order('date_achat', { ascending: false }),
-    db.from('ventes').select('*, articles(*)').order('date_vente', { ascending: false })
+/* ─── DATA ─── */
+async function loadData(){
+  const[{data:arts},{data:vts}]=await Promise.all([
+    db.from('articles').select('*').order('date_achat',{ascending:false}),
+    db.from('ventes').select('*, articles(*)').order('date_vente',{ascending:false})
   ]);
-  articles = arts || [];
-  ventes = vts || [];
-  liveData = buildLiveData(ventes);
+  articles=arts||[];ventes=vts||[];liveData=buildLiveData(ventes);
 }
-
-function buildLiveData(ventes) {
-  const map = {};
-  ventes.forEach(v => {
-    if (!v.date_vente || !v.articles) return;
-    const d = new Date(v.date_vente), y = d.getFullYear(), m = MONTHS_FR[d.getMonth()];
-    const key = `${y}-${m}`;
-    const ca = v.prix_vente || 0, bn = ca - (v.articles.prix_achat || 0);
-    if (!map[key]) map[key] = { y, m, ca: 0, benef: 0, thib: 0, maman: 0, cat: v.articles.categorie || 'equitation' };
-    map[key].ca += ca; map[key].benef += bn;
-    map[key].thib += (v.part_thib || bn); map[key].maman += (v.part_maman || 0);
+function buildLiveData(ventes){
+  const map={};
+  ventes.forEach(v=>{
+    if(!v.date_vente||!v.articles)return;
+    const d=new Date(v.date_vente),y=d.getFullYear(),m=MONTHS_FR[d.getMonth()],key=`${y}-${m}`;
+    const ca=v.prix_vente||0,bn=ca-(v.articles.prix_achat||0);
+    if(!map[key])map[key]={y,m,ca:0,benef:0,thib:0,maman:0,cat:v.articles.categorie||'equitation'};
+    map[key].ca+=ca;map[key].benef+=bn;
+    map[key].thib+=(v.part_thib||bn);map[key].maman+=(v.part_maman||0);
   });
-  return Object.values(map).sort((a, b) => a.y !== b.y ? a.y - b.y : MONTHS_FR.indexOf(a.m) - MONTHS_FR.indexOf(b.m));
+  return Object.values(map).sort((a,b)=>a.y!==b.y?a.y-b.y:MONTHS_FR.indexOf(a.m)-MONTHS_FR.indexOf(b.m));
+}
+function allData(){
+  const live=liveData.filter(d=>d.y>2026||(d.y===2026&&MONTHS_FR.indexOf(d.m)>=5));
+  return[...DATA_FIXED,...live];
+}
+function filtered(){
+  let d=allData();
+  if(currentYear!=='all')d=d.filter(r=>r.y===currentYear);
+  if(currentMonth!=='all')d=d.filter(r=>r.m===currentMonth);
+  return d;
+}
+function prevPeriodData(){
+  const d=allData();
+  if(currentMonth!=='all'&&currentYear!=='all'){
+    const mi=MONTHS_FR.indexOf(currentMonth);
+    if(mi>0)return d.filter(r=>r.y===currentYear&&r.m===MONTHS_FR[mi-1]);
+    return d.filter(r=>r.y===currentYear-1&&r.m==='Décembre');
+  }
+  if(currentYear!=='all')return d.filter(r=>r.y===currentYear-1);
+  return[];
 }
 
-function allData() {
-  const live = liveData.filter(d => d.y > 2026 || (d.y === 2026 && MONTHS_FR.indexOf(d.m) >= 5));
-  return [...DATA_FIXED, ...live];
+/* ─── HELPERS ─── */
+const fmt=n=>Math.round(n).toLocaleString('fr-FR')+' €';
+const today=()=>new Date().toISOString().split('T')[0];
+const r2=n=>Math.round(n*100)/100;
+function daysSince(dateStr){if(!dateStr)return null;return Math.floor((Date.now()-new Date(dateStr).getTime())/86400000);}
+function dotBadge(days){
+  if(days===null)return'';
+  if(days<=30)return'<span class="dot dot-green" title="'+days+' jours en stock"></span>';
+  if(days<=60)return'<span class="dot dot-orange" title="'+days+' jours en stock"></span>';
+  return'<span class="dot dot-red" title="'+days+' jours en stock"></span>';
+}
+function delta(current,prev){
+  if(!prev||prev===0)return'';
+  const pct=Math.round((current-prev)/Math.abs(prev)*100);
+  if(pct>0)return`<span class="kpi-delta up">▲ ${pct}%</span>`;
+  if(pct<0)return`<span class="kpi-delta down">▼ ${Math.abs(pct)}%</span>`;
+  return`<span class="kpi-delta neutral">= 0%</span>`;
+}
+function avgSellDays(){
+  const sold=ventes.filter(v=>v.date_vente&&v.articles&&v.articles.date_achat);
+  if(!sold.length)return null;
+  const total=sold.reduce((s,v)=>{
+    const days=(new Date(v.date_vente)-new Date(v.articles.date_achat))/86400000;
+    return s+(days>0?days:0);
+  },0);
+  return Math.round(total/sold.length);
 }
 
-function filtered() {
-  const d = allData();
-  return currentYear === 'all' ? d : d.filter(r => r.y === currentYear);
+/* ─── TOAST ─── */
+function showToast(msg,type='green'){
+  const container=document.getElementById('toast');
+  const el=document.createElement('div');
+  el.className=`toast-item ${type}`;
+  el.textContent=msg;
+  container.appendChild(el);
+  requestAnimationFrame(()=>{requestAnimationFrame(()=>{el.classList.add('show');});});
+  setTimeout(()=>{el.classList.remove('show');setTimeout(()=>el.remove(),400);},3000);
 }
 
-/* ════════════════════════════════════════════
-   HELPERS
-════════════════════════════════════════════ */
-const fmt = n => (Math.round(n * 100) / 100).toLocaleString('fr-FR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
-const fmtDec = n => (Math.round(n * 100) / 100).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
-const today = () => new Date().toISOString().split('T')[0];
-const r2 = n => Math.round(n * 100) / 100;
-
-function daysSince(dateStr) {
-  if (!dateStr) return null;
-  return Math.floor((Date.now() - new Date(dateStr).getTime()) / 86400000);
+/* ─── NAVIGATION ─── */
+function gotoPage(name,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  if(el)el.classList.add('active');
 }
+function closeModal(id){document.getElementById(id).classList.remove('show');}
 
-function daysBadge(n) {
-  if (n === null) return '';
-  if (n <= 30) return `<span class="days-badge days-ok">${n}j</span>`;
-  if (n <= 60) return `<span class="days-badge days-warn">${n}j</span>`;
-  return `<span class="days-badge days-late">${n}j</span>`;
+/* ─── FILTERS ─── */
+function buildFilters(){
+  const years=[...new Set(allData().map(d=>d.y))].sort();
+  let h=`<button class="yr-btn active" onclick="setYear('all',this)">Toutes</button>`;
+  years.forEach(y=>{h+=`<button class="yr-btn" onclick="setYear(${y},this)">${y}</button>`;});
+  h+=`<div class="filter-sep"></div>`;
+  h+=`<select class="month-select" id="month-select" onchange="setMonth(this.value)"><option value="all">Tous les mois</option>`;
+  MONTHS_FR.forEach(m=>{h+=`<option value="${m}">${m}</option>`;});
+  h+='</select>';
+  document.getElementById('dash-filters').innerHTML=h;
 }
-
-/* ════════════════════════════════════════════
-   NAVIGATION
-════════════════════════════════════════════ */
-function gotoPage(name, el) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
-  if (el) el.classList.add('active');
-}
-
-/* ════════════════════════════════════════════
-   YEAR FILTER
-════════════════════════════════════════════ */
-function buildYearFilter() {
-  const years = [...new Set(allData().map(d => d.y))].sort();
-  let h = `<button class="yr-btn active" onclick="setYear('all',this)">Toutes</button>`;
-  years.forEach(y => { h += `<button class="yr-btn" onclick="setYear(${y},this)">${y}</button>`; });
-  document.getElementById('year-filter').innerHTML = h;
-}
-
-function setYear(y, el) {
-  currentYear = y;
-  document.querySelectorAll('.yr-btn').forEach(b => b.classList.remove('active'));
+function setYear(y,el){
+  currentYear=y;currentMonth='all';
+  document.querySelectorAll('.yr-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
+  const ms=document.getElementById('month-select');if(ms)ms.value='all';
+  renderDashboard();
+}
+function setMonth(m){
+  currentMonth=m;
   renderDashboard();
 }
 
-/* ════════════════════════════════════════════
-   OBJECTIVES (localStorage)
-════════════════════════════════════════════ */
-function getObjective(year, month) {
-  return parseFloat(localStorage.getItem(`obj_${year}_${month}`)) || 0;
-}
-function setObjectiveLS(year, month, val) {
-  localStorage.setItem(`obj_${year}_${month}`, val);
-}
-
-let objModalYear = null, objModalMonth = null;
-function openObjectiveModal(year, month) {
-  objModalYear = year; objModalMonth = month;
-  const existing = getObjective(year, month);
-  document.getElementById('obj-modal-period').textContent = `${month} ${year}`;
-  document.getElementById('obj-input').value = existing || '';
+/* ─── OBJECTIVES ─── */
+function getObjective(year,month){return parseFloat(localStorage.getItem(`obj_${year}_${month}`))||0;}
+function openObjectiveModal(year,month){
+  objModalYear=year;objModalMonth=month;
+  document.getElementById('obj-modal-period').textContent=`${month} ${year}`;
+  document.getElementById('obj-input').value=getObjective(year,month)||'';
   document.getElementById('modal-obj').classList.add('show');
-  setTimeout(() => document.getElementById('obj-input').focus(), 100);
+  setTimeout(()=>document.getElementById('obj-input').focus(),100);
 }
-function saveObjective() {
-  const val = parseFloat(document.getElementById('obj-input').value) || 0;
-  setObjectiveLS(objModalYear, objModalMonth, val);
+function saveObjective(){
+  const val=parseFloat(document.getElementById('obj-input').value)||0;
+  localStorage.setItem(`obj_${objModalYear}_${objModalMonth}`,val);
   closeModal('modal-obj');
   renderDashboard();
+  showToast('Objectif enregistré ✓');
 }
 
-/* ════════════════════════════════════════════
-   DASHBOARD
-════════════════════════════════════════════ */
-function renderDashboard() {
-  const d = filtered();
-  renderKPIs(d);
-  renderBarChart(d);
-  renderAnnualChart();
-  renderCumulChart();
-  renderCatChart(d);
-  renderCatCards(d);
-  // Update period label
-  if (currentYear === 'all') {
-    document.getElementById('dash-period').textContent = 'Depuis septembre 2021';
-  } else {
-    const total = d.reduce((s, r) => s + r.benef, 0);
-    document.getElementById('dash-period').textContent = `${currentYear} · ${fmt(total)} de bénéfice`;
-  }
-}
+/* ─── DASHBOARD ─── */
+function renderDashboard(){
+  const d=filtered(),prev=prevPeriodData();
+  const tB=d.reduce((s,r)=>s+r.benef,0),prevB=prev.reduce((s,r)=>s+r.benef,0);
+  const tCA=d.reduce((s,r)=>s+r.ca,0),prevCA=prev.reduce((s,r)=>s+r.ca,0);
+  const tThib=d.reduce((s,r)=>s+r.thib,0),prevThib=prev.reduce((s,r)=>s+r.thib,0);
+  const tMaman=d.reduce((s,r)=>s+r.maman,0);
+  const marge=tCA>0?Math.round(tB/tCA*100):0;
+  const best=[...d].filter(r=>r.benef>0).sort((a,b)=>b.benef-a.benef)[0];
+  const enStock=articles.filter(a=>a.statut==='en_stock');
+  const valStock=enStock.reduce((s,a)=>s+a.prix_achat,0);
+  const avgDays=avgSellDays();
 
-function renderKPIs(d) {
-  const tB = d.reduce((s, r) => s + r.benef, 0);
-  const tCA = d.reduce((s, r) => s + r.ca, 0);
-  const tThib = d.reduce((s, r) => s + r.thib, 0);
-  const tMaman = d.reduce((s, r) => s + r.maman, 0);
-  const avgMarge = tCA > 0 ? Math.round(tB / tCA * 100) : 0;
-  const best = [...d].filter(r => r.benef > 0).sort((a, b) => b.benef - a.benef)[0];
-  const enStock = articles.filter(a => a.statut === 'en_stock');
-  const valStock = enStock.reduce((s, a) => s + a.prix_achat, 0);
+  // Period label
+  let periodLabel='';
+  if(currentYear==='all')periodLabel='Depuis septembre 2021';
+  else if(currentMonth!=='all')periodLabel=`${currentMonth} ${currentYear}`;
+  else periodLabel=String(currentYear);
+  document.getElementById('dash-period').textContent=periodLabel;
 
-  // Objective for current month
-  const now = new Date();
-  const curMonth = MONTHS_FR[now.getMonth()];
-  const curYear = now.getFullYear();
-  const obj = getObjective(curYear, curMonth);
-  // Current month data
-  const curMonthData = allData().filter(r => r.y === curYear && r.m === curMonth);
-  const curMonthBenef = curMonthData.reduce((s, r) => s + r.benef, 0);
-  const objPct = obj > 0 ? Math.min(100, Math.round(curMonthBenef / obj * 100)) : 0;
+  // Objective for selected or current month
+  const now=new Date();
+  const objYear=currentYear!=='all'?currentYear:now.getFullYear();
+  const objMonth=currentMonth!=='all'?currentMonth:MONTHS_FR[now.getMonth()];
+  const obj=getObjective(objYear,objMonth);
+  const objPct=obj>0?Math.min(100,Math.round(tB/obj*100)):0;
 
-  let objKpi = '';
-  if (obj > 0) {
-    objKpi = `
-    <div class="kpi gold">
-      <div class="kpi-label">🎯 Objectif ${curMonth.substring(0,3)}</div>
+  let objKpi='';
+  if(obj>0){
+    objKpi=`<div class="kpi gold" style="cursor:pointer" onclick="openObjectiveModal(${objYear},'${objMonth}')">
+      <div class="kpi-label">🎯 Objectif ${objMonth.substring(0,3)}</div>
       <div class="kpi-value gold">${objPct}%</div>
-      <div class="kpi-sub">${fmt(curMonthBenef)} / ${fmt(obj)}</div>
-      <div class="kpi-progress">
-        <div class="kpi-progress-bar"><div class="kpi-progress-fill" style="width:${objPct}%"></div></div>
-      </div>
+      <div class="kpi-sub">${fmt(tB)} / ${fmt(obj)}</div>
+      <div class="kpi-progress"><div class="kpi-progress-bar"><div class="kpi-progress-fill" style="width:${objPct}%"></div></div></div>
     </div>`;
-  } else {
-    objKpi = `
-    <div class="kpi gold" style="cursor:pointer" onclick="openObjectiveModal(${curYear},'${curMonth}')">
-      <div class="kpi-label">🎯 Objectif ${curMonth.substring(0,3)}</div>
-      <div class="kpi-value gold" style="font-size:16px;color:var(--text3)">Non défini</div>
-      <div class="kpi-sub" style="margin-top:8px"><span class="obj-set-btn">Définir un objectif →</span></div>
+  }else{
+    objKpi=`<div class="kpi gold" style="cursor:pointer" onclick="openObjectiveModal(${objYear},'${objMonth}')">
+      <div class="kpi-label">🎯 Objectif ${objMonth.substring(0,3)}</div>
+      <div class="kpi-value gold" style="font-size:14px;color:var(--text3)">Non défini</div>
+      <div class="kpi-sub" style="margin-top:8px;color:var(--accent)">Définir →</div>
     </div>`;
   }
 
-  document.getElementById('kpi-grid').innerHTML = `
+  document.getElementById('kpi-grid').innerHTML=`
     <div class="kpi green">
       <div class="kpi-label">📈 Bénéfice total</div>
       <div class="kpi-value green">${fmt(tB)}</div>
-      <div class="kpi-sub">${currentYear === 'all' ? 'Depuis sept. 2021' : currentYear}</div>
+      ${delta(tB,prevB)}
+      <div class="kpi-sub" style="margin-top:4px">${periodLabel}</div>
     </div>
     <div class="kpi blue">
       <div class="kpi-label">💰 Chiffre d'affaires</div>
       <div class="kpi-value blue">${fmt(tCA)}</div>
-      <div class="kpi-sub">Marge moy. ${avgMarge}%</div>
+      ${delta(tCA,prevCA)}
+      <div class="kpi-sub" style="margin-top:4px">Marge ${marge}%</div>
     </div>
     <div class="kpi green">
       <div class="kpi-label">🧍 Part Thibault</div>
       <div class="kpi-value green">${fmt(tThib)}</div>
-      <div class="kpi-sub">Net après maman</div>
+      ${delta(tThib,prevThib)}
     </div>
     <div class="kpi purple">
       <div class="kpi-label">👩 Part Maman</div>
       <div class="kpi-value purple">${fmt(tMaman)}</div>
-      <div class="kpi-sub">${tB > 0 ? Math.round(tMaman / tB * 100) : 0}% du bénéfice</div>
+      <div class="kpi-sub" style="margin-top:5px">${tB>0?Math.round(tMaman/tB*100):0}% du bénéfice</div>
     </div>
     <div class="kpi orange">
       <div class="kpi-label">📦 Stock actuel</div>
       <div class="kpi-value orange">${enStock.length} art.</div>
-      <div class="kpi-sub">${fmt(valStock)} investis</div>
+      <div class="kpi-sub" style="margin-top:5px">${fmt(valStock)} investis</div>
     </div>
     ${objKpi}
-    ${best ? `
-    <div class="kpi blue">
+    ${avgDays!==null?`<div class="kpi blue">
+      <div class="kpi-label">⏱ Temps moyen vente</div>
+      <div class="kpi-value blue">${avgDays}j</div>
+      <div class="kpi-sub" style="margin-top:5px">Sur toutes les ventes</div>
+    </div>`:''}
+    ${best?`<div class="kpi green">
       <div class="kpi-label">⭐ Meilleur mois</div>
-      <div class="kpi-value blue" style="font-size:20px">${fmt(best.benef)}</div>
-      <div class="kpi-sub">${best.m} ${best.y}</div>
-    </div>` : ''}
+      <div class="kpi-value green" style="font-size:20px">${fmt(best.benef)}</div>
+      <div class="kpi-sub" style="margin-top:5px">${best.m} ${best.y}</div>
+    </div>`:''}
   `;
 
-  // Click on objective card to edit if already set
-  if (obj > 0) {
-    const kpiCards = document.querySelectorAll('.kpi.gold');
-    kpiCards.forEach(c => {
-      c.style.cursor = 'pointer';
-      c.onclick = () => openObjectiveModal(curYear, curMonth);
-    });
-  }
+  renderBarChart(d);
+  renderAnnualChart();
+  renderCumulChart();
+  renderSplitChart();
+  renderCatCards(d);
 }
 
-function renderBarChart(d) {
-  if (charts.bar) charts.bar.destroy();
-  charts.bar = new Chart(document.getElementById('chartBar'), {
-    type: 'bar',
-    data: {
-      labels: d.map(r => r.m.substring(0, 3) + ' ' + r.y),
-      datasets: [{
-        data: d.map(r => r.benef),
-        backgroundColor: d.map(r => CAT_COLORS[r.cat] || CAT_COLORS.equitation),
-        borderRadius: 5, borderSkipped: false
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => fmt(c.raw) } } },
-      scales: {
-        x: { ticks: { color: '#555e72', font: { size: 10 }, maxRotation: 55 }, grid: { color: '#1e2128' } },
-        y: { ticks: { color: '#555e72', callback: v => v + '€' }, grid: { color: '#1e2128' } }
-      }
-    }
-  });
+function renderBarChart(d){
+  if(charts.bar)charts.bar.destroy();
+  charts.bar=new Chart(document.getElementById('chartBar'),{type:'bar',
+    data:{labels:d.map(r=>r.m.substring(0,3)+' '+r.y),datasets:[{data:d.map(r=>r.benef),backgroundColor:d.map(r=>CAT_COLORS[r.cat]||CAT_COLORS.equitation),borderRadius:5,borderSkipped:false}]},
+    options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fmt(c.raw)}}},
+      scales:{x:{ticks:{color:'#555e72',font:{size:10},maxRotation:55},grid:{color:'#1e2128'}},y:{ticks:{color:'#555e72',callback:v=>v+'€'},grid:{color:'#1e2128'}}}}});
 }
-
-function renderAnnualChart() {
-  const all = allData(), yrs = [...new Set(all.map(d => d.y))].sort();
-  if (charts.annual) charts.annual.destroy();
-  charts.annual = new Chart(document.getElementById('chartAnnuel'), {
-    type: 'bar',
-    data: {
-      labels: yrs,
-      datasets: [
-        { label: 'CA', data: yrs.map(y => all.filter(d => d.y === y).reduce((s, r) => s + r.ca, 0)), backgroundColor: 'rgba(108,143,255,.2)', borderColor: 'rgba(108,143,255,.7)', borderWidth: 1, borderRadius: 4 },
-        { label: 'Bénéfice', data: yrs.map(y => all.filter(d => d.y === y).reduce((s, r) => s + r.benef, 0)), backgroundColor: 'rgba(62,207,142,.65)', borderRadius: 4 }
+function renderAnnualChart(){
+  const all=allData(),yrs=[...new Set(all.map(d=>d.y))].sort();
+  if(charts.annual)charts.annual.destroy();
+  charts.annual=new Chart(document.getElementById('chartAnnuel'),{type:'bar',
+    data:{labels:yrs,datasets:[
+      {label:'CA',data:yrs.map(y=>all.filter(d=>d.y===y).reduce((s,r)=>s+r.ca,0)),backgroundColor:'rgba(108,143,255,.2)',borderColor:'rgba(108,143,255,.7)',borderWidth:1,borderRadius:4},
+      {label:'Bénéfice',data:yrs.map(y=>all.filter(d=>d.y===y).reduce((s,r)=>s+r.benef,0)),backgroundColor:'rgba(62,207,142,.65)',borderRadius:4}]},
+    options:{responsive:true,plugins:{legend:{labels:{color:'#8890a4',font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.raw)}}},
+      scales:{x:{ticks:{color:'#555e72'},grid:{color:'#1e2128'}},y:{ticks:{color:'#555e72',callback:v=>v+'€'},grid:{color:'#1e2128'}}}}});
+}
+function renderCumulChart(){
+  const all=allData(),yrs=[...new Set(all.map(d=>d.y))].sort(),palette=[210,30,120,60,160,270];
+  const datasets=yrs.map((y,i)=>{let cum=0;const vals=all.filter(d=>d.y===y).map(r=>{cum+=r.benef;return cum;});return{label:String(y),data:vals,borderColor:`hsl(${palette[i%palette.length]},70%,62%)`,fill:false,tension:.35,borderWidth:2,pointRadius:3};});
+  const maxLen=Math.max(...yrs.map(y=>all.filter(d=>d.y===y).length));
+  if(charts.cumul)charts.cumul.destroy();
+  charts.cumul=new Chart(document.getElementById('chartCumul'),{type:'line',
+    data:{labels:MONTHS_FR.slice(0,maxLen).map(m=>m.substring(0,3)),datasets},
+    options:{responsive:true,plugins:{legend:{labels:{color:'#8890a4',font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.raw)}}},
+      scales:{x:{ticks:{color:'#555e72',font:{size:10}},grid:{color:'#1e2128'}},y:{ticks:{color:'#555e72',callback:v=>v+'€'},grid:{color:'#1e2128'}}}}});
+}
+function renderSplitChart(){
+  const all=allData();
+  const yrs=[...new Set(all.map(d=>d.y))].sort();
+  // Monthly data for last 2 years or selected year
+  let base=all;
+  if(currentYear!=='all')base=all.filter(d=>d.y===currentYear);
+  else base=all.filter(d=>d.y>=2025);
+  if(charts.split)charts.split.destroy();
+  charts.split=new Chart(document.getElementById('chartSplit'),{type:'bar',
+    data:{
+      labels:base.filter(r=>r.thib>0||r.maman>0).map(r=>r.m.substring(0,3)+' '+r.y),
+      datasets:[
+        {label:'Thibault',data:base.filter(r=>r.thib>0||r.maman>0).map(r=>r.thib),backgroundColor:'rgba(62,207,142,.7)',borderRadius:4,stack:'s'},
+        {label:'Maman',data:base.filter(r=>r.thib>0||r.maman>0).map(r=>r.maman),backgroundColor:'rgba(167,139,250,.7)',borderRadius:4,stack:'s'}
       ]
     },
-    options: {
-      responsive: true,
-      plugins: { legend: { labels: { color: '#8890a4', font: { size: 11 } } }, tooltip: { callbacks: { label: c => c.dataset.label + ': ' + fmt(c.raw) } } },
-      scales: {
-        x: { ticks: { color: '#555e72' }, grid: { color: '#1e2128' } },
-        y: { ticks: { color: '#555e72', callback: v => v + '€' }, grid: { color: '#1e2128' } }
-      }
-    }
+    options:{responsive:true,plugins:{legend:{labels:{color:'#8890a4',font:{size:11}}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fmt(c.raw)}}},
+      scales:{x:{ticks:{color:'#555e72',font:{size:10},maxRotation:55},grid:{color:'#1e2128'}},y:{ticks:{color:'#555e72',callback:v=>v+'€'},grid:{color:'#1e2128'}},stacked:true}}});
+}
+function renderCatCards(d){
+  const cats=['sneakers','vetements','equitation','mixed'],total=d.reduce((s,r)=>s+r.benef,0);
+  let h='';
+  cats.forEach(c=>{
+    const rows=d.filter(r=>r.cat===c),benef=rows.reduce((s,r)=>s+r.benef,0),ca=rows.reduce((s,r)=>s+r.ca,0),mois=rows.filter(r=>r.benef>0).length;
+    if(!mois&&!benef)return;
+    const share=total>0?Math.round(benef/total*100):0,marge=ca>0?Math.round(benef/ca*100):0;
+    h+=`<div class="cat-card ${c}"><div class="cat-name">${CAT_LABELS[c]}</div><div class="cat-benef pos">${fmt(benef)}</div><div class="cat-sub">${share}% du total · CA ${fmt(ca)} · Marge ${marge}% · ${mois} mois</div></div>`;
   });
+  document.getElementById('cat-grid').innerHTML=h||'<div style="color:var(--text3)">Aucune donnée</div>';
 }
 
-function renderCumulChart() {
-  const all = allData(), yrs = [...new Set(all.map(d => d.y))].sort();
-  const palette = [210, 30, 120, 60, 160, 270];
-  const datasets = yrs.map((y, i) => {
-    let cum = 0;
-    const vals = all.filter(d => d.y === y).map(r => { cum += r.benef; return cum; });
-    return { label: String(y), data: vals, borderColor: `hsl(${palette[i % palette.length]},70%,62%)`, fill: false, tension: .35, borderWidth: 2, pointRadius: 3 };
-  });
-  const maxLen = Math.max(...yrs.map(y => all.filter(d => d.y === y).length));
-  if (charts.cumul) charts.cumul.destroy();
-  charts.cumul = new Chart(document.getElementById('chartCumul'), {
-    type: 'line',
-    data: { labels: MONTHS_FR.slice(0, maxLen).map(m => m.substring(0, 3)), datasets },
-    options: {
-      responsive: true,
-      plugins: { legend: { labels: { color: '#8890a4', font: { size: 11 } } }, tooltip: { callbacks: { label: c => c.dataset.label + ': ' + fmt(c.raw) } } },
-      scales: {
-        x: { ticks: { color: '#555e72', font: { size: 10 } }, grid: { color: '#1e2128' } },
-        y: { ticks: { color: '#555e72', callback: v => v + '€' }, grid: { color: '#1e2128' } }
-      }
-    }
-  });
+/* ─── STOCK ─── */
+function renderStockHeaderBar(){
+  const enStock=articles.filter(a=>a.statut==='en_stock');
+  const vendus=articles.filter(a=>a.statut==='vendu');
+  const valAchat=enStock.reduce((s,a)=>s+a.prix_achat,0);
+  const avgMarge=0.55;
+  const valEstimee=Math.round(valAchat/(1-avgMarge));
+  const benefPotentiel=valEstimee-valAchat;
+  document.getElementById('stock-header-bar').innerHTML=`
+    <div class="stock-stat"><div class="stock-stat-val" style="color:var(--orange)">${enStock.length}</div><div class="stock-stat-label">En stock</div></div>
+    <div class="stock-stat-sep"></div>
+    <div class="stock-stat"><div class="stock-stat-val" style="color:var(--text2)">${fmt(valAchat)}</div><div class="stock-stat-label">Investi</div></div>
+    <div class="stock-stat-sep"></div>
+    <div class="stock-stat"><div class="stock-stat-val" style="color:var(--green)">+${fmt(benefPotentiel)}</div><div class="stock-stat-label">Bénéf. potentiel</div></div>
+    <div class="stock-stat-sep"></div>
+    <div class="stock-stat"><div class="stock-stat-val" style="color:var(--text3)">${vendus.length}</div><div class="stock-stat-label">Articles vendus</div></div>
+  `;
 }
-
-function renderCatChart(d) {
-  const cats = ['sneakers', 'vetements', 'equitation', 'mixed'];
-  const stats = cats.map(c => ({ c, b: d.filter(r => r.cat === c).reduce((s, r) => s + r.benef, 0) })).filter(s => s.b > 0);
-  if (!stats.length) return;
-  if (charts.cat) charts.cat.destroy();
-  charts.cat = new Chart(document.getElementById('chartCat'), {
-    type: 'doughnut',
-    data: {
-      labels: stats.map(s => CAT_LABELS[s.c]),
-      datasets: [{ data: stats.map(s => s.b), backgroundColor: stats.map(s => CAT_COLORS[s.c]), borderColor: '#111318', borderWidth: 3 }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { position: 'right', labels: { color: '#8890a4', font: { size: 11 } } },
-        tooltip: { callbacks: { label: c => { const total = stats.reduce((s, x) => s + x.b, 0); return c.label + ': ' + fmt(c.raw) + ' (' + Math.round(c.raw / total * 100) + '%)'; } } }
-      }
-    }
-  });
+function renderStockFilters(){
+  const statuses=[{v:'en_stock',l:'En stock'},{v:'vendu',l:'Vendus'},{v:'all',l:'Tous'}];
+  const cats=[{v:'all',l:'Toutes'},{v:'equitation',l:'Équitation'},{v:'vetements',l:'Vêtements'},{v:'sneakers',l:'Sneakers'}];
+  let h=statuses.map(s=>`<button class="filter-pill${stockStatus===s.v?' active':''}" onclick="setStockStatus('${s.v}')">${s.l}</button>`).join('');
+  h+=`<div class="pill-sep"></div>`;
+  h+=cats.map(c=>`<button class="filter-pill${stockCat===c.v?' active':''}" onclick="setStockCat('${c.v}')">${c.l}</button>`).join('');
+  document.getElementById('stock-filters').innerHTML=h;
 }
-
-function renderCatCards(d) {
-  const cats = ['sneakers', 'vetements', 'equitation', 'mixed'];
-  const total = d.reduce((s, r) => s + r.benef, 0);
-  let h = '';
-  cats.forEach(c => {
-    const rows = d.filter(r => r.cat === c);
-    const benef = rows.reduce((s, r) => s + r.benef, 0);
-    const ca = rows.reduce((s, r) => s + r.ca, 0);
-    const mois = rows.filter(r => r.benef > 0).length;
-    if (!mois && !benef) return;
-    const share = total > 0 ? Math.round(benef / total * 100) : 0;
-    const marge = ca > 0 ? Math.round(benef / ca * 100) : 0;
-    h += `<div class="cat-card ${c}">
-      <div class="cat-name">${CAT_LABELS[c]}</div>
-      <div class="cat-benef ${benef >= 0 ? 'pos' : 'neg'}">${fmt(benef)}</div>
-      <div class="cat-sub">${share}% du total · CA ${fmt(ca)} · Marge ${marge}% · ${mois} mois</div>
-    </div>`;
-  });
-  document.getElementById('cat-grid').innerHTML = h || '<div style="color:var(--text3);font-size:13px;">Aucune donnée</div>';
-}
-
-/* ════════════════════════════════════════════
-   STOCK
-════════════════════════════════════════════ */
-function renderStockFilters() {
-  const statuses = [
-    { v: 'en_stock', l: 'En stock' },
-    { v: 'vendu', l: 'Vendus' },
-    { v: 'all', l: 'Tous' }
-  ];
-  const cats = [
-    { v: 'all', l: 'Toutes catégories' },
-    { v: 'equitation', l: 'Équitation' },
-    { v: 'vetements', l: 'Vêtements' },
-    { v: 'sneakers', l: 'Sneakers' }
-  ];
-  let h = statuses.map(s => `<button class="filter-pill${stockStatus === s.v ? ' active' : ''}" onclick="setStockStatus('${s.v}',this)">${s.l}</button>`).join('');
-  h += `<div class="filter-sep"></div>`;
-  h += cats.map(c => `<button class="filter-pill${stockCat === c.v ? ' active' : ''}" onclick="setStockCat('${c.v}',this)">${c.l}</button>`).join('');
-  document.getElementById('stock-filters').innerHTML = h;
-}
-
-function setStockStatus(v) { stockStatus = v; renderStock(); }
-function setStockCat(v) { stockCat = v; renderStock(); }
-
-function renderStock() {
+function setStockStatus(v){stockStatus=v;renderStock();}
+function setStockCat(v){stockCat=v;renderStock();}
+function renderStock(){
+  renderStockHeaderBar();
   renderStockFilters();
-  let list = [...articles];
-  if (stockStatus !== 'all') list = list.filter(a => a.statut === stockStatus);
-  if (stockCat !== 'all') list = list.filter(a => a.categorie === stockCat);
-
-  // Sort
-  const sort = document.getElementById('sort-select')?.value || 'date_desc';
-  list.sort((a, b) => {
-    if (sort === 'date_desc') return new Date(b.date_achat || 0) - new Date(a.date_achat || 0);
-    if (sort === 'date_asc') return new Date(a.date_achat || 0) - new Date(b.date_achat || 0);
-    if (sort === 'prix_desc') return b.prix_achat - a.prix_achat;
-    if (sort === 'prix_asc') return a.prix_achat - b.prix_achat;
-    if (sort === 'benef_desc') {
-      const bvA = ventes.find(v => v.article_id === a.id);
-      const bvB = ventes.find(v => v.article_id === b.id);
-      const bnA = bvA ? bvA.prix_vente - a.prix_achat : -999999;
-      const bnB = bvB ? bvB.prix_vente - b.prix_achat : -999999;
-      return bnB - bnA;
+  const search=(document.getElementById('search-input')?.value||'').toLowerCase();
+  let list=[...articles];
+  if(stockStatus!=='all')list=list.filter(a=>a.statut===stockStatus);
+  if(stockCat!=='all')list=list.filter(a=>a.categorie===stockCat);
+  if(search)list=list.filter(a=>(a.nom||'').toLowerCase().includes(search)||(a.marque||'').toLowerCase().includes(search)||(a.sku||'').toLowerCase().includes(search));
+  const sort=document.getElementById('sort-select')?.value||'date_desc';
+  list.sort((a,b)=>{
+    if(sort==='date_desc')return new Date(b.date_achat||0)-new Date(a.date_achat||0);
+    if(sort==='date_asc')return new Date(a.date_achat||0)-new Date(b.date_achat||0);
+    if(sort==='prix_desc')return b.prix_achat-a.prix_achat;
+    if(sort==='prix_asc')return a.prix_achat-b.prix_achat;
+    if(sort==='benef_desc'){
+      const bA=ventes.find(v=>v.article_id===a.id),bB=ventes.find(v=>v.article_id===b.id);
+      return(bB?bB.prix_vente-b.prix_achat:-999999)-(bA?bA.prix_vente-a.prix_achat:-999999);
     }
     return 0;
   });
-
-  // Count label
-  document.getElementById('stock-count-label').textContent = `${list.length} article${list.length > 1 ? 's' : ''}`;
-
-  // Table header
-  const isVendu = stockStatus === 'vendu';
-  const thead = isVendu
-    ? `<th>Article</th><th>Catégorie</th><th>Achat</th><th>Vente</th><th>Bénéfice</th><th>PayThib</th><th></th>`
-    : `<th>Article</th><th>Catégorie</th><th>Prix achat</th><th>En stock</th><th></th>`;
-  document.getElementById('stock-thead').innerHTML = thead;
-
-  if (!list.length) {
-    document.getElementById('stock-tbody').innerHTML = `<tr><td colspan="7">
-      <div class="empty-state">
-        <div class="empty-icon">📦</div>
-        <div class="empty-title">${stockStatus === 'en_stock' ? 'Stock vide' : 'Aucune vente'}</div>
-        <div class="empty-sub">${stockStatus === 'en_stock' ? 'Clique sur "Nouvel article" pour commencer.' : 'Les ventes enregistrées apparaîtront ici.'}</div>
-      </div>
-    </td></tr>`;
+  document.getElementById('stock-count-label').textContent=`${list.length} article${list.length>1?'s':''}`;
+  const isVendu=stockStatus==='vendu';
+  document.getElementById('stock-thead').innerHTML=isVendu
+    ?'<th>Article</th><th>Catégorie</th><th>Achat</th><th>Vente</th><th>Bénéfice</th><th>PayThib</th><th></th>'
+    :'<th>Article</th><th>Catégorie</th><th>Prix achat</th><th>Ancienneté</th><th></th>';
+  if(!list.length){
+    document.getElementById('stock-tbody').innerHTML=`<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">📦</div><div class="empty-title">${stockStatus==='en_stock'?'Stock vide':'Aucune vente'}</div><div class="empty-sub">${stockStatus==='en_stock'?'Clique sur "Nouvel article" pour commencer.':'Les ventes apparaîtront ici.'}</div></div></td></tr>`;
     return;
   }
-
-  let h = '';
-  list.forEach(a => {
-    const v = ventes.find(x => x.article_id === a.id);
-    const bn = v ? r2(v.prix_vente - a.prix_achat) : null;
-    const payThib = v ? r2(v.prix_vente - (v.part_maman || 0)) : null;
-    const days = a.statut === 'en_stock' ? daysSince(a.date_achat) : null;
-
-    if (isVendu) {
-      h += `<tr>
-        <td>
-          <div class="td-main">${a.nom}${a.taille ? ' <span style="color:var(--text3);font-weight:400">· ' + a.taille + '</span>' : ''}</div>
-          ${a.sku ? `<div class="td-sub">SKU: ${a.sku}</div>` : ''}
-        </td>
-        <td><span class="badge badge-${a.categorie || 'equitation'}">${CAT_LABELS[a.categorie] || '—'}</span></td>
+  let h='';
+  list.forEach(a=>{
+    const v=ventes.find(x=>x.article_id===a.id);
+    const bn=v?r2(v.prix_vente-a.prix_achat):null;
+    const payThib=v?r2(v.prix_vente-(v.part_maman||0)):null;
+    const days=a.statut==='en_stock'?daysSince(a.date_achat):null;
+    if(isVendu){
+      h+=`<tr>
+        <td><div class="td-main">${a.nom}${a.taille?` <span style="color:var(--text3);font-weight:400">· ${a.taille}</span>`:''}</div>${a.sku?`<div class="td-sub">SKU: ${a.sku}</div>`:''}</td>
+        <td><span class="badge badge-${a.categorie||'equitation'}">${CAT_LABELS[a.categorie]||'—'}</span></td>
         <td class="td-muted">${fmt(a.prix_achat)}</td>
-        <td class="td-muted">${v ? fmt(v.prix_vente) : '—'}</td>
-        <td class="td-amount ${bn !== null ? (bn >= 0 ? 'green' : 'red') : ''}" style="color:${bn >= 0 ? 'var(--green)' : 'var(--red)'}">${bn !== null ? fmt(bn) : '—'}</td>
-        <td class="td-amount" style="color:var(--accent)">${payThib !== null ? fmt(payThib) : '—'}</td>
-        <td><div class="actions-cell">
-          <button class="btn-icon edit" title="Modifier" onclick="openEditModal('${a.id}')">✎</button>
-          <button class="btn-icon danger" title="Supprimer" onclick="openDelModal('${a.id}')">✕</button>
-        </div></td>
+        <td class="td-muted">${v?fmt(v.prix_vente):'—'}</td>
+        <td class="td-amount" style="color:${bn!==null&&bn>=0?'var(--green)':'var(--red)'}">${bn!==null?fmt(bn):'—'}</td>
+        <td class="td-amount" style="color:var(--accent)">${payThib!==null?fmt(payThib):'—'}</td>
+        <td><div class="actions-cell"><button class="btn-icon edit" title="Modifier" onclick="openEditModal('${a.id}')">✎</button><button class="btn-icon danger" title="Supprimer" onclick="openDelModal('${a.id}')">✕</button></div></td>
       </tr>`;
-    } else {
-      h += `<tr>
-        <td>
-          <div class="td-main">${a.nom}${a.taille ? ' <span style="color:var(--text3);font-weight:400">· ' + a.taille + '</span>' : ''}</div>
-          ${a.marque || a.sku ? `<div class="td-sub">${[a.marque, a.sku ? 'SKU: ' + a.sku : ''].filter(Boolean).join(' · ')}</div>` : ''}
-        </td>
-        <td><span class="badge badge-${a.categorie || 'equitation'}">${CAT_LABELS[a.categorie] || '—'}</span></td>
+    }else{
+      h+=`<tr>
+        <td><div class="td-main">${dotBadge(days)}${a.nom}${a.taille?` <span style="color:var(--text3);font-weight:400">· ${a.taille}</span>`:''}</div>${a.marque||a.sku?`<div class="td-sub">${[a.marque,a.sku?'SKU: '+a.sku:''].filter(Boolean).join(' · ')}</div>`:''}</td>
+        <td><span class="badge badge-${a.categorie||'equitation'}">${CAT_LABELS[a.categorie]||'—'}</span></td>
         <td class="td-amount">${fmt(a.prix_achat)}</td>
-        <td>${days !== null ? daysBadge(days) : '<span class="td-muted">—</span>'}</td>
-        <td><div class="actions-cell">
-          <button class="btn-icon sell" title="Vendre" onclick="openSellModal('${a.id}')">$</button>
-          <button class="btn-icon edit" title="Modifier" onclick="openEditModal('${a.id}')">✎</button>
-          <button class="btn-icon danger" title="Supprimer" onclick="openDelModal('${a.id}')">✕</button>
-        </div></td>
+        <td class="td-muted">${days!==null?days+' jours':'—'}</td>
+        <td><div class="actions-cell"><button class="btn-icon sell-icon" title="Vendre" onclick="openSellModal('${a.id}')">$</button><button class="btn-icon edit" title="Modifier" onclick="openEditModal('${a.id}')">✎</button><button class="btn-icon danger" title="Supprimer" onclick="openDelModal('${a.id}')">✕</button></div></td>
       </tr>`;
     }
   });
-  document.getElementById('stock-tbody').innerHTML = h;
+  document.getElementById('stock-tbody').innerHTML=h;
 }
 
-/* ════════════════════════════════════════════
-   MODALS
-════════════════════════════════════════════ */
-function closeModal(id) { document.getElementById(id).classList.remove('show'); }
-
-// ── Add ──
-function openAddModal() {
-  ['add-nom', 'add-taille', 'add-sku', 'add-marque', 'add-prix'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('add-date').value = today();
-  document.getElementById('add-error').textContent = '';
+/* ─── MODAL ADD ─── */
+function openAddModal(){
+  ['add-nom','add-taille','add-sku','add-marque','add-prix'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('add-date').value=today();
+  document.getElementById('add-error').textContent='';
   document.getElementById('modal-add').classList.add('show');
-  setTimeout(() => document.getElementById('add-nom').focus(), 100);
+  setTimeout(()=>document.getElementById('add-nom').focus(),100);
 }
-
-async function handleAdd() {
-  const nom = document.getElementById('add-nom').value.trim();
-  const prix = parseFloat(document.getElementById('add-prix').value);
-  const errEl = document.getElementById('add-error');
-  if (!nom) { errEl.textContent = 'Le nom est requis.'; return; }
-  if (!prix || prix <= 0) { errEl.textContent = "Le prix d'achat est requis."; return; }
-  const btn = document.getElementById('btn-add');
-  btn.disabled = true; btn.textContent = 'Ajout…';
-  const { error } = await db.from('articles').insert({
-    nom, categorie: document.getElementById('add-categorie').value,
-    taille: document.getElementById('add-taille').value || null,
-    sku: document.getElementById('add-sku').value || null,
-    marque: document.getElementById('add-marque').value || null,
-    prix_achat: prix, date_achat: document.getElementById('add-date').value || null,
-    user_id: currentUser.id
+async function handleAdd(){
+  const nom=document.getElementById('add-nom').value.trim();
+  const prix=parseFloat(document.getElementById('add-prix').value);
+  const errEl=document.getElementById('add-error');
+  if(!nom){errEl.textContent='Le nom est requis.';return;}
+  if(!prix||prix<=0){errEl.textContent="Le prix d'achat est requis.";return;}
+  const btn=document.getElementById('btn-add');btn.disabled=true;btn.textContent='Ajout…';
+  const{error}=await db.from('articles').insert({
+    nom,categorie:document.getElementById('add-categorie').value,
+    taille:document.getElementById('add-taille').value||null,
+    sku:document.getElementById('add-sku').value||null,
+    marque:document.getElementById('add-marque').value||null,
+    prix_achat:prix,date_achat:document.getElementById('add-date').value||null,
+    user_id:currentUser.id
   });
-  btn.disabled = false; btn.textContent = 'Ajouter au stock';
-  if (error) { errEl.textContent = 'Erreur : ' + error.message; return; }
+  btn.disabled=false;btn.textContent='Ajouter au stock';
+  if(error){errEl.textContent='Erreur : '+error.message;return;}
   closeModal('modal-add');
-  await loadData(); renderStock();
+  await loadData();renderStock();
+  showToast('Article ajouté ✓');
 }
 
-// ── Edit ──
-function openEditModal(id) {
-  const a = articles.find(x => x.id === id);
-  if (!a) return;
-  currentEditId = id;
-  document.getElementById('edit-nom').value = a.nom || '';
-  document.getElementById('edit-categorie').value = a.categorie || 'equitation';
-  document.getElementById('edit-taille').value = a.taille || '';
-  document.getElementById('edit-marque').value = a.marque || '';
-  document.getElementById('edit-sku').value = a.sku || '';
-  document.getElementById('edit-prix').value = a.prix_achat || '';
-  document.getElementById('edit-date').value = a.date_achat || '';
-  document.getElementById('edit-notes').value = a.notes || '';
-  document.getElementById('edit-error').textContent = '';
+/* ─── MODAL EDIT ─── */
+function openEditModal(id){
+  const a=articles.find(x=>x.id===id);if(!a)return;
+  currentEditId=id;
+  document.getElementById('edit-nom').value=a.nom||'';
+  document.getElementById('edit-categorie').value=a.categorie||'equitation';
+  document.getElementById('edit-taille').value=a.taille||'';
+  document.getElementById('edit-marque').value=a.marque||'';
+  document.getElementById('edit-sku').value=a.sku||'';
+  document.getElementById('edit-prix').value=a.prix_achat||'';
+  document.getElementById('edit-date').value=a.date_achat||'';
+  document.getElementById('edit-notes').value=a.notes||'';
+  document.getElementById('edit-error').textContent='';
   document.getElementById('modal-edit').classList.add('show');
-  setTimeout(() => document.getElementById('edit-nom').focus(), 100);
+  setTimeout(()=>document.getElementById('edit-nom').focus(),100);
 }
-
-async function handleEdit() {
-  const nom = document.getElementById('edit-nom').value.trim();
-  const prix = parseFloat(document.getElementById('edit-prix').value);
-  const errEl = document.getElementById('edit-error');
-  if (!nom) { errEl.textContent = 'Le nom est requis.'; return; }
-  if (!prix || prix <= 0) { errEl.textContent = "Le prix d'achat est requis."; return; }
-  const btn = document.getElementById('btn-edit');
-  btn.disabled = true; btn.textContent = 'Enregistrement…';
-  const { error } = await db.from('articles').update({
-    nom, categorie: document.getElementById('edit-categorie').value,
-    taille: document.getElementById('edit-taille').value || null,
-    marque: document.getElementById('edit-marque').value || null,
-    sku: document.getElementById('edit-sku').value || null,
-    prix_achat: prix, date_achat: document.getElementById('edit-date').value || null,
-    notes: document.getElementById('edit-notes').value || null
-  }).eq('id', currentEditId);
-  btn.disabled = false; btn.textContent = 'Enregistrer';
-  if (error) { errEl.textContent = 'Erreur : ' + error.message; return; }
+async function handleEdit(){
+  const nom=document.getElementById('edit-nom').value.trim();
+  const prix=parseFloat(document.getElementById('edit-prix').value);
+  const errEl=document.getElementById('edit-error');
+  if(!nom){errEl.textContent='Le nom est requis.';return;}
+  if(!prix||prix<=0){errEl.textContent="Le prix d'achat est requis.";return;}
+  const btn=document.getElementById('btn-edit');btn.disabled=true;btn.textContent='Enregistrement…';
+  const{error}=await db.from('articles').update({
+    nom,categorie:document.getElementById('edit-categorie').value,
+    taille:document.getElementById('edit-taille').value||null,
+    marque:document.getElementById('edit-marque').value||null,
+    sku:document.getElementById('edit-sku').value||null,
+    prix_achat:prix,date_achat:document.getElementById('edit-date').value||null,
+    notes:document.getElementById('edit-notes').value||null
+  }).eq('id',currentEditId);
+  btn.disabled=false;btn.textContent='Enregistrer';
+  if(error){errEl.textContent='Erreur : '+error.message;return;}
   closeModal('modal-edit');
-  await loadData(); renderStock();
+  await loadData();renderStock();
+  showToast('Article modifié ✓');
 }
 
-// ── Sell ──
-function openSellModal(id) {
-  const a = articles.find(x => x.id === id);
-  if (!a) return;
-  currentSellId = id;
-  document.getElementById('sell-article-name').textContent = a.nom + (a.taille ? ' · ' + a.taille : '');
-  document.getElementById('sell-achat-info').textContent = `Acheté ${fmt(a.prix_achat)}${a.date_achat ? ' le ' + new Date(a.date_achat).toLocaleDateString('fr-FR') : ''}`;
-  document.getElementById('sell-prix').value = '';
-  document.getElementById('sell-date').value = today();
-  document.getElementById('sell-pct').value = '0';
-  document.getElementById('sell-error').textContent = '';
-  document.getElementById('sell-preview').classList.remove('show');
+/* ─── MODAL SELL ─── */
+function toggleVenteMaman(){
+  const cb=document.getElementById('cb-vente-maman');
+  cb.checked=!cb.checked;
+  updateSellPreview();
+}
+function openSellModal(id){
+  const a=articles.find(x=>x.id===id);if(!a)return;
+  currentSellId=id;
+  document.getElementById('sell-article-name').textContent=a.nom+(a.taille?' · '+a.taille:'');
+  document.getElementById('sell-achat-info').textContent=`Acheté ${fmt(a.prix_achat)}${a.date_achat?' le '+new Date(a.date_achat).toLocaleDateString('fr-FR'):''}`;
+  document.getElementById('sell-prix').value='';
+  document.getElementById('sell-date').value=today();
+  document.getElementById('cb-vente-maman').checked=false;
+  document.getElementById('sell-error').textContent='';
+  document.getElementById('sell-preview').style.display='none';
   document.getElementById('modal-sell').classList.add('show');
-  setTimeout(() => document.getElementById('sell-prix').focus(), 100);
+  setTimeout(()=>document.getElementById('sell-prix').focus(),100);
 }
-
-function updateSellPreview() {
-  const a = articles.find(x => x.id === currentSellId);
-  if (!a) return;
-  const pv = parseFloat(document.getElementById('sell-prix').value);
-  const pct = parseFloat(document.getElementById('sell-pct').value) || 0;
-  if (isNaN(pv) || pv <= 0) { document.getElementById('sell-preview').classList.remove('show'); return; }
-  const bn = pv - a.prix_achat;
-  const mama = r2(bn * pct / 100);
-  const thib = r2(bn - mama);
-  const payThib = r2(pv - mama);
-  const marge = Math.round(bn / pv * 100);
-  document.getElementById('prev-benef').textContent = fmt(bn);
-  document.getElementById('prev-marge').textContent = marge + '%';
-  document.getElementById('prev-maman').textContent = pct > 0 ? fmt(mama) : '—';
-  document.getElementById('prev-thib').textContent = fmt(thib);
-  document.getElementById('prev-paythib').textContent = fmt(payThib);
-  document.getElementById('sell-preview').classList.add('show');
+function updateSellPreview(){
+  const a=articles.find(x=>x.id===currentSellId);if(!a)return;
+  const pv=parseFloat(document.getElementById('sell-prix').value);
+  const venteMaman=document.getElementById('cb-vente-maman').checked;
+  if(isNaN(pv)||pv<=0){document.getElementById('sell-preview').style.display='none';return;}
+  const bn=pv-a.prix_achat;
+  const mama=venteMaman?r2(bn*0.5):0;
+  const thib=r2(bn-mama);
+  const payThib=r2(pv-mama);
+  const marge=Math.round(bn/pv*100);
+  document.getElementById('prev-benef').textContent=fmt(bn);
+  document.getElementById('prev-marge').textContent=marge+'%';
+  // Part maman
+  if(venteMaman){
+    document.getElementById('prev-maman-wrap').style.display='block';
+    document.getElementById('prev-maman-na').style.display='none';
+    document.getElementById('prev-maman').textContent=fmt(mama);
+  }else{
+    document.getElementById('prev-maman-wrap').style.display='none';
+    document.getElementById('prev-maman-na').style.display='block';
+  }
+  document.getElementById('prev-thib').textContent=fmt(thib);
+  // PayThib
+  document.getElementById('paythib-section').style.display=venteMaman?'block':'none';
+  document.getElementById('prev-paythib').textContent=fmt(payThib);
+  document.getElementById('sell-preview').style.display='block';
 }
-
-async function handleSell() {
-  const a = articles.find(x => x.id === currentSellId);
-  const pv = parseFloat(document.getElementById('sell-prix').value);
-  const pctM = parseFloat(document.getElementById('sell-pct').value) || 0;
-  const dv = document.getElementById('sell-date').value;
-  const errEl = document.getElementById('sell-error');
-  if (!pv || pv <= 0) { errEl.textContent = 'Le prix de vente est requis.'; return; }
-  const bn = r2(pv - a.prix_achat);
-  const mama = r2(bn * pctM / 100);
-  const thib = r2(bn - mama);
-  const btn = document.getElementById('btn-sell');
-  btn.disabled = true; btn.textContent = 'Enregistrement…';
-  const [{ error: e1 }, { error: e2 }] = await Promise.all([
-    db.from('ventes').insert({ article_id: currentSellId, prix_vente: pv, date_vente: dv || null, pct_maman: pctM, part_maman: mama, part_thib: thib, user_id: currentUser.id }),
-    db.from('articles').update({ statut: 'vendu' }).eq('id', currentSellId)
+async function handleSell(){
+  const a=articles.find(x=>x.id===currentSellId);
+  const pv=parseFloat(document.getElementById('sell-prix').value);
+  const venteMaman=document.getElementById('cb-vente-maman').checked;
+  const dv=document.getElementById('sell-date').value;
+  const errEl=document.getElementById('sell-error');
+  if(!pv||pv<=0){errEl.textContent='Le prix de vente est requis.';return;}
+  const bn=r2(pv-a.prix_achat);
+  const mama=venteMaman?r2(bn*0.5):0;
+  const thib=r2(bn-mama);
+  const btn=document.getElementById('btn-sell');btn.disabled=true;btn.textContent='Enregistrement…';
+  const[{error:e1},{error:e2}]=await Promise.all([
+    db.from('ventes').insert({article_id:currentSellId,prix_vente:pv,date_vente:dv||null,pct_maman:venteMaman?50:0,part_maman:mama,part_thib:thib,user_id:currentUser.id}),
+    db.from('articles').update({statut:'vendu'}).eq('id',currentSellId)
   ]);
-  btn.disabled = false; btn.textContent = 'Confirmer la vente';
-  if (e1 || e2) { errEl.textContent = "Erreur lors de l'enregistrement."; return; }
+  btn.disabled=false;btn.textContent='Confirmer la vente';
+  if(e1||e2){errEl.textContent="Erreur lors de l'enregistrement.";return;}
   closeModal('modal-sell');
-  await loadData(); buildYearFilter(); renderDashboard(); renderStock();
+  await loadData();buildFilters();renderDashboard();renderStock();
+  showToast('Vente enregistrée ✓');
 }
 
-// ── Delete ──
-function openDelModal(id) {
-  const a = articles.find(x => x.id === id);
-  if (!a) return;
-  currentDelId = id;
-  document.getElementById('del-name').textContent = a.nom + (a.taille ? ' · ' + a.taille : '');
-  document.getElementById('del-error').textContent = '';
+/* ─── MODAL DELETE ─── */
+function openDelModal(id){
+  const a=articles.find(x=>x.id===id);if(!a)return;
+  currentDelId=id;
+  document.getElementById('del-name').textContent=a.nom+(a.taille?' · '+a.taille:'');
+  document.getElementById('del-error').textContent='';
   document.getElementById('modal-delete').classList.add('show');
 }
-
-async function handleDelete() {
-  const btn = document.getElementById('btn-del');
-  const errEl = document.getElementById('del-error');
-  btn.disabled = true; btn.textContent = 'Suppression…';
-  const { error } = await db.from('articles').delete().eq('id', currentDelId);
-  btn.disabled = false; btn.textContent = 'Supprimer définitivement';
-  if (error) { errEl.textContent = 'Erreur : ' + error.message; return; }
+async function handleDelete(){
+  const btn=document.getElementById('btn-del'),errEl=document.getElementById('del-error');
+  btn.disabled=true;btn.textContent='Suppression…';
+  const{error}=await db.from('articles').delete().eq('id',currentDelId);
+  btn.disabled=false;btn.textContent='Supprimer définitivement';
+  if(error){errEl.textContent='Erreur : '+error.message;return;}
   closeModal('modal-delete');
-  await loadData(); buildYearFilter(); renderDashboard(); renderStock();
+  await loadData();buildFilters();renderDashboard();renderStock();
+  showToast('Article supprimé','red');
 }
 
-/* ════════════════════════════════════════════
-   PDF EXPORT
-════════════════════════════════════════════ */
-function exportPDF() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
-  const d = filtered();
-  const tB = d.reduce((s, r) => s + r.benef, 0);
-  const tCA = d.reduce((s, r) => s + r.ca, 0);
-  const tThib = d.reduce((s, r) => s + r.thib, 0);
-  const tMaman = d.reduce((s, r) => s + r.maman, 0);
-  const marge = tCA > 0 ? Math.round(tB / tCA * 100) : 0;
-  const period = currentYear === 'all' ? 'Toutes les années' : String(currentYear);
-
-  // Header
-  doc.setFillColor(10, 12, 16);
-  doc.rect(0, 0, 210, 38, 'F');
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(20); doc.setFont(undefined, 'bold');
-  doc.text('ResellThib', 15, 16);
-  doc.setFontSize(10); doc.setFont(undefined, 'normal');
-  doc.setTextColor(200, 210, 230);
-  doc.text('Rapport · ' + period, 15, 25);
-  doc.text('Généré le ' + new Date().toLocaleDateString('fr-FR'), 15, 32);
-
-  // KPIs
-  let y = 50;
-  doc.setFontSize(12); doc.setFont(undefined, 'bold'); doc.setTextColor(30, 30, 40);
-  doc.text('Résumé financier', 15, y); y += 8;
-
-  const kpis = [
-    ['Bénéfice total', fmt(tB)],
-    ['Chiffre d\'affaires', fmt(tCA)],
-    ['Marge moyenne', marge + '%'],
-    ['Part Thibault', fmt(tThib)],
-    ['Part Maman', fmt(tMaman)],
-  ];
-  doc.setFontSize(10); doc.setFont(undefined, 'normal');
-  kpis.forEach(([label, val]) => {
-    doc.setTextColor(100, 110, 130);
-    doc.text(label, 15, y);
-    doc.setTextColor(30, 30, 40); doc.setFont(undefined, 'bold');
-    doc.text(val, 100, y);
-    doc.setFont(undefined, 'normal');
-    y += 7;
+/* ─── PDF EXPORT ─── */
+function exportPDF(){
+  const{jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'p',unit:'mm',format:'a4'});
+  const d=filtered();
+  const tB=d.reduce((s,r)=>s+r.benef,0),tCA=d.reduce((s,r)=>s+r.ca,0);
+  const tThib=d.reduce((s,r)=>s+r.thib,0),tMaman=d.reduce((s,r)=>s+r.maman,0);
+  const marge=tCA>0?Math.round(tB/tCA*100):0;
+  let period=currentYear==='all'?'Toutes les années':currentMonth!=='all'?`${currentMonth} ${currentYear}`:String(currentYear);
+  doc.setFillColor(10,12,16);doc.rect(0,0,210,36,'F');
+  doc.setTextColor(255,255,255);doc.setFontSize(20);doc.setFont(undefined,'bold');doc.text('ResellThib',15,15);
+  doc.setFontSize(10);doc.setFont(undefined,'normal');doc.setTextColor(180,195,220);
+  doc.text('Rapport · '+period,15,23);doc.text('Généré le '+new Date().toLocaleDateString('fr-FR'),15,30);
+  let y=46;
+  doc.setFontSize(12);doc.setFont(undefined,'bold');doc.setTextColor(20,25,35);doc.text('Résumé financier',15,y);y+=8;
+  const kpis=[['Bénéfice total',fmt(tB)],["Chiffre d'affaires",fmt(tCA)],['Marge moyenne',marge+'%'],['Part Thibault',fmt(tThib)],['Part Maman',fmt(tMaman)]];
+  doc.setFontSize(10);
+  kpis.forEach(([l,v])=>{
+    doc.setFont(undefined,'normal');doc.setTextColor(100,110,130);doc.text(l,15,y);
+    doc.setFont(undefined,'bold');doc.setTextColor(20,25,35);doc.text(v,110,y);
+    y+=7;
   });
-
-  // Ventes du mois ou de l'année
-  y += 6;
-  doc.setFontSize(12); doc.setFont(undefined, 'bold'); doc.setTextColor(30, 30, 40);
-  doc.text('Détail des ventes', 15, y); y += 8;
-
-  const ventesFiltered = ventes.filter(v => {
-    if (!v.date_vente) return false;
-    if (currentYear === 'all') return true;
-    return new Date(v.date_vente).getFullYear() === currentYear;
+  y+=6;doc.setFontSize(12);doc.setFont(undefined,'bold');doc.setTextColor(20,25,35);doc.text('Détail des ventes',15,y);y+=8;
+  const vFiltered=ventes.filter(v=>{
+    if(!v.date_vente)return false;
+    const vy=new Date(v.date_vente).getFullYear(),vm=MONTHS_FR[new Date(v.date_vente).getMonth()];
+    if(currentYear!=='all'&&vy!==currentYear)return false;
+    if(currentMonth!=='all'&&vm!==currentMonth)return false;
+    return true;
   });
-
-  if (ventesFiltered.length === 0) {
-    doc.setFontSize(10); doc.setFont(undefined, 'normal'); doc.setTextColor(150, 150, 160);
-    doc.text('Aucune vente pour cette période.', 15, y);
-  } else {
-    // Table header
-    doc.setFillColor(240, 242, 248);
-    doc.rect(10, y - 4, 190, 7, 'F');
-    doc.setFontSize(9); doc.setFont(undefined, 'bold'); doc.setTextColor(80, 90, 110);
-    doc.text('Article', 15, y); doc.text('Date', 90, y); doc.text('Vente', 120, y); doc.text('Bénéf.', 148, y); doc.text('PayThib', 175, y);
-    y += 6;
-    doc.setFont(undefined, 'normal'); doc.setTextColor(40, 40, 50);
-    ventesFiltered.forEach((v, i) => {
-      if (y > 270) { doc.addPage(); y = 20; }
-      if (i % 2 === 0) { doc.setFillColor(250, 251, 253); doc.rect(10, y - 4, 190, 6.5, 'F'); }
-      const artName = v.articles ? (v.articles.nom + (v.articles.taille ? ' · ' + v.articles.taille : '')) : '—';
-      const dateStr = v.date_vente ? new Date(v.date_vente).toLocaleDateString('fr-FR') : '—';
-      const vente = fmt(v.prix_vente);
-      const benef = v.articles ? fmt(r2(v.prix_vente - v.articles.prix_achat)) : '—';
-      const pt = fmt(r2(v.prix_vente - (v.part_maman || 0)));
-      doc.setFontSize(9);
-      doc.text(artName.length > 30 ? artName.substring(0, 28) + '…' : artName, 15, y);
-      doc.text(dateStr, 90, y);
-      doc.text(vente, 120, y);
-      doc.text(benef, 148, y);
-      doc.text(pt, 175, y);
-      y += 7;
+  if(!vFiltered.length){doc.setFontSize(10);doc.setFont(undefined,'normal');doc.setTextColor(150,155,165);doc.text('Aucune vente pour cette période.',15,y);}
+  else{
+    doc.setFillColor(238,242,248);doc.rect(10,y-4,190,7,'F');
+    doc.setFontSize(9);doc.setFont(undefined,'bold');doc.setTextColor(80,90,110);
+    doc.text('Article',15,y);doc.text('Date',85,y);doc.text('Vente',112,y);doc.text('Bénéf.',138,y);doc.text('Maman',158,y);doc.text('PayThib',178,y);
+    y+=6;doc.setFont(undefined,'normal');
+    vFiltered.forEach((v,i)=>{
+      if(y>272){doc.addPage();y=20;}
+      if(i%2===0){doc.setFillColor(250,251,253);doc.rect(10,y-4,190,6.5,'F');}
+      const nm=v.articles?(v.articles.nom+(v.articles.taille?' · '+v.articles.taille:'')):('—');
+      const dStr=new Date(v.date_vente).toLocaleDateString('fr-FR');
+      doc.setFontSize(9);doc.setTextColor(30,35,50);
+      doc.text(nm.length>30?nm.substring(0,28)+'…':nm,15,y);
+      doc.text(dStr,85,y);
+      doc.text(fmt(v.prix_vente),112,y);
+      const bn=v.articles?fmt(r2(v.prix_vente-v.articles.prix_achat)):'—';
+      doc.text(bn,138,y);
+      doc.text(fmt(v.part_maman||0),158,y);
+      doc.text(fmt(r2(v.prix_vente-(v.part_maman||0))),178,y);
+      y+=7;
     });
   }
-
-  // Footer
-  doc.setFontSize(8); doc.setTextColor(180, 185, 195);
-  doc.text('ResellThib · Micro-entreprise · ' + new Date().toLocaleDateString('fr-FR'), 15, 290);
-
-  doc.save(`ResellThib_${period}_${new Date().toISOString().split('T')[0]}.pdf`);
+  doc.setFontSize(8);doc.setTextColor(180,185,195);doc.text('ResellThib · Micro-entreprise · '+new Date().toLocaleDateString('fr-FR'),15,288);
+  const fname=`ResellThib_${period.replace(/ /g,'_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+  doc.save(fname);
+  showToast('PDF exporté ✓');
 }
 
-/* ════════════════════════════════════════════
-   INIT
-════════════════════════════════════════════ */
 checkAuth();
 </script>
 </body>
