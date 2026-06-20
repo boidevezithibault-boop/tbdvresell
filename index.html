@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resell — Thibault</title>
+<title>ResellThib · TBDV</title>
+<link id="fav" rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%236c8fff'/%3E%3Ctext x='16' y='13' font-family='Arial' font-weight='bold' font-size='12' fill='white' text-anchor='middle' dominant-baseline='middle'%3ERT%3C/text%3E%3Ctext x='16' y='25' font-family='Arial' font-size='7' fill='rgba(255,255,255,0.8)' text-anchor='middle'%3ETBDV%3C/text%3E%3C/svg%3E">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -246,6 +247,50 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
 
+/* ─── THEMES ─── */
+[data-theme="beige"]{--bg:#f5f0e8;--bg2:#ffffff;--bg3:#ede8de;--bg4:#e5dfd4;--border:#ddd8cc;--border2:#cec8ba;--text:#2c2520;--text2:#7a6e5e;--text3:#a09080;--accent:#b07d3a;--accent-dim:rgba(176,125,58,.12);--green:#2e7d32;--green-dim:rgba(46,125,50,.1);--red:#c62828;--red-dim:rgba(198,40,40,.08);--gold:#c9912a;--gold-dim:rgba(201,145,42,.1);--purple:#7c5cbf;--purple-dim:rgba(124,92,191,.1);--orange:#e65100;--orange-dim:rgba(230,81,0,.1);}
+[data-theme="forest"]{--bg:#0f1a0e;--bg2:#0a1209;--bg3:#0d1a0b;--bg4:#102012;--border:#1a2e18;--border2:#234a20;--text:#c8e6c5;--text2:#6a9a66;--text3:#3a6636;--accent:#5cb85c;--accent-dim:rgba(92,184,92,.12);--green:#81c784;--green-dim:rgba(129,199,132,.12);--red:#ef5350;--red-dim:rgba(239,83,80,.1);--gold:#aed581;--gold-dim:rgba(174,213,129,.1);--purple:#80cbc4;--purple-dim:rgba(128,203,196,.1);--orange:#ffb74d;--orange-dim:rgba(255,183,77,.1);}
+[data-theme="indigo"]{--bg:#0e0f1f;--bg2:#090a18;--bg3:#0d0e1e;--bg4:#111228;--border:#1a1c35;--border2:#252850;--text:#e4e6ff;--text2:#6b70b8;--text3:#3a3d6e;--accent:#818cf8;--accent-dim:rgba(129,140,248,.12);--green:#34d399;--green-dim:rgba(52,211,153,.12);--red:#f87171;--red-dim:rgba(248,113,113,.1);--gold:#fbbf24;--gold-dim:rgba(251,191,36,.1);--purple:#c084fc;--purple-dim:rgba(192,132,252,.12);--orange:#fb923c;--orange-dim:rgba(251,146,60,.1);}
+[data-theme="coral"]{--bg:#fff5f0;--bg2:#ffffff;--bg3:#ffeee8;--bg4:#ffe5da;--border:#f5d0c0;--border2:#e8c0ac;--text:#2a1810;--text2:#8a5040;--text3:#b08070;--accent:#e05a40;--accent-dim:rgba(224,90,64,.12);--green:#2e7d32;--green-dim:rgba(46,125,50,.1);--red:#c62828;--red-dim:rgba(198,40,40,.08);--gold:#c9912a;--gold-dim:rgba(201,145,42,.1);--purple:#7c5cbf;--purple-dim:rgba(124,92,191,.1);--orange:#bf360c;--orange-dim:rgba(191,54,12,.1);}
+
+/* ─── TOPNAV LAYOUT ─── */
+[data-layout="topnav"] .sidebar{flex-direction:row;align-items:center;width:100%;height:52px;bottom:auto;border-right:none;border-bottom:1px solid var(--border);padding:0;}
+[data-layout="topnav"] .sidebar-logo{padding:0 18px;border-bottom:none;border-right:1px solid var(--border);height:52px;display:flex;align-items:center;}
+[data-layout="topnav"] .sidebar-logo .sub{display:none;}
+[data-layout="topnav"] .sidebar-nav{flex-direction:row;padding:0 8px;gap:2px;flex:1;}
+[data-layout="topnav"] .nav-section{display:none;}
+[data-layout="topnav"] .nav-item{padding:6px 14px;}
+[data-layout="topnav"] .sidebar-footer{margin-top:0;border-top:none;border-left:1px solid var(--border);padding:0 12px;height:52px;display:flex;align-items:center;gap:8px;flex-direction:row;}
+[data-layout="topnav"] .logout-btn{margin-top:0;width:auto;}
+[data-layout="topnav"] .main{margin-left:0;margin-top:52px;}
+
+/* ─── COMPACT DENSITY ─── */
+[data-density="compact"] .kpi{padding:12px 14px;}
+[data-density="compact"] .kpi-value{font-size:19px;}
+[data-density="compact"] .kpi-grid{gap:8px;}
+[data-density="compact"] .page{padding:18px 22px;}
+
+/* ─── SETTINGS ─── */
+.settings-section{margin-bottom:20px;}
+.settings-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);margin-bottom:10px;}
+.theme-swatches{display:flex;gap:8px;flex-wrap:wrap;}
+.swatch{width:34px;height:34px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .15s;}
+.swatch.active{border-color:var(--text);transform:scale(1.1);}
+.layout-btn{flex:1;padding:10px;border:1px solid var(--border2);border-radius:8px;background:var(--bg3);color:var(--text2);cursor:pointer;font-size:12px;font-weight:600;text-align:center;transition:all .15s;font-family:inherit;}
+.layout-btn.active{background:var(--accent-dim);border-color:var(--accent);color:var(--accent);}
+.layout-btns,.density-btns{display:flex;gap:8px;}
+.settings-gear{background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:4px 6px;transition:color .15s;font-family:inherit;}
+.settings-gear:hover{color:var(--text);}
+
+/* ─── DORMANT ALERT ─── */
+.dormant-alert{display:flex;align-items:center;gap:10px;background:var(--gold-dim);border:1px solid rgba(246,195,66,.25);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12.5px;color:var(--gold);}
+
+/* ─── MONTH NOTE ─── */
+.note-area{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;}
+.note-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.note-input{width:100%;background:transparent;border:none;color:var(--text2);font-size:13px;font-family:inherit;resize:none;outline:none;min-height:32px;}
+.note-input::placeholder{color:var(--text3);}
+
 @media(max-width:900px){
   :root{--sidebar:0px;}
   .sidebar{transform:translateX(-220px);width:220px;}
@@ -256,7 +301,7 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
 }
 </style>
 </head>
-<body>
+<body data-theme="dark" data-layout="sidebar" data-density="normal">
 
 <!-- LOGIN -->
 <div id="login-screen">
@@ -306,6 +351,7 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
           <div class="email" id="user-email-display">—</div>
         </div>
       </div>
+      <button class="settings-gear" onclick="openSettings()" title="Paramètres">⚙</button>
       <button class="logout-btn" onclick="doLogout()">↪ Déconnexion</button>
     </div>
   </aside>
@@ -324,11 +370,15 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
             Export PDF
           </button>
+          <button class="btn btn-primary btn-sm" onclick="exportBilanPDF()" title="Bilan annuel complet (PDF)">
+            📊 Bilan annuel
+          </button>
         </div>
       </div>
 
       <div class="dash-filters" id="dash-filters"></div>
       <div class="kpi-grid" id="kpi-grid"></div>
+      <div id="note-area-wrap"></div>
 
       <div class="charts-row">
         <div class="chart-card"><div class="chart-title">Bénéfice mensuel</div><canvas id="chartBar" height="95"></canvas></div>
@@ -356,6 +406,7 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
         </button>
       </div>
 
+      <div id="dormant-alert"></div>
       <div class="stock-header-bar" id="stock-header-bar"></div>
 
       <div class="stock-toolbar">
@@ -382,6 +433,40 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
 
   </main>
 </div>
+</div>
+
+<!-- MODAL SETTINGS -->
+<div class="modal-overlay" id="modal-settings" onclick="if(event.target===this)closeModal('modal-settings')">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header"><div class="modal-title">⚙ Paramètres</div><div class="modal-sub">Personnalisation de l'interface</div></div>
+    <div class="modal-body">
+      <div class="settings-section">
+        <div class="settings-label">Thème couleur</div>
+        <div class="theme-swatches">
+          <div class="swatch" data-theme-val="dark" style="background:#6c8fff" title="Dark" onclick="setSetting('theme','dark')"></div>
+          <div class="swatch" data-theme-val="beige" style="background:#b07d3a" title="Beige" onclick="setSetting('theme','beige')"></div>
+          <div class="swatch" data-theme-val="forest" style="background:#5cb85c" title="Forêt" onclick="setSetting('theme','forest')"></div>
+          <div class="swatch" data-theme-val="indigo" style="background:#818cf8" title="Indigo" onclick="setSetting('theme','indigo')"></div>
+          <div class="swatch" data-theme-val="coral" style="background:#e05a40" title="Corail" onclick="setSetting('theme','coral')"></div>
+        </div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-label">Disposition</div>
+        <div class="layout-btns">
+          <button class="layout-btn active" data-layout-val="sidebar" onclick="setSetting('layout','sidebar')">☰ Sidebar</button>
+          <button class="layout-btn" data-layout-val="topnav" onclick="setSetting('layout','topnav')">▬ Navigation haut</button>
+        </div>
+      </div>
+      <div class="settings-section" style="margin-bottom:0">
+        <div class="settings-label">Densité KPIs</div>
+        <div class="density-btns">
+          <button class="layout-btn active" data-density-val="normal" onclick="setSetting('density','normal')">Normal</button>
+          <button class="layout-btn" data-density-val="compact" onclick="setSetting('density','compact')">Compact</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-ghost btn-full" onclick="closeModal('modal-settings')">Fermer</button></div>
+  </div>
 </div>
 
 <!-- TOAST CONTAINER -->
@@ -589,6 +674,64 @@ const MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','A
 const CAT_LABELS = {sneakers:'Sneakers',vetements:'Vêtements',equitation:'Équitation',mixed:'Mix'};
 const CAT_COLORS = {sneakers:'rgba(108,143,255,.7)',vetements:'rgba(62,207,142,.7)',equitation:'rgba(167,139,250,.7)',mixed:'rgba(251,146,60,.7)'};
 
+/* ─── SETTINGS ─── */
+const THEME_COLORS={dark:'%236c8fff',beige:'%23b07d3a',forest:'%235cb85c',indigo:'%23818cf8',coral:'%23e05a40'};
+function loadSettings(){
+  const t=localStorage.getItem('rt_theme')||'dark';
+  const l=localStorage.getItem('rt_layout')||'sidebar';
+  const d=localStorage.getItem('rt_density')||'normal';
+  document.body.setAttribute('data-theme',t);
+  document.body.setAttribute('data-layout',l);
+  document.body.setAttribute('data-density',d);
+  updateFavicon(t);
+}
+function setSetting(key,val){
+  localStorage.setItem('rt_'+key,val);
+  document.body.setAttribute('data-'+key,val);
+  if(key==='theme')updateFavicon(val);
+  // update active states in settings modal
+  document.querySelectorAll('[data-'+key+'-val]').forEach(el=>{
+    el.classList.toggle('active',el.getAttribute('data-'+key+'-val')===val);
+  });
+}
+function updateFavicon(theme){
+  const c=THEME_COLORS[theme]||THEME_COLORS.dark;
+  document.getElementById('fav').href=`data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='${c}'/%3E%3Ctext x='16' y='13' font-family='Arial' font-weight='bold' font-size='12' fill='white' text-anchor='middle' dominant-baseline='middle'%3ERT%3C/text%3E%3Ctext x='16' y='25' font-family='Arial' font-size='7' fill='rgba(255,255,255,0.8)' text-anchor='middle'%3ETBDV%3C/text%3E%3C/svg%3E`;
+}
+function openSettings(){
+  const t=localStorage.getItem('rt_theme')||'dark';
+  const l=localStorage.getItem('rt_layout')||'sidebar';
+  const d=localStorage.getItem('rt_density')||'normal';
+  document.querySelectorAll('[data-theme-val]').forEach(el=>el.classList.toggle('active',el.getAttribute('data-theme-val')===t));
+  document.querySelectorAll('[data-layout-val]').forEach(el=>el.classList.toggle('active',el.getAttribute('data-layout-val')===l));
+  document.querySelectorAll('[data-density-val]').forEach(el=>el.classList.toggle('active',el.getAttribute('data-density-val')===d));
+  document.getElementById('modal-settings').classList.add('show');
+}
+
+/* ─── NOTES PAR MOIS ─── */
+function noteKey(year,month){return `note_${year}_${month}`;}
+function renderNoteArea(){
+  const wrap=document.getElementById('note-area-wrap');
+  if(!wrap)return;
+  if(currentYear==='all'||currentMonth==='all'){wrap.innerHTML='';return;}
+  const key=noteKey(currentYear,currentMonth);
+  const val=localStorage.getItem(key)||'';
+  wrap.innerHTML=`<div class="note-area"><div class="note-label">📝 Note — ${currentMonth} ${currentYear}</div><textarea class="note-input" id="note-input" placeholder="Ajouter une note sur ce mois…" oninput="localStorage.setItem('${key}',this.value)">${val}</textarea></div>`;
+}
+
+/* ─── PROJECTION FIN D'ANNÉE ─── */
+function projectEndOfYear(yearData,year){
+  const now=new Date();
+  if(year!==now.getFullYear())return null;
+  const mIdx=now.getMonth();
+  const elapsed=yearData.filter(r=>MONTHS_FR.indexOf(r.m)<=mIdx);
+  if(!elapsed.length)return null;
+  const totalNow=elapsed.reduce((s,r)=>s+r.benef,0);
+  const avg=totalNow/elapsed.length;
+  const remaining=11-mIdx;
+  return Math.round(totalNow+avg*remaining);
+}
+
 let currentUser=null, articles=[], ventes=[], liveData=[];
 let currentYear='all', currentMonth='all';
 let stockStatus='en_stock', stockCat='all';
@@ -618,6 +761,7 @@ async function doLogout(){
   document.getElementById('login-screen').style.display='flex';
 }
 async function initApp(){
+  loadSettings();
   document.getElementById('login-screen').style.display='none';
   document.getElementById('app-screen').style.display='block';
   document.getElementById('user-email-display').textContent=currentUser.email;
@@ -864,6 +1008,23 @@ function renderDashboard(){
     </div>`:''}
   `;
 
+  // Projection fin d'année (année courante uniquement)
+  let projKpi='';
+  if(currentYear!=='all'&&currentMonth==='all'){
+    const proj=projectEndOfYear(d,currentYear);
+    if(proj){projKpi=`<div class="kpi blue" style="background:linear-gradient(135deg,var(--accent-dim),transparent)">
+      <div class="kpi-label">🔮 Projection 2026</div>
+      <div class="kpi-value blue">${fmt(proj)}</div>
+      <div class="kpi-sub" style="margin-top:5px">À ce rythme en déc.</div>
+    </div>`;}
+  }
+  // Injecter projection dans la grille
+  if(projKpi){
+    const grid=document.getElementById('kpi-grid');
+    grid.insertAdjacentHTML('beforeend',projKpi);
+  }
+
+  renderNoteArea();
   renderBarChart(d);
   renderAnnualChart();
   renderCumulChart();
@@ -930,6 +1091,35 @@ function renderCatCards(d){
 }
 
 /* ─── STOCK ─── */
+/* ─── BÉNÉF POTENTIEL PAR CATÉGORIE ─── */
+function avgMarginByCat(){
+  const map={};
+  ventes.forEach(v=>{
+    if(!v.articles)return;
+    const cat=v.articles.categorie||'equitation';
+    const pv=v.prix_vente||0,pa=v.articles.prix_achat||0;
+    if(pv<=0)return;
+    const m=(pv-pa)/pv;
+    if(!map[cat]){map[cat]={sum:0,n:0};}
+    map[cat].sum+=m;map[cat].n++;
+  });
+  const res={};
+  Object.entries(map).forEach(([c,d])=>{res[c]=d.n>0?(d.sum/d.n)*0.8:0.45;});
+  return res;
+}
+function estimatedBenef(article,margins){
+  const m=margins[article.categorie]||0.45;
+  return Math.round(article.prix_achat*m/(1-m));
+}
+
+/* ─── DORMANT ALERT ─── */
+function renderDormantAlert(){
+  const el=document.getElementById('dormant-alert');
+  if(!el)return;
+  const dormant=articles.filter(a=>a.statut==='en_stock'&&daysSince(a.date_achat)>60);
+  el.innerHTML=dormant.length?`<div class="dormant-alert">⚠ ${dormant.length} article${dormant.length>1?'s':''} en stock depuis plus de 60 jours</div>`:'';
+}
+
 function renderStockHeaderBar(){
   const enStock=articles.filter(a=>a.statut==='en_stock');
   const vendus=articles.filter(a=>a.statut==='vendu');
@@ -948,7 +1138,7 @@ function renderStockHeaderBar(){
   `;
 }
 function renderStockFilters(){
-  const statuses=[{v:'en_stock',l:'En stock'},{v:'vendu',l:'Vendus'},{v:'all',l:'Tous'}];
+  const statuses=[{v:'en_stock',l:'En stock'},{v:'reserve',l:'Réservé'},{v:'vendu',l:'Vendus'},{v:'all',l:'Tous'}];
   const cats=[{v:'all',l:'Toutes'},{v:'equitation',l:'Équitation'},{v:'vetements',l:'Vêtements'},{v:'sneakers',l:'Sneakers'}];
   let h=statuses.map(s=>`<button class="filter-pill${stockStatus===s.v?' active':''}" onclick="setStockStatus('${s.v}')">${s.l}</button>`).join('');
   h+=`<div class="pill-sep"></div>`;
@@ -958,6 +1148,7 @@ function renderStockFilters(){
 function setStockStatus(v){stockStatus=v;renderStock();}
 function setStockCat(v){stockCat=v;renderStock();}
 function renderStock(){
+  renderDormantAlert();
   renderStockHeaderBar();
   renderStockFilters();
   const search=(document.getElementById('search-input')?.value||'').toLowerCase();
@@ -979,9 +1170,12 @@ function renderStock(){
   });
   document.getElementById('stock-count-label').textContent=`${list.length} article${list.length>1?'s':''}`;
   const isVendu=stockStatus==='vendu';
+  const margins=avgMarginByCat();
   document.getElementById('stock-thead').innerHTML=isVendu
     ?'<th>Article</th><th>Catégorie</th><th>Achat</th><th>Vente</th><th>Bénéfice</th><th>PayThib</th><th></th>'
-    :'<th>Article</th><th>Catégorie</th><th>Prix achat</th><th>Ancienneté</th><th></th>';
+    :(stockStatus==='en_stock'||stockStatus==='reserve'
+      ?'<th>Article</th><th>Catégorie</th><th>Prix achat</th><th>Bénéf. estimé</th><th>Ancienneté</th><th></th>'
+      :'<th>Article</th><th>Catégorie</th><th>Prix achat</th><th>Ancienneté</th><th></th>');
   if(!list.length){
     document.getElementById('stock-tbody').innerHTML=`<tr><td colspan="7"><div class="empty-state"><div class="empty-icon">📦</div><div class="empty-title">${stockStatus==='en_stock'?'Stock vide':'Aucune vente'}</div><div class="empty-sub">${stockStatus==='en_stock'?'Clique sur "Nouvel article" pour commencer.':'Les ventes apparaîtront ici.'}</div></div></td></tr>`;
     return;
@@ -1003,10 +1197,13 @@ function renderStock(){
         <td><div class="actions-cell"><button class="btn-icon edit" title="Modifier" onclick="openEditModal('${a.id}')">✎</button><button class="btn-icon danger" title="Supprimer" onclick="openDelModal('${a.id}')">✕</button></div></td>
       </tr>`;
     }else{
+      const eb=estimatedBenef(a,margins);
+      const showBenefCol=stockStatus==='en_stock'||stockStatus==='reserve';
       h+=`<tr>
         <td><div class="td-main">${dotBadge(days)}${a.nom}${a.taille?` <span style="color:var(--text3);font-weight:400">· ${a.taille}</span>`:''}</div>${a.marque||a.sku?`<div class="td-sub">${[a.marque,a.sku?'SKU: '+a.sku:''].filter(Boolean).join(' · ')}</div>`:''}</td>
-        <td><span class="badge badge-${a.categorie||'equitation'}">${CAT_LABELS[a.categorie]||'—'}</span></td>
+        <td><span class="badge badge-${a.categorie||'equitation'}">${CAT_LABELS[a.categorie]||'—'}</span>${a.statut==='reserve'?' <span class="badge badge-reserve" style="margin-left:4px">Réservé</span>':''}</td>
         <td class="td-amount">${fmt(a.prix_achat)}</td>
+        ${showBenefCol?`<td class="td-muted" style="color:var(--green)">+${fmt(eb)}</td>`:''}
         <td class="td-muted">${days!==null?days+' jours':'—'}</td>
         <td><div class="actions-cell"><button class="btn-icon sell-icon" title="Vendre" onclick="openSellModal('${a.id}')">$</button><button class="btn-icon edit" title="Modifier" onclick="openEditModal('${a.id}')">✎</button><button class="btn-icon danger" title="Supprimer" onclick="openDelModal('${a.id}')">✕</button></div></td>
       </tr>`;
@@ -1227,6 +1424,135 @@ function exportPDF(){
   doc.save(fname);
   showToast('PDF exporté ✓');
 }
+
+/* ─── BILAN PDF ANNUEL ─── */
+function exportBilanPDF(){
+  const{jsPDF}=window.jspdf;
+  const doc=new jsPDF({orientation:'p',unit:'mm',format:'a4'});
+  const year=currentYear!=='all'?currentYear:new Date().getFullYear();
+  const d=allData().filter(r=>r.y===year);
+  const tB=d.reduce((s,r)=>s+r.benef,0);
+  const tCA=d.reduce((s,r)=>s+r.ca,0);
+  const tThib=d.reduce((s,r)=>s+r.thib,0);
+  const tMaman=d.reduce((s,r)=>s+r.maman,0);
+  const tCaThib=d.reduce((s,r)=>s+(r.ca_thib||0),0);
+  const tCaMaman=d.reduce((s,r)=>s+(r.ca_maman||0),0);
+  const tPayThib=d.reduce((s,r)=>s+(r.payThib||0),0);
+  const marge=tCA>0?Math.round(tB/tCA*100):0;
+  const best=[...d].filter(r=>r.benef>0).sort((a,b)=>b.benef-a.benef)[0];
+
+  // ── PAGE 1: COVER ──
+  doc.setFillColor(20,25,40);doc.rect(0,0,210,297,'F');
+  doc.setFillColor(108,143,255);doc.rect(0,0,210,5,'F');
+  doc.setTextColor(108,143,255);doc.setFontSize(11);doc.setFont(undefined,'bold');
+  doc.text('TBDV RESELL',15,22);
+  doc.setTextColor(255,255,255);doc.setFontSize(38);doc.setFont(undefined,'bold');
+  doc.text('Bilan '+year,15,45);
+  doc.setFontSize(13);doc.setFont(undefined,'normal');doc.setTextColor(140,160,200);
+  doc.text('Rapport annuel · Micro-entreprise',15,56);
+  // Big number
+  doc.setFillColor(30,35,55);doc.roundedRect(15,70,180,45,4,4,'F');
+  doc.setTextColor(62,207,142);doc.setFontSize(9);doc.setFont(undefined,'bold');doc.text('BÉNÉFICE TOTAL',25,84);
+  doc.setFontSize(32);doc.text(fmt(tB),25,100);
+  doc.setTextColor(140,160,200);doc.setFontSize(10);doc.setFont(undefined,'normal');
+  doc.text('CA total : '+fmt(tCA)+'  ·  Marge : '+marge+'%',25,112);
+  // KPI grid
+  const kpis2=[['CA Thibault',fmt(tCaThib),'108,143,255'],['CA Maman',fmt(tCaMaman),'167,139,250'],['Bénéf. Thibault',fmt(tThib),'62,207,142'],['Bénéf. Maman',fmt(tMaman),'167,139,250'],['PayThib',fmt(tPayThib),'108,143,255'],best?['Meilleur mois',best.m+' — '+fmt(best.benef),'246,195,66']:null].filter(Boolean);
+  let gx=15,gy=128;
+  kpis2.forEach((k,i)=>{
+    const col=i%2===0?15:112;if(i>0&&i%2===0)gy+=25;
+    const rgb=k[2].split(',').map(Number);
+    doc.setFillColor(30,35,55);doc.roundedRect(col,gy,90,20,3,3,'F');
+    doc.setFillColor(...rgb);doc.roundedRect(col,gy,3,20,1,1,'F');
+    doc.setTextColor(140,160,200);doc.setFontSize(8);doc.setFont(undefined,'normal');doc.text(k[0],col+7,gy+8);
+    doc.setTextColor(255,255,255);doc.setFontSize(11);doc.setFont(undefined,'bold');doc.text(k[1],col+7,gy+16);
+  });
+  doc.setTextColor(60,70,90);doc.setFontSize(9);doc.setFont(undefined,'normal');
+  doc.text('ResellThib · TBDV · '+new Date().toLocaleDateString('fr-FR'),15,288);
+
+  // ── PAGE 2: ÉVOLUTION MENSUELLE ──
+  doc.addPage();
+  doc.setFillColor(248,249,252);doc.rect(0,0,210,297,'F');
+  doc.setFillColor(108,143,255);doc.rect(0,0,210,1,'F');
+  doc.setTextColor(20,25,40);doc.setFontSize(18);doc.setFont(undefined,'bold');doc.text('Évolution mensuelle '+year,15,20);
+  doc.setTextColor(120,130,150);doc.setFontSize(10);doc.setFont(undefined,'normal');doc.text('Bénéfice par mois',15,28);
+  // Bar chart
+  const chartX=15,chartY=38,chartW=180,chartH=80;
+  const monthData=MONTHS_FR.map(m=>{const row=d.find(r=>r.m===m);return row?row.benef:0;});
+  const maxV=Math.max(...monthData,1);
+  const barW=chartW/12*0.65,gap=chartW/12;
+  monthData.forEach((v,i)=>{
+    const bh=v>0?(v/maxV)*chartH:0;
+    const bx=chartX+i*gap+(gap-barW)/2;
+    const by=chartY+chartH-bh;
+    const pct=(i/11);
+    const r=Math.round(62+pct*(108-62)),g=Math.round(207+pct*(143-207)),b2=Math.round(142+pct*(255-142));
+    doc.setFillColor(r,g,b2);
+    if(bh>0)doc.roundedRect(bx,by,barW,bh,1,1,'F');
+    doc.setTextColor(120,130,150);doc.setFontSize(6.5);
+    doc.text(MONTHS_FR[i].substring(0,3),bx+barW/2,chartY+chartH+7,{align:'center'});
+    if(v>0&&bh>10){doc.setTextColor(60,70,90);doc.setFontSize(6);doc.text(Math.round(v)+'€',bx+barW/2,by-2,{align:'center'});}
+  });
+  // Baseline
+  doc.setDrawColor(200,205,215);doc.setLineWidth(0.3);doc.line(chartX,chartY+chartH,chartX+chartW,chartY+chartH);
+
+  // Tableau récap mensuel
+  let ty=135;
+  doc.setFillColor(240,243,250);doc.rect(15,ty-5,180,8,'F');
+  doc.setTextColor(80,90,110);doc.setFontSize(8);doc.setFont(undefined,'bold');
+  doc.text('Mois',20,ty);doc.text('CA',80,ty);doc.text('Bénéfice',110,ty);doc.text('Thib',145,ty);doc.text('Maman',170,ty);
+  ty+=6;doc.setFont(undefined,'normal');
+  MONTHS_FR.forEach((m,i)=>{
+    const row=d.find(r=>r.m===m);if(!row||row.benef===0)return;
+    if(ty>275){doc.addPage();ty=20;}
+    if(i%2===0){doc.setFillColor(248,249,252);doc.rect(15,ty-4,180,7,'F');}
+    doc.setTextColor(30,40,55);doc.setFontSize(8.5);
+    doc.text(m,20,ty);doc.text(fmt(row.ca),80,ty);
+    doc.setTextColor(46,125,50);doc.text(fmt(row.benef),110,ty);
+    doc.setTextColor(30,40,55);doc.text(fmt(row.thib),145,ty);
+    doc.setTextColor(row.maman>0?100:170,row.maman>0?50:170,row.maman>0?150:170);doc.text(fmt(row.maman),170,ty);
+    ty+=7;
+  });
+
+  // ── PAGE 3: THIBAULT / MAMAN ──
+  if(tMaman>0){
+    doc.addPage();
+    doc.setFillColor(248,249,252);doc.rect(0,0,210,297,'F');
+    doc.setFillColor(108,143,255);doc.rect(0,0,210,1,'F');
+    doc.setTextColor(20,25,40);doc.setFontSize(18);doc.setFont(undefined,'bold');doc.text('Thibault vs Maman',15,20);
+    // Split bar
+    const barTotCA=tCaThib+tCaMaman;
+    const thibPct=barTotCA>0?tCaThib/barTotCA:1;
+    doc.setFillColor(62,207,142);doc.roundedRect(15,35,Math.round(180*thibPct),12,3,3,'F');
+    doc.setFillColor(167,139,250);doc.roundedRect(15+Math.round(180*thibPct),35,Math.round(180*(1-thibPct)),12,3,3,'F');
+    doc.setTextColor(255,255,255);doc.setFontSize(8);doc.setFont(undefined,'bold');
+    if(thibPct>0.15)doc.text('Thibault '+Math.round(thibPct*100)+'%',18,43);
+    if(1-thibPct>0.1)doc.text('Maman '+Math.round((1-thibPct)*100)+'%',15+Math.round(180*thibPct)+3,43);
+    const rows2=[['CA Thibault',fmt(tCaThib),'62,207,142'],['CA Maman',fmt(tCaMaman),'167,139,250'],['Bénéf. Thibault',fmt(tThib),'62,207,142'],['Bénéf. Maman',fmt(tMaman),'167,139,250'],['PayThib (à reverser)',fmt(tPayThib),'108,143,255']];
+    let ry=62;
+    rows2.forEach(([l,v,rgb])=>{
+      const c=rgb.split(',').map(Number);
+      doc.setFillColor(...c);doc.roundedRect(15,ry,3,9,1,1,'F');
+      doc.setTextColor(80,90,110);doc.setFontSize(9);doc.setFont(undefined,'normal');doc.text(l,22,ry+6.5);
+      doc.setTextColor(20,30,50);doc.setFont(undefined,'bold');doc.text(v,150,ry+6.5);
+      ry+=14;
+    });
+  }
+
+  const fname=`ResellThib_Bilan_${year}.pdf`;
+  doc.save(fname);
+  showToast('Bilan '+year+' exporté ✓');
+}
+
+/* ─── RACCOURCIS CLAVIER ─── */
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT')return;
+  if(e.key==='Escape'){document.querySelectorAll('.modal-overlay.show').forEach(m=>m.classList.remove('show'));}
+  if((e.key==='n'||e.key==='N')&&document.getElementById('page-stock').classList.contains('active')){openAddModal();}
+  if((e.key==='p'||e.key==='P')&&document.getElementById('page-dashboard').classList.contains('active')){
+    currentYear!=='all'&&currentMonth==='all'?exportBilanPDF():exportPDF();
+  }
+});
 
 checkAuth();
 </script>
