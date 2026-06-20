@@ -8,6 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
@@ -421,6 +422,9 @@ tbody tr:hover{background:rgba(255,255,255,.018);}
           </button>
           <button class="btn btn-primary btn-sm" onclick="exportBilanPDF()" title="Bilan annuel complet (PDF)">
             📊 Bilan annuel
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="exportPPTX()" style="background:var(--purple)" title="PowerPoint adaptatif — vue actuelle">
+            🎞 PowerPoint
           </button>
         </div>
       </div>
@@ -1576,6 +1580,175 @@ function exportPDF(){
   const fname=`ResellThib_${period.replace(/ /g,'_')}_${new Date().toISOString().split('T')[0]}.pdf`;
   doc.save(fname);
   showToast('PDF exporté ✓');
+}
+
+/* ─── EXPORT POWERPOINT ─── */
+const PP={BG:'0A0C10',BG2:'111318',BG3:'1E2128',BRD:'252830',TX:'EEF0F6',TX2:'8890A4',TX3:'555E72',AC:'6C8FFF',GR:'3ECF8E',PU:'A78BFA',GO:'F6C342',OR:'FB923C',RE:'F56565'};
+const CO={showTitle:false,showLegend:false,plotAreaBkgdColor:'0A0C10',chartAreaBkgdColor:'0A0C10',valAxisLabelColor:'555E72',catAxisLabelColor:'555E72',valGridLine:{color:'1E2128',style:'solid'}};
+function ppBg(sl){sl.addShape('rect',{x:0,y:0,w:'100%',h:'100%',fill:{color:PP.BG},line:{color:PP.BG}});sl.addShape('rect',{x:0,y:0,w:'100%',h:0.07,fill:{color:PP.AC},line:{color:PP.AC}});sl.addText('TBDV RESELL',{x:0.4,y:0.17,w:4,h:0.28,fontSize:8.5,color:PP.AC,bold:true,fontFace:'Calibri'});}
+function ppH(sl,t){sl.addText(t,{x:0.4,y:0.55,w:12.5,h:0.68,fontSize:26,color:PP.TX,bold:true,fontFace:'Calibri'});sl.addShape('rect',{x:0.4,y:1.18,w:1.2,h:0.05,fill:{color:PP.AC},line:{color:PP.AC}});}
+function ppCard(sl,x,y,w,h,label,value,color){sl.addShape('rect',{x,y,w,h,fill:{color:PP.BG2},line:{color:PP.BRD,size:0.5}});sl.addShape('rect',{x,y,w:0.06,h,fill:{color},line:{color}});sl.addText(label.toUpperCase(),{x:x+0.2,y:y+0.18,w:w-0.3,h:0.28,fontSize:8,color:PP.TX2,bold:true,fontFace:'Calibri'});sl.addText(value,{x:x+0.2,y:y+0.48,w:w-0.3,h:0.8,fontSize:20,color,bold:true,fontFace:'Calibri'});}
+
+async function exportPPTX(){
+  if(typeof PptxGenJS==='undefined'){showToast('Librairie non chargée','red');return;}
+  showToast('Génération du PowerPoint…');
+  const pptx=new PptxGenJS();
+  pptx.layout='LAYOUT_16x9';pptx.author='ResellThib · TBDV';
+  const d=filtered();
+  const mode=currentYear==='all'?'all':currentMonth!=='all'?'month':'year';
+  try{
+    if(mode==='all')ppAll(pptx,d);
+    else if(mode==='year')ppYear(pptx,d);
+    else ppMonth(pptx,d);
+    let fn='ResellThib'+(mode==='year'?'_'+currentYear:mode==='month'?'_'+currentMonth+'_'+currentYear:'_2021-2026');
+    await pptx.writeFile({fileName:fn+'.pptx'});
+    showToast('PowerPoint exporté ✓');
+  }catch(e){console.error(e);showToast('Erreur export','red');}
+}
+
+function ppAll(pptx,d){
+  const all=allData(),yrs=[...new Set(all.map(r=>r.y))].sort();
+  const tB=Math.round(all.reduce((s,r)=>s+r.benef,0)),tCA=Math.round(all.reduce((s,r)=>s+r.ca,0));
+  const marge=tCA>0?Math.round(tB/tCA*100):0;
+  const best=[...all].filter(r=>r.benef>0).sort((a,b)=>b.benef-a.benef)[0];
+  // Slide 1 – Cover
+  const s1=pptx.addSlide();ppBg(s1);
+  s1.addText('2021 — 2026',{x:0.4,y:1.1,w:10,h:0.5,fontSize:15,color:PP.TX2,fontFace:'Calibri'});
+  s1.addText('ResellThib',{x:0.4,y:1.6,w:12.5,h:1.6,fontSize:72,color:PP.TX,bold:true,fontFace:'Calibri'});
+  s1.addText('Bilan complet · Micro-entreprise TBDV',{x:0.4,y:3.25,w:10,h:0.5,fontSize:14,color:PP.TX2,fontFace:'Calibri'});
+  s1.addShape('rect',{x:0.4,y:4.1,w:6,h:2.7,fill:{color:PP.BG2},line:{color:PP.BRD,size:0.5}});
+  s1.addShape('rect',{x:0.4,y:4.1,w:6,h:0.06,fill:{color:PP.GR},line:{color:PP.GR}});
+  s1.addText('BÉNÉFICE TOTAL',{x:0.6,y:4.26,w:5.5,h:0.3,fontSize:9,color:PP.TX2,bold:true,fontFace:'Calibri'});
+  s1.addText(fmt(tB),{x:0.6,y:4.6,w:5.5,h:1,fontSize:40,color:PP.GR,bold:true,fontFace:'Calibri'});
+  s1.addText('Depuis sept. 2021 · '+yrs.length+' années',{x:0.6,y:5.6,w:5.5,h:0.4,fontSize:11,color:PP.TX3,fontFace:'Calibri'});
+  ppCard(s1,6.8,4.1,3.0,1.3,'CA Total',fmt(tCA),PP.AC);
+  ppCard(s1,10.1,4.1,3.1,1.3,'Marge moy.',marge+'%',PP.GO);
+  s1.addShape('rect',{x:6.8,y:5.6,w:6.5,h:1.2,fill:{color:PP.BG2},line:{color:PP.BRD,size:0.5}});
+  if(best)s1.addText('⭐  Meilleur mois : '+best.m+' '+best.y+' — '+fmt(best.benef),{x:7.0,y:5.75,w:6.1,h:0.8,fontSize:14,color:PP.TX,bold:true,fontFace:'Calibri'});
+  // Slide 2 – Chiffres clés
+  const s2=pptx.addSlide();ppBg(s2);ppH(s2,'Chiffres clés · 2021–2026');
+  const cats=['sneakers','vetements','equitation','mixed'];
+  const bestCat=cats.map(c=>({c,b:all.filter(r=>r.cat===c).reduce((s,r)=>s+r.benef,0)})).sort((a,b)=>b.b-a.b)[0];
+  [['CA Total',fmt(tCA),PP.AC],['Bénéfice total',fmt(tB),PP.GR],['Marge moy.',marge+'%',PP.GO],['Meilleur mois',best?best.m+' '+best.y:'—',PP.PU],['Années actives',yrs.length+' ans',PP.OR],['Top catégorie',bestCat?CAT_LABELS[bestCat.c]:'—',PP.GR]].forEach(([l,v,c],i)=>{ppCard(s2,0.4+(i%3)*4.35,1.5+Math.floor(i/3)*2.5,4.05,2.2,l,v,c);});
+  // Slide 3 – Bar chart annuel
+  const s3=pptx.addSlide();ppBg(s3);ppH(s3,'Évolution annuelle CA & Bénéfice');
+  s3.addChart(pptx.ChartType.bar,[{name:'CA',labels:yrs.map(String),values:yrs.map(y=>Math.round(all.filter(r=>r.y===y).reduce((s,r)=>s+r.ca,0)))},{name:'Bénéfice',labels:yrs.map(String),values:yrs.map(y=>Math.round(all.filter(r=>r.y===y).reduce((s,r)=>s+r.benef,0)))}],{...CO,x:0.4,y:1.4,w:12.5,h:5.6,chartColors:[PP.AC,PP.GR],showLegend:true,legendColor:PP.TX2,legendFontSize:11});
+  // Slide 4 – Camembert catégories
+  const s4=pptx.addSlide();ppBg(s4);ppH(s4,'Répartition par catégorie');
+  const aCats=cats.filter(c=>all.some(r=>r.cat===c&&r.benef>0));
+  s4.addChart(pptx.ChartType.pie,[{name:'Bénéfice',labels:aCats.map(c=>CAT_LABELS[c]),values:aCats.map(c=>Math.round(all.filter(r=>r.cat===c).reduce((s,r)=>s+r.benef,0)))}],{...CO,x:1.5,y:1.3,w:10,h:5.7,chartColors:[PP.AC,PP.GR,PP.PU,PP.OR],showLegend:true,legendPos:'r',legendColor:PP.TX2,legendFontSize:13,showPercent:true,dataLabelColor:PP.TX,dataLabelFontSize:11});
+}
+
+function ppYear(pptx,d){
+  const year=currentYear,prevD=allData().filter(r=>r.y===year-1);
+  const tB=Math.round(d.reduce((s,r)=>s+r.benef,0)),tCA=Math.round(d.reduce((s,r)=>s+r.ca,0));
+  const tThib=Math.round(d.reduce((s,r)=>s+r.thib,0)),tMaman=Math.round(d.reduce((s,r)=>s+r.maman,0));
+  const tCaThib=Math.round(d.reduce((s,r)=>s+(r.ca_thib||0),0)),tCaMaman=Math.round(d.reduce((s,r)=>s+(r.ca_maman||0),0));
+  const tPayThib=Math.round(d.reduce((s,r)=>s+(r.payThib||0),0));
+  const marge=tCA>0?Math.round(tB/tCA*100):0;
+  const prevB=Math.round(prevD.reduce((s,r)=>s+r.benef,0));
+  const growth=prevB>0?Math.round((tB-prevB)/prevB*100):null;
+  const best=[...d].filter(r=>r.benef>0).sort((a,b)=>b.benef-a.benef)[0];
+  // Slide 1 – Cover
+  const s1=pptx.addSlide();ppBg(s1);
+  s1.addText('Bilan annuel',{x:0.4,y:1.1,w:10,h:0.5,fontSize:15,color:PP.TX2,fontFace:'Calibri'});
+  s1.addText(String(year),{x:0.4,y:1.6,w:12.5,h:1.6,fontSize:80,color:PP.TX,bold:true,fontFace:'Calibri'});
+  s1.addShape('rect',{x:0.4,y:3.6,w:6,h:2.8,fill:{color:PP.BG2},line:{color:PP.BRD,size:0.5}});
+  s1.addShape('rect',{x:0.4,y:3.6,w:6,h:0.06,fill:{color:PP.GR},line:{color:PP.GR}});
+  s1.addText('BÉNÉFICE',{x:0.6,y:3.76,w:5.5,h:0.3,fontSize:9,color:PP.TX2,bold:true,fontFace:'Calibri'});
+  s1.addText(fmt(tB),{x:0.6,y:4.1,w:5.5,h:1,fontSize:42,color:PP.GR,bold:true,fontFace:'Calibri'});
+  if(growth!==null)s1.addText((growth>=0?'▲ +':'▼ ')+Math.abs(growth)+'% vs '+(year-1),{x:0.6,y:5.15,w:5.5,h:0.45,fontSize:13,color:growth>=0?PP.GR:PP.RE,bold:true,fontFace:'Calibri'});
+  ppCard(s1,6.8,3.6,3.0,1.35,'CA',fmt(tCA),PP.AC);
+  ppCard(s1,10.1,3.6,3.1,1.35,'Marge',marge+'%',PP.GO);
+  ppCard(s1,6.8,5.15,3.0,1.25,'Bénéf. Thib',fmt(tThib),PP.GR);
+  ppCard(s1,10.1,5.15,3.1,1.25,'Bénéf. Maman',fmt(tMaman),PP.PU);
+  // Slide 2 – Chiffres clés
+  const s2=pptx.addSlide();ppBg(s2);ppH(s2,'Chiffres clés '+year);
+  [['Bénéfice',fmt(tB),PP.GR],['CA',fmt(tCA),PP.AC],['Marge',marge+'%',PP.GO],['CA Thibault',fmt(tCaThib),PP.AC],['CA Maman',fmt(tCaMaman),PP.PU],['PayThib',fmt(tPayThib),PP.AC],best?['Meilleur mois',best.m+' — '+fmt(best.benef),PP.GO]:null].filter(Boolean).slice(0,6).forEach(([l,v,c],i)=>{ppCard(s2,0.4+(i%3)*4.35,1.5+Math.floor(i/3)*2.5,4.05,2.2,l,v,c);});
+  // Slide 3 – Évolution mensuelle
+  const s3=pptx.addSlide();ppBg(s3);ppH(s3,'Évolution mensuelle '+year);
+  const bd=[{name:'Bénéfice '+year,labels:d.map(r=>r.m.substring(0,3)),values:d.map(r=>Math.round(r.benef))}];
+  if(prevD.length)bd.push({name:'Bénéfice '+(year-1),labels:prevD.map(r=>r.m.substring(0,3)),values:prevD.map(r=>Math.round(r.benef))});
+  s3.addChart(pptx.ChartType.bar,bd,{...CO,x:0.4,y:1.4,w:12.5,h:5.6,chartColors:[PP.GR,PP.AC],showLegend:bd.length>1,legendColor:PP.TX2,legendFontSize:11});
+  // Slide 4 – Thibault vs Maman
+  if(tMaman>0){
+    const s4=pptx.addSlide();ppBg(s4);ppH(s4,'Thibault vs Maman — '+year);
+    const rows=d.filter(r=>r.thib>0||r.maman>0);
+    s4.addChart(pptx.ChartType.bar,[{name:'Thibault',labels:rows.map(r=>r.m.substring(0,3)),values:rows.map(r=>Math.round(r.thib))},{name:'Maman',labels:rows.map(r=>r.m.substring(0,3)),values:rows.map(r=>Math.round(r.maman))}],{...CO,barGrouping:'stacked',x:0.4,y:1.4,w:12.5,h:4.5,chartColors:[PP.GR,PP.PU],showLegend:true,legendColor:PP.TX2,legendFontSize:11});
+    s4.addShape('rect',{x:0.4,y:6.15,w:12.5,h:1.0,fill:{color:PP.BG2},line:{color:PP.BRD,size:0.5}});
+    s4.addShape('rect',{x:0.4,y:6.15,w:12.5,h:0.06,fill:{color:PP.AC},line:{color:PP.AC}});
+    s4.addText('PayThib total — Maman reverse à Thibault : '+fmt(tPayThib),{x:0.65,y:6.3,w:12,h:0.7,fontSize:15,color:PP.AC,bold:true,fontFace:'Calibri'});
+  }
+  // Slide 5 – Comparaison vs année précédente
+  if(prevB>0){
+    const s5=pptx.addSlide();ppBg(s5);ppH(s5,year+' vs '+(year-1));
+    const prevCA=Math.round(prevD.reduce((s,r)=>s+r.ca,0)),prevThib=Math.round(prevD.reduce((s,r)=>s+r.thib,0)),prevMaman=Math.round(prevD.reduce((s,r)=>s+r.maman,0));
+    [[fmt(tB),fmt(prevB),'Bénéfice',PP.GR],[fmt(tCA),fmt(prevCA),'CA',PP.AC],[fmt(tThib),fmt(prevThib),'Part Thibault',PP.GR],[fmt(tMaman),fmt(prevMaman),'Part Maman',PP.PU]].forEach(([cur,prev2,label,color],i)=>{
+      const cx=0.4+(i%2)*6.55,cy=1.5+Math.floor(i/2)*2.65;
+      s5.addShape('rect',{x:cx,y:cy,w:6.2,h:2.4,fill:{color:PP.BG2},line:{color:PP.BRD,size:0.5}});
+      s5.addShape('rect',{x:cx,y:cy,w:6.2,h:0.06,fill:{color},line:{color}});
+      s5.addText(label.toUpperCase(),{x:cx+0.2,y:cy+0.2,w:5.8,h:0.3,fontSize:9,color:PP.TX2,bold:true,fontFace:'Calibri'});
+      s5.addText(year+' : '+cur,{x:cx+0.2,y:cy+0.6,w:5.8,h:0.6,fontSize:22,color,bold:true,fontFace:'Calibri'});
+      s5.addText((year-1)+' : '+prev2,{x:cx+0.2,y:cy+1.25,w:5.8,h:0.5,fontSize:16,color:PP.TX2,fontFace:'Calibri'});
+    });
+  }
+}
+
+function ppMonth(pptx,d){
+  const year=currentYear,month=currentMonth,mi=MONTHS_FR.indexOf(month);
+  const tB=Math.round(d.reduce((s,r)=>s+r.benef,0)),tCA=Math.round(d.reduce((s,r)=>s+r.ca,0));
+  const tThib=Math.round(d.reduce((s,r)=>s+r.thib,0)),tMaman=Math.round(d.reduce((s,r)=>s+r.maman,0));
+  const tPayThib=Math.round(d.reduce((s,r)=>s+(r.payThib||0),0));
+  const marge=tCA>0?Math.round(tB/tCA*100):0;
+  const prevM=mi>0?MONTHS_FR[mi-1]:MONTHS_FR[11],prevY=mi>0?year:year-1;
+  const prevRow=allData().find(r=>r.y===prevY&&r.m===prevM);
+  const mVentes=ventes.filter(v=>{if(!v.date_vente)return false;const d2=new Date(v.date_vente);return d2.getFullYear()===year&&d2.getMonth()===mi;}).sort((a,b)=>new Date(a.date_vente)-new Date(b.date_vente));
+  // Slide 1 – Cover
+  const s1=pptx.addSlide();ppBg(s1);
+  s1.addText('Récap mensuel',{x:0.4,y:1.1,w:10,h:0.5,fontSize:15,color:PP.TX2,fontFace:'Calibri'});
+  s1.addText(month+' '+year,{x:0.4,y:1.6,w:12.5,h:1.4,fontSize:56,color:PP.TX,bold:true,fontFace:'Calibri'});
+  s1.addShape('rect',{x:0.4,y:3.3,w:6,h:2.8,fill:{color:PP.BG2},line:{color:PP.BRD,size:0.5}});
+  s1.addShape('rect',{x:0.4,y:3.3,w:6,h:0.06,fill:{color:PP.GR},line:{color:PP.GR}});
+  s1.addText('BÉNÉFICE DU MOIS',{x:0.6,y:3.46,w:5.5,h:0.3,fontSize:9,color:PP.TX2,bold:true,fontFace:'Calibri'});
+  s1.addText(fmt(tB),{x:0.6,y:3.8,w:5.5,h:1,fontSize:42,color:PP.GR,bold:true,fontFace:'Calibri'});
+  if(prevRow){const diff=tB-prevRow.benef,pct=prevRow.benef>0?Math.round(diff/Math.abs(prevRow.benef)*100):null;if(pct!==null)s1.addText((diff>=0?'▲ +':'▼ ')+Math.abs(pct)+'% vs '+prevM,{x:0.6,y:4.85,w:5.5,h:0.45,fontSize:13,color:diff>=0?PP.GR:PP.RE,bold:true,fontFace:'Calibri'});}
+  s1.addText('Marge '+marge+'% · '+mVentes.length+' vente'+(mVentes.length>1?'s':''),{x:0.6,y:5.5,w:5.5,h:0.4,fontSize:11,color:PP.TX3,fontFace:'Calibri'});
+  ppCard(s1,6.8,3.3,3.0,1.3,'CA',fmt(tCA),PP.AC);
+  ppCard(s1,10.1,3.3,3.1,1.3,'Bénéf. Thib',fmt(tThib),PP.GR);
+  ppCard(s1,6.8,4.85,3.0,1.25,'Bénéf. Maman',fmt(tMaman),PP.PU);
+  ppCard(s1,10.1,4.85,3.1,1.25,'PayThib',fmt(tPayThib),PP.AC);
+  // Slide 2 – Ventes du mois
+  if(mVentes.length){
+    const s2=pptx.addSlide();ppBg(s2);ppH(s2,'Ventes de '+month+' '+year);
+    s2.addShape('rect',{x:0.4,y:1.35,w:12.5,h:0.42,fill:{color:PP.BG3},line:{color:PP.BRD,size:0.3}});
+    [{t:'Article',x:0.6,w:4.5},{t:'Date',x:5.35,w:1.5},{t:'Vente',x:7.1,w:1.8},{t:'Bénéfice',x:9.1,w:1.8},{t:'Maman',x:11.1,w:1.6}].forEach(col=>s2.addText(col.t.toUpperCase(),{x:col.x,y:1.42,w:col.w,h:0.28,fontSize:8,color:PP.TX2,bold:true,fontFace:'Calibri'}));
+    mVentes.slice(0,9).forEach((v,i)=>{
+      const ry=1.8+i*0.57;
+      if(i%2===0)s2.addShape('rect',{x:0.4,y:ry,w:12.5,h:0.55,fill:{color:PP.BG2},line:{color:PP.BRD,size:0.2}});
+      const bn=r2((v.prix_vente||0)-(v.articles?v.articles.prix_achat||0:0));
+      const nom=v.articles?(v.articles.nom+(v.articles.taille?' · '+v.articles.taille:'')):'-';
+      const date=new Date(v.date_vente).toLocaleDateString('fr-FR');
+      s2.addText(nom.length>28?nom.substring(0,26)+'…':nom,{x:0.6,y:ry+0.1,w:4.5,h:0.35,fontSize:10,color:PP.TX,fontFace:'Calibri'});
+      s2.addText(date,{x:5.35,y:ry+0.1,w:1.5,h:0.35,fontSize:10,color:PP.TX2,fontFace:'Calibri'});
+      s2.addText(fmt(v.prix_vente),{x:7.1,y:ry+0.1,w:1.8,h:0.35,fontSize:10,color:PP.AC,fontFace:'Calibri'});
+      s2.addText(fmt(bn),{x:9.1,y:ry+0.1,w:1.8,h:0.35,fontSize:10,color:PP.GR,bold:true,fontFace:'Calibri'});
+      s2.addText(fmt(v.part_maman||0),{x:11.1,y:ry+0.1,w:1.6,h:0.35,fontSize:10,color:PP.PU,fontFace:'Calibri'});
+    });
+    s2.addShape('rect',{x:0.4,y:7.0,w:12.5,h:0.42,fill:{color:PP.BG3},line:{color:PP.BRD,size:0.3}});
+    s2.addText('Total : '+fmt(tCA)+'  ·  Bénéfice : '+fmt(tB)+'  ·  Marge : '+marge+'%',{x:0.6,y:7.06,w:12,h:0.3,fontSize:10.5,color:PP.TX,bold:true,fontFace:'Calibri'});
+  }
+  // Slide 3 – Comparaison vs mois précédent
+  if(prevRow){
+    const s3=pptx.addSlide();ppBg(s3);ppH(s3,month+' vs '+prevM);
+    [[fmt(tB),fmt(prevRow.benef),'Bénéfice',PP.GR],[fmt(tCA),fmt(prevRow.ca),'CA',PP.AC],[fmt(tThib),fmt(prevRow.thib),'Part Thibault',PP.GR],[fmt(tMaman),fmt(prevRow.maman),'Part Maman',PP.PU]].forEach(([cur,prev2,label,color],i)=>{
+      const cx=0.4+(i%2)*6.55,cy=1.5+Math.floor(i/2)*2.65;
+      s3.addShape('rect',{x:cx,y:cy,w:6.2,h:2.4,fill:{color:PP.BG2},line:{color:PP.BRD,size:0.5}});
+      s3.addShape('rect',{x:cx,y:cy,w:6.2,h:0.06,fill:{color},line:{color}});
+      s3.addText(label.toUpperCase(),{x:cx+0.2,y:cy+0.2,w:5.8,h:0.3,fontSize:9,color:PP.TX2,bold:true,fontFace:'Calibri'});
+      s3.addText(month+' : '+cur,{x:cx+0.2,y:cy+0.6,w:5.8,h:0.6,fontSize:22,color,bold:true,fontFace:'Calibri'});
+      s3.addText(prevM+' : '+prev2,{x:cx+0.2,y:cy+1.25,w:5.8,h:0.5,fontSize:16,color:PP.TX2,fontFace:'Calibri'});
+    });
+  }
 }
 
 /* ─── BILAN PDF ANNUEL ─── */
